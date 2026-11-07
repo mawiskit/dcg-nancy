@@ -1,0 +1,65 @@
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+      NOINDEX: ${{ vars.NOINDEX }}
+      PUBLIC_GA_ID: ${{ vars.PUBLIC_GA_ID }}
+      PUBLIC_GSC_TOKEN: ${{ vars.PUBLIC_GSC_TOKEN }}
+      PUBLIC_FORM_ENDPOINT: ${{ vars.PUBLIC_FORM_ENDPOINT }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Le site est servi sur son nom de domaine (dcg-nancy.fr par défaut, modifiable avec la variable CUSTOM_DOMAIN).
+      # Pour le garder hors de Google, créer la variable NOINDEX = true.
+      - name: Configurer l'adresse du site
+        run: |
+          DOMAIN="${CUSTOM_DOMAIN:-dcg-nancy.fr}"
+          echo "SITE_URL=https://$DOMAIN" >> "$GITHUB_ENV"
+          echo "BASE_PATH=/" >> "$GITHUB_ENV"
+          echo "$DOMAIN" > public/CNAME
+          if [ "$NOINDEX" = "true" ]; then
+            echo "PUBLIC_INDEXABLE=false" >> "$GITHUB_ENV"
+          else
+            echo "PUBLIC_INDEXABLE=true" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Construire le site
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
