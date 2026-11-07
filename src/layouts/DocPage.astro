@@ -1,0 +1,18 @@
+---
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+const { title, description, noindex = false } = Astro.props;
+---
+<Base title={title} description={description} noindex={noindex} variant="doc">
+  <Header />
+  <main id="contenu" class="doc-main">
+    <article class="doc-body">
+      <slot />
+    </article>
+  </main>
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+</Base>
