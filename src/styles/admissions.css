@@ -1,0 +1,41 @@
+/* Page « Admissions » : composants propres à cette page.
+   Le reste (hero, bandes, têtes de section, tableau, légende, bloc final) vient de decouvrir.css. */
+
+.ad-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+
+/* Étapes : lignes réglées, numéros en grand */
+.ad-steps { list-style: none; border-top: 2px solid var(--nuit); }
+.ad-steps > li { display: grid; grid-template-columns: clamp(56px, 6vw, 84px) minmax(0, 1fr); gap: 8px clamp(14px, 2.4vw, 32px); align-items: start; padding: clamp(18px, 2.8vh, 26px) 0; border-bottom: 1px solid var(--line-l); }
+.ad-steps h3 { font: 600 clamp(1.125rem, 1.7vw, 1.375rem) / 1.2 var(--display); color: var(--nuit); }
+.ad-steps p { margin-top: 6px; max-width: 58ch; font-size: .9688rem; line-height: 1.62; color: rgba(24, 21, 56, .9); }
+
+/* Encadré latéral : filet doré, sans carte ni ombre */
+.ad-aside { padding-left: clamp(18px, 2.4vw, 32px); border-left: 3px solid var(--or); position: sticky; top: calc(var(--hh, 80px) + 24px); }
+.ad-asl { font: 600 .6875rem / 1.2 var(--text); letter-spacing: .16em; text-transform: uppercase; color: rgba(24, 21, 56, .62); margin-bottom: 10px; }
+.ad-aside h3 { font: 600 clamp(1.25rem, 1.9vw, 1.6rem) / 1.2 var(--display); color: var(--nuit); }
+.ad-aside > p:not(.ad-asl):not(.ad-note) { margin-top: 12px; font-size: 1rem; line-height: 1.62; color: rgba(24, 21, 56, .9); }
+.ad-cta { display: inline-block; margin-top: 20px; text-decoration: none; max-width: 100%; text-align: center; overflow-wrap: anywhere; }
+.ad-note { margin-top: 16px; font-size: .875rem; line-height: 1.55; color: rgba(24, 21, 56, .78); }
+.ad-note a { text-decoration: underline; text-decoration-color: var(--or); text-decoration-thickness: 2px; }
+
+/* Variante sombre (deuxième année) */
+.ad-grid-dark .ad-steps { border-top-color: var(--a1); }
+.ad-grid-dark .ad-steps > li { border-bottom-color: var(--line-d); }
+.ad-grid-dark .ad-steps .dd-dn { color: var(--a1); }
+.ad-grid-dark .ad-steps h3 { color: #fff; }
+.ad-grid-dark .ad-steps p { color: rgba(236, 236, 236, .88); }
+.ad-grid-dark .ad-aside { border-left-color: var(--or); }
+.ad-grid-dark .ad-asl { color: rgba(236, 236, 236, .66); }
+.ad-grid-dark .ad-aside h3 { color: #fff; }
+.ad-grid-dark .ad-aside > p:not(.ad-asl):not(.ad-note) { color: rgba(236, 236, 236, .9); }
+.ad-grid-dark .ad-note { color: rgba(236, 236, 236, .78); }
+.ad-grid-dark .ad-note a { color: #fff; text-decoration-color: var(--or); }
+.dd-dark .ad-cta { color: var(--nuit); }
+
+@media (max-width: 1000px) {
+  .ad-grid { grid-template-columns: 1fr; gap: 30px; }
+  .ad-aside { position: static; }
+}
+@media (max-width: 760px) {
+  .ad-steps > li { grid-template-columns: 48px minmax(0, 1fr); }
+}
