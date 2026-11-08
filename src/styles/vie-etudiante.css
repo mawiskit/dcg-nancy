@@ -29,6 +29,13 @@
   background: none; border: 1px solid rgba(236, 236, 236, .45); padding: 11px 16px; cursor: pointer; transition: background .25s, border-color .25s;
 }
 .ve-pause:hover, .ve-pause:focus-visible { background: rgba(255, 255, 255, .08); border-color: var(--or); }
+.ve-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.ve-actions .ve-pause { margin-top: 0; }
+.ve-social {
+  display: inline-flex; align-items: center; gap: 9px; font: 600 .75rem / 1 var(--text); letter-spacing: .12em; text-transform: uppercase;
+  color: var(--or); text-decoration: none; border: 1px solid rgba(255, 215, 94, .55); padding: 11px 16px; transition: background .25s, color .25s;
+}
+.ve-social:hover, .ve-social:focus-visible { background: var(--or); color: var(--violet); }
 
 .ve-film {
   --fh: clamp(105px, 12vw, 175px);
