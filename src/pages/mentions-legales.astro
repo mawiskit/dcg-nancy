@@ -1,0 +1,26 @@
+---
+import DocPage from '../layouts/DocPage.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<DocPage seed={1} title="Mentions légales – DCG Nancy" description="Mentions légales du site DCG Nancy : éditrice, hébergement, propriété intellectuelle.">
+  <h1>Mentions légales</h1>
+
+  <h2>Éditrice du site</h2>
+  <p>Marie Duval, enseignante en classe préparatoire au DCG au lycée Georges de la Tour, Nancy (Meurthe-et-Moselle). Directrice de la publication : Marie Duval.</p>
+  <p>Contact : via le <a href={`${base}/contact/`}>formulaire de contact</a>.</p>
+
+  <h2>Hébergement</h2>
+  <p>GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
+  <p>Nom de domaine : Infomaniak Network SA (Suisse).</p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>Les textes, le logo DCG Nancy, les visuels et la mise en page de ce site sont protégés. Toute reproduction sans autorisation de l’éditrice est interdite.</p>
+
+  <h2>Photographies</h2>
+  <p>Toute personne reconnaissable sur une photographie publiée sur ce site peut en demander le retrait à tout moment, via le <a href={`${base}/contact/`}>formulaire de contact</a>.</p>
+
+  <h2>Données personnelles et cookies</h2>
+  <p>Le traitement de vos données et l’usage des cookies sont décrits dans la <a href={`${base}/confidentialite/`}>politique de confidentialité</a>.</p>
+
+  <p class="doc-date">Dernière mise à jour : novembre 2026.</p>
+</DocPage>
