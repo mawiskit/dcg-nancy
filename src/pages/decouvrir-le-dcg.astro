@@ -202,7 +202,10 @@ const jsonLd = {
     <section class="dd-light dd-intro" id="domaines" aria-labelledby="dd-h-multi">
       <div class="dd-wrap">
         <div class="dd-split">
-          <h2 id="dd-h-multi">Bien plus que de la comptabilité</h2>
+          <div class="dd-hl">
+            <p class="dd-kicker">Un diplôme pluridisciplinaire</p>
+            <h2 id="dd-h-multi">Bien plus que de la comptabilité</h2>
+          </div>
           <div class="dd-prose">
             <p>On résume souvent le DCG à l’apprentissage de la comptabilité. Elle y occupe une vraie place, mais la formation est pluridisciplinaire : elle apprend aussi à comprendre le cadre juridique d’une entreprise, sa fiscalité, ses choix de financement, son environnement économique et son management.</p>
             <p>L’objectif est de comprendre comment fonctionne une organisation dans son ensemble, et pas seulement comment elle tient ses comptes. Pour des études de comptabilité après le bac à Nancy, cette formation en comptabilité et gestion offre un socle large, qui ouvre sur de nombreuses <a href={`${base}/poursuites-etudes-carrieres/`}>poursuites d’études et carrières</a>.</p>
@@ -222,7 +225,7 @@ const jsonLd = {
               <a href={`#domaine-${d.id}`}>
                 <span class="dd-dn">{d.n}</span>
                 <span class="dd-dt"><b>{d.t}</b><em>{d.lead}</em></span>
-                <span class="dd-dc">{d.codes}</span>
+                <span class="dd-dc"><i>Unités d’enseignement</i>{d.codes}</span>
               </a>
             </li>
           ))}
@@ -232,10 +235,14 @@ const jsonLd = {
 
     <!-- ───────── Le tableau central ───────── -->
     <section class="dd-dark dd-prog" id="programme" aria-labelledby="dd-h-prog">
-      <div class="dd-wrap">
-        <p class="dd-kicker">Les enseignements sur trois ans</p>
-        <h2 id="dd-h-prog">Le programme du DCG année par année</h2>
-        <p class="dd-sublead">Chaque année, entre 4 et 5 UE sont validées, ce qui permet de valider l’intégralité du diplôme au bout des trois ans. Voici, pour la formation DCG proposée à Nancy, la répartition des enseignements.</p>
+      <div class="dd-wrap dd-wide">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">Les enseignements sur trois ans</p>
+            <h2 id="dd-h-prog">Le programme du DCG année par année</h2>
+          </div>
+          <p class="dd-sublead">Chaque année, entre 4 et 5 UE sont validées, ce qui permet de valider l’intégralité du diplôme au bout des trois ans. Voici, pour la formation DCG proposée à Nancy, la répartition des enseignements.</p>
+        </div>
 
         <div class="dd-years">
           {years.map((y) => (
@@ -271,7 +278,10 @@ const jsonLd = {
     <section class="dd-light dd-subjects" id="matieres" aria-labelledby="dd-h-mat">
       <div class="dd-wrap">
         <div class="dd-split dd-split-head">
-          <h2 id="dd-h-mat">Les matières du DCG : que va-t-on apprendre ?</h2>
+          <div class="dd-hl">
+            <p class="dd-kicker">Les 13 unités d’enseignement</p>
+            <h2 id="dd-h-mat">Les matières du DCG : que va-t-on apprendre ?</h2>
+          </div>
           <p class="dd-sublead">Les unités d’enseignement sont présentées ici par domaine, avec l’année où elles sont enseignées. Chaque matière du DCG se découvre par des exemples concrets plutôt que par des définitions.</p>
         </div>
 
@@ -332,7 +342,10 @@ const jsonLd = {
     <section class="dd-light dd-skills" aria-labelledby="dd-h-skills">
       <div class="dd-wrap">
         <div class="dd-split dd-split-head">
-          <h2 id="dd-h-skills">Les compétences développées</h2>
+          <div class="dd-hl">
+            <p class="dd-kicker">Ce que la formation apporte</p>
+            <h2 id="dd-h-skills">Les compétences développées</h2>
+          </div>
           <p class="dd-sublead">Au fil des trois ans, la formation DCG donne des repères solides en comptabilité, en gestion, en droit, en finance, en économie et en management, complétés par l’anglais, le numérique et la communication.</p>
         </div>
         <ul class="dd-skilllist">
