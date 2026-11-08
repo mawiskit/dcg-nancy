@@ -10,11 +10,11 @@ const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/pourquoi-nous-choisir/`, Astro.site).href;
 
 const title = 'Pourquoi choisir notre DCG à Nancy ? | DCG Nancy';
-const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : classes à taille humaine, prise de parole, travail en groupes, stages, visites et rencontres de professionnels.';
+const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : classes à taille humaine, prise de parole, jeu d’entreprise, Tournoi européen de gestion, stages, visites et rencontres de professionnels.';
 
 /* ───────── Photographies (public/images/pourquoi/) : deux largeurs par image, recadrées sans déformation ─────────
    Les légendes (« cap ») sont volontairement descriptives : à remplacer par les légendes d’origine des fichiers. */
-const pic = (name, widths, ratio, alt, cap) => {
+const pic = (name, widths, ratio, alt, cap, pos = '50% 50%') => {
   const dir = `${base}/images/pourquoi/${name}`;
   const big = Math.max(...widths);
   return {
@@ -24,6 +24,7 @@ const pic = (name, widths, ratio, alt, cap) => {
     h: Math.round(big / ratio),
     alt,
     cap,
+    pos,
   };
 };
 const P = {
@@ -37,6 +38,15 @@ const P = {
   visite: pic('visite-entreprise-promotion', [900, 1600], 2048 / 1083, 'Un groupe d’étudiants et d’adultes, en gilets de sécurité et charlottes, pose devant un quai lors d’une visite d’entreprise.', 'Visite d’entreprise'),
   visite2: pic('visite-entreprise-groupe', [800, 1400], 1500 / 1180, 'Des étudiants et une adulte en gilets orange posent ensemble pendant une visite d’entreprise.', 'Visite d’entreprise'),
   promo: pic('photo-promotion-20-ans-dcg', [800, 1600], 1600 / 720, 'Photo de groupe d’étudiants du DCG, beaucoup portent un t-shirt « DCG », sur des marches devant un bâtiment du lycée.', 'Photo de promotion, 20 ans du DCG'),
+  jeuBrain: pic('jeu-entreprise-brainstorming', [800, 1400], 2016 / 908, 'Un intervenant debout devant un écran affichant « Les règles du brainstorming », à côté d’une bannière « Entreprendre pour Apprendre ».', 'Le jeu d’entreprise, avec Entreprendre pour Apprendre'),
+  jeuGroupe: pic('jeu-entreprise-groupe', [800, 1400], 2016 / 908, 'Un groupe d’étudiants posant debout dans une salle de cours aux murs jaunes, l’une d’elles tenant un micro.', 'Un groupe d’étudiants réunis dans la salle', '50% 45%'),
+  tournoi: pic('tournoi-equipe', [800, 1300], 1599 / 899, 'Quatre étudiantes assises devant leurs ordinateurs lors du Tournoi européen de gestion, deux d’entre elles faisant un signe de la main.', 'Une équipe en plein tournoi', '40% 50%'),
+  tournoiPromo: pic('tournoi-promotion-2024', [700, 1200], 1599 / 1200, 'Photo de groupe des participants au Tournoi européen de gestion, en t-shirts blancs, certains tenant des ballons dorés.', 'Les participants du tournoi'),
+  tournoiFinance: pic('tournoi-remise-finance', [700, 1200], 2000 / 1500, 'Remise des prix du Challenge Finance : l’équipe 7 du lycée Georges de la Tour, troisième prix, pose avec les organisatrices.', 'Challenge Finance : 3e prix', '50% 62%'),
+  tournoiRH: pic('tournoi-remise-rh', [400, 720], 720 / 1600, 'Remise du troisième prix Ressources humaines à l’équipe 6 du lycée Georges de la Tour.', 'Ressources humaines : 3e prix', '50% 22%'),
+  presse: pic('presse-vingt-ans-dcg', [689], 689 / 666, 'Article de presse intitulé « Georges-de-la-Tour fête les vingt ans de son diplôme compta et gestion », avec la photo de groupe des étudiants actuels.', 'Article de presse sur les vingt ans du DCG'),
+  anniv: pic('anniversaire-20-ans-salle', [800, 1400], 4 / 3, 'Une grande salle de sport aménagée en salle de réception : des étudiants assis face à une scène où plusieurs personnes prennent la parole.', 'Un moment de l’anniversaire, dans la salle du lycée'),
+  vendredi: pic('vendredis-expertise', [800, 1400], 1600 / 720, 'Des étudiants assis dans une salle aux grands rideaux bleus, certains souriant à l’objectif, pendant une rencontre.', 'Un Vendredi de l’expertise', '30% 50%'),
   lycee: pic('lycee-georges-de-la-tour', [666], 666 / 500, 'Entrée et bâtiments du lycée Georges-de-la-Tour à Nancy, sous un ciel bleu.', 'Le lycée Georges-de-la-Tour, à Nancy'),
 };
 
@@ -45,34 +55,54 @@ const themes = [
   {
     id: 'chacun-compte', n: 't1', title: 'Ici, chacun compte', sub: 'Un accompagnement de proximité',
     text: 'Des promotions à taille humaine, avec des classes d’environ 30 à 35 étudiants. Une équipe enseignante accessible et investie, un accompagnement pédagogique régulier et une attention portée à la progression de chacun.',
-    pos: '38% 50%', sizes: '(min-width: 1000px) 34vw, 96vw', main: P.accomp, extra: [P.petitGroupe],
+    pos: '38% 50%', sizes: '(min-width: 1000px) 40vw, 96vw', main: P.accomp, extra: [P.petitGroupe],
   },
   {
     id: 'prendre-la-parole', n: 't2', title: 'Oser prendre la parole', sub: 'Prendre confiance et s’affirmer',
-    text: 'Coaching oral, ateliers d’expression orale, gestion du stress, sophrologie, personal branding : des temps pour s’entraîner, gagner en assurance et développer des compétences personnelles et professionnelles.',
+    text: 'Coaching oral, ateliers d’expression orale, gestion du stress, sophrologie, personal branding : des temps pour s’entraîner, gagner en assurance et développer des compétences personnelles et professionnelles.',
     pos: '52% 50%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.oral, extra: [],
   },
   {
     id: 'apprendre-en-faisant', n: 't3', title: 'Apprendre en faisant', sub: 'Apprendre autrement',
-    text: 'Travail en groupes, méthodologie, jeux pédagogiques, mises en situation : une approche collaborative où l’on apprend aussi en cherchant, en présentant et en jouant ensemble.',
-    pos: '50% 40%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.methodo, extra: [P.groupe, P.jeu],
+    text: 'Travail en groupes, méthodologie, jeux pédagogiques, mises en situation : une approche collaborative où l’on apprend aussi en cherchant, en présentant et en jouant ensemble.',
+    pos: '50% 40%', sizes: '(min-width: 1000px) 34vw, 50vw', main: P.methodo, extra: [P.groupe, P.jeu],
   },
   {
-    id: 'monde-professionnel', n: 't4', title: 'Le monde professionnel en direct', sub: 'Rencontrer les professionnels',
-    text: 'Conférences, interventions de professionnels, rencontres avec les acteurs de la comptabilité et de la finance, échanges autour des métiers et des parcours professionnels.',
-    pos: '45% 50%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.conf, extra: [],
+    id: 'jeu-d-entreprise', n: 't4', title: 'Un jeu d’entreprise chaque année', sub: 'Se mettre dans la peau d’un entrepreneur',
+    text: 'Chaque année, un nouveau jeu d’entreprise est proposé aux étudiants, en partenariat avec l’association Entreprendre pour Apprendre. Brainstorming, travail d’équipe : on apprend à entreprendre en le faisant.',
+    pos: '50% 38%', sizes: '(min-width: 1000px) 34vw, 50vw', main: P.jeuGroupe, extra: [P.jeuBrain],
   },
   {
-    id: 'sortir-de-la-classe', n: 't5', title: 'Sortir de la salle de cours', sub: 'Découvrir l’entreprise',
-    text: 'Deux périodes de stage de quatre semaines minimum, en première et en deuxième année, et des visites d’entreprises : découvrir les organisations et relier les enseignements aux réalités professionnelles.',
-    pos: '50% 55%', sizes: '(min-width: 1000px) 46vw, 96vw', main: P.visite, extra: [P.visite2],
+    id: 'tournoi-de-gestion', n: 't5', title: 'Le Tournoi européen de gestion', sub: 'Se mesurer à d’autres équipes',
+    text: 'Les étudiants participent au Tournoi européen de gestion de l’Ordre des experts-comptables (Région Grand Est). Par équipes, ils s’y mesurent à d’autres établissements, et des équipes du lycée sont déjà montées sur le podium, avec des troisièmes prix en Challenge Finance et en Ressources humaines.',
+    pos: '40% 50%', sizes: '(min-width: 1000px) 42vw, 96vw', main: P.tournoi, extra: [P.tournoiPromo, P.tournoiFinance, P.tournoiRH],
   },
   {
-    id: 'trois-ans', n: 't6', title: 'Trois ans pour se construire', sub: 'Construire son avenir',
+    id: 'monde-professionnel', n: 't6', title: 'Le monde professionnel en direct', sub: 'Rencontrer les professionnels',
+    text: 'Conférences, interventions de professionnels, rencontres avec les acteurs de la comptabilité et de la finance, échanges autour des métiers et des parcours professionnels. Les Vendredis de l’expertise permettent aussi d’échanger avec d’anciens diplômés sur les débouchés du DCG.',
+    pos: '45% 50%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.conf, extra: [P.vendredi],
+  },
+  {
+    id: 'sortir-de-la-classe', n: 't7', title: 'Sortir de la salle de cours', sub: 'Découvrir l’entreprise',
+    text: 'Deux périodes de stage de quatre semaines minimum, en première et en deuxième année, et des visites d’entreprises : découvrir les organisations et relier les enseignements aux réalités professionnelles.',
+    pos: '50% 55%', sizes: '(min-width: 1000px) 50vw, 96vw', main: P.visite, extra: [P.visite2],
+  },
+  {
+    id: 'trois-ans', n: 't8', title: 'Trois ans pour se construire', sub: 'Construire son avenir',
     text: 'Au fil des trois années du DCG, les étudiants acquièrent des bases solides, gagnent en autonomie et précisent peu à peu leur projet. Une progression qui se construit pas à pas, avec la promotion et l’équipe pédagogique.',
-    pos: '50% 40%', sizes: '(min-width: 1000px) 24vw, 96vw', main: P.promo, extra: [],
+    pos: '50% 40%', sizes: '(min-width: 1000px) 50vw, 96vw', main: P.promo, extra: [],
   },
 ];
+
+/* Article de presse : les vingt ans du DCG */
+const presse = {
+  titre: 'Les vingt ans du DCG, vus par la presse',
+  chapo: 'À l’occasion des vingt ans du diplôme, le lycée a réuni les étudiants actuels, d’anciens collègues et d’anciens étudiants, devenus experts-comptables, contrôleurs de gestion, responsables administratifs et financiers ou enseignants en économie-gestion.',
+  points: [
+    'Un événement organisé avec les étudiants actuels, en présence notamment de Mathieu Labbouz, inspecteur général d’économie-gestion et président du jury national du DCG.',
+    'Au programme : un quiz géant, la remise des diplômes à la promotion 2025, puis un buffet et une soirée dansante.',
+  ],
+};
 
 const infos = [
   { k: 'Adresse', v: '5 rue de la Croix Saint-Claude, 54000 Nancy' },
@@ -129,7 +159,7 @@ const jsonLd = {
           <p>Un diplôme exigeant, un accompagnement de proximité et une formation ouverte sur le monde professionnel.</p>
         </header>
 
-        <ul class="pq-mosaic" aria-label="Six raisons de choisir notre DCG">
+        <ul class="pq-mosaic" aria-label="Huit raisons de choisir notre DCG">
           {themes.map((t) => (
             <li class={`pq-tile pq-${t.n}`}>
               <button type="button" class="pq-open" data-open={t.id} aria-haspopup="dialog">
@@ -157,7 +187,7 @@ const jsonLd = {
             <div class="pq-dm-more">
               {t.extra.map((e) => (
                 <figure>
-                  <img src={e.src} srcset={e.srcset} sizes="(min-width: 1000px) 260px, 46vw" width={e.w} height={e.h} alt={e.alt} loading="lazy" decoding="async" />
+                  <img src={e.src} srcset={e.srcset} sizes="(min-width: 1000px) 260px, 46vw" width={e.w} height={e.h} alt={e.alt} loading="lazy" decoding="async" style={`object-position:${e.pos}`} />
                   <figcaption>{e.cap}</figcaption>
                 </figure>
               ))}
@@ -192,6 +222,30 @@ const jsonLd = {
             ))}
           </dl>
           <p class="pq-site"><a href="https://www.georges-delatour-nancy.fr/" rel="noopener" target="_blank">Site officiel du lycée</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Dans la presse ───────── -->
+    <section class="pq-press" aria-labelledby="pq-h-presse">
+      <div class="pq-wrap pq-press-in">
+        <figure class="pq-press-art">
+          <img src={P.presse.src} width={P.presse.w} height={P.presse.h} alt={P.presse.alt} loading="lazy" decoding="async" />
+          <figcaption>{P.presse.cap}</figcaption>
+        </figure>
+        <div class="pq-press-txt">
+          <p class="pq-sub">Dans la presse</p>
+          <h2 id="pq-h-presse">{presse.titre}</h2>
+          <p class="pq-chapo">{presse.chapo}</p>
+          <ul class="pq-press-list">
+            {presse.points.map((x) => (
+              <li>{x}</li>
+            ))}
+          </ul>
+          <figure class="pq-press-ph">
+            <img src={P.anniv.src} srcset={P.anniv.srcset} sizes="(min-width: 1000px) 40vw, 92vw" width={P.anniv.w} height={P.anniv.h} alt={P.anniv.alt} loading="lazy" decoding="async" />
+            <figcaption>{P.anniv.cap}</figcaption>
+          </figure>
         </div>
       </div>
     </section>
