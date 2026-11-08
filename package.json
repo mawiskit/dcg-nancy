@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.0",
+    "@fontsource/dekko": "^5.0.0",
+    "@fontsource/montserrat": "^5.0.0",
     "astro": "^5.0.0"
   }
 }
