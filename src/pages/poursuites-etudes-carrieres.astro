@@ -72,12 +72,6 @@ const opens = [
   { t: 'Un réseau d’anciens', s: 'Des anciens étudiants toujours prêts à partager leur expérience.' },
 ];
 
-const resources = [
-  { t: 'Les métiers présentés par l’Ordre des experts-comptables', s: 'Le kit professeur de l’Ordre.', href: 'https://www.experts-comptables.fr/kit-professeur' },
-  { t: 'L’expertise comptable, un secteur attractif', s: 'La filière présentée par l’Ordre des experts-comptables.', href: 'https://vitrine-rec.experts-comptables.org/sites/default/attractivite-2022/' },
-  { t: 'Les métiers de la comptabilité et de la gestion', s: 'Un MOOC gratuit du CNAM pour faire un choix éclairé.', href: 'https://www.fun-mooc.fr/courses/course-v1:CNAM+01056+session02/about' },
-];
-
 const next = [
   { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
   { t: 'Vie étudiante', s: 'L’association des étudiants, les voyages, les rencontres avec des professionnels.', href: '/vie-etudiante/' },
@@ -227,13 +221,6 @@ const jsonLd = {
         <ul class="dd-skilllist">
           {opens.map((k) => (
             <li><h3>{k.t}</h3><p>{k.s}</p></li>
-          ))}
-        </ul>
-
-        <h3 class="dd-h3-quiet ap-res-t">Pour en savoir plus sur les métiers</h3>
-        <ul class="ap-res">
-          {resources.map((r) => (
-            <li><a href={r.href} target="_blank" rel="noopener"><b>{r.t}</b><span>{r.s}</span></a></li>
           ))}
         </ul>
       </div>
