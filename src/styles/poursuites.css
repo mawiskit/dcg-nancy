@@ -31,18 +31,11 @@
 .ap-where { margin-top: clamp(28px, 4.5vh, 44px); }
 
 /* Pour en savoir plus */
-.ap-res-t { margin-top: clamp(40px, 6vh, 64px); }
-.ap-res { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); border-top: 2px solid var(--nuit); }
-.ap-res a { display: grid; gap: 4px; padding: 18px 0 22px; height: 100%; border-bottom: 1px solid var(--line-l); text-decoration: none; color: var(--nuit); }
-.ap-res b { font: 600 1.0625rem / 1.3 var(--display); text-decoration: underline; text-decoration-color: var(--or); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.ap-res span { font-size: .9375rem; line-height: 1.5; color: rgba(24, 21, 56, .82); }
-.ap-res a:hover b { text-decoration-color: var(--nuit); }
 
 .ap .dd-next h2 { font-size: clamp(1.6rem, 2.8vw, 2.4rem); line-height: 1.12; max-width: 18ch; }
 
 @media (max-width: 1000px) {
   .ap-jobs { grid-template-columns: 1fr; gap: 36px; }
-  .ap-res { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
   .ap-routes > li { grid-template-columns: 48px minmax(0, 1fr); }
@@ -51,15 +44,13 @@
 
 @media (min-width: 1001px) {
   .ap-rt h3 { font-size: var(--d-h3); }
-  .ap-rt p, .ap-res span, .ap-now span { font-size: var(--d-small); line-height: 1.55; margin-top: 5px; }
+  .ap-rt p, .ap-now span { font-size: var(--d-small); line-height: 1.55; margin-top: 5px; }
   .ap-ex a { font-size: var(--d-small); }
   .ap-col h3 { font-size: var(--d-h3); padding-bottom: 10px; }
   .ap-now li { padding: 10px 0; }
-  .ap-now b, .ap-grp li, .ap-res b { font-size: 1rem; }
+  .ap-now b, .ap-grp li { font-size: 1rem; }
   .ap-grp { padding-top: 10px; }
   .ap-where { margin-top: var(--d-gap); }
-  .ap-res-t { margin-top: clamp(26px, 4vh, 40px); }
-  .ap-res a { padding: 12px 0 15px; }
   .ap .dd-next h2 { font-size: var(--d-h2); }
 }
 @media (min-width: 1001px) {
