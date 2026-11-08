@@ -1,8 +1,0 @@
----
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const ga = import.meta.env.PUBLIC_GA_ID;
----
-<a href={`${base}/contact/`} data-open-contact>Contact</a>
-<a href={`${base}/mentions-legales/`}>Mentions légales</a>
-<a href={`${base}/confidentialite/`}>Confidentialité</a>
-{ga && <button type="button" class="linklike" data-cookie-manage>Gérer les cookies</button>}
