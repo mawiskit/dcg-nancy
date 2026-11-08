@@ -12,9 +12,10 @@ interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  selfCanonical?: boolean;
   variant?: 'home' | 'doc';
 }
-const { title, description, noindex: noindexProp = false, variant = 'home' } = Astro.props;
+const { title, description, noindex: noindexProp = false, selfCanonical = true, variant = 'home' } = Astro.props;
 // Indexable par défaut ; la variable NOINDEX=true du déploiement demande aux moteurs de ne pas l'indexer.
 const noindex = noindexProp || import.meta.env.PUBLIC_INDEXABLE === 'false';
 
@@ -31,7 +32,7 @@ const ogImage = new URL(`${base}/images/og-dcg-nancy.jpg`, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {selfCanonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#122658" />
     <meta name="geo.region" content="FR-54" />
@@ -46,7 +47,7 @@ const ogImage = new URL(`${base}/images/og-dcg-nancy.jpg`, Astro.site).href;
     <meta property="og:site_name" content="DCG Nancy" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {selfCanonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content="Logo DCG Nancy, lycée Georges de la Tour" />
     <meta name="twitter:card" content="summary" />
