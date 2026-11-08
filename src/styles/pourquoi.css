@@ -94,7 +94,7 @@ html.pq-lock { overflow: hidden; }
 .pq-infos div { padding: 10px 0; border-bottom: 1px solid var(--line-l); display: grid; gap: 2px; }
 .pq-infos dt { font: 600 .6875rem / 1.4 var(--text); letter-spacing: .16em; text-transform: uppercase; color: var(--nuit); }
 .pq-infos dd { font-size: .9375rem; line-height: 1.45; }
-.pq .pq-site { margin-top: 12px; font-size: .9375rem; }
+.pq .pq-site { margin-top: 12px; font-size: .9375rem; display: flex; flex-wrap: wrap; gap: 6px 26px; }
 .pq-site a { color: var(--nuit); font-weight: 600; text-decoration: underline; text-decoration-color: var(--or); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .pq-site a::after { content: " ↗"; }
 
