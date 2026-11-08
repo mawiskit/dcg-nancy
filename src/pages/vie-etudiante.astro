@@ -17,20 +17,18 @@ const img = `${base}/images/vie-etudiante`;
 
 /* Légendes fournies par l’éditrice.
    w = largeur de l’image à la hauteur de 600 px (pour éviter tout décalage de mise en page). */
-const bandA = [
+const strip = [
   { f: 'groupe-plein-air', w: 800, cap: 'Accrobranche : photo de groupe de la promotion.' },
   { f: 'bowling', w: 1333, cap: 'La journée d’intégration au bowling.' },
   { f: 'terrasse', w: 804, cap: 'La journée d’intégration, en centre-ville.' },
-  { f: 'randonnee', w: 450, cap: 'Une randonnée dans les Vosges, pour la cohésion de la promotion.' },
-  { f: 'repas-promotion', w: 800, cap: 'Un repas de promotion avec l’équipe enseignante.' },
-  { f: 'affiche-weichella', w: 485, cap: '« Weichella », 16-17-18 septembre 2022.' },
-  { f: 'parc-attractions', w: 1022, cap: 'Un week-end détente à Europa-Park, avant les examens.' },
-];
-const bandB = [
   { f: 'association-presentation', w: 800, cap: 'Présentation de l’association GEFISUP Nancy.' },
+  { f: 'repas-promotion', w: 800, cap: 'Un repas de promotion avec l’équipe enseignante.' },
   { f: 'soiree-bar', w: 741, cap: 'Une soirée futsal entre étudiants.' },
-  { f: 'repas-groupe', w: 800, cap: 'Photo de groupe à la fin d’un repas, avec l’équipe enseignante.' },
+  { f: 'randonnee', w: 450, cap: 'Une randonnée dans les Vosges, pour la cohésion de la promotion.' },
+  { f: 'affiche-weichella', w: 485, cap: '« Weichella », 16-17-18 septembre 2022.' },
   { f: 'groupe-interieur', w: 1067, cap: 'Photo de groupe lors du week-end d’intégration.' },
+  { f: 'parc-attractions', w: 1022, cap: 'Un week-end détente à Europa-Park, avant les examens.' },
+  { f: 'repas-groupe', w: 800, cap: 'Photo de groupe à la fin d’un repas, avec l’équipe enseignante.' },
   { f: 'association-estrade', w: 800, cap: 'L’assemblée générale de l’association.' },
   { f: 'restaurant-bouillon', w: 800, cap: 'Le restaurant de fin d’année, au Bouillon.' },
 ];
@@ -150,10 +148,10 @@ const jsonLd = {
       </div>
 
       <div class="ve-film" id="ve-film" role="group" aria-label="Pellicule de photographies de la vie étudiante">
-        <div class="ve-band ve-band-a" style="--dur: 130s">
+        <div class="ve-band" style="--dur: 125s">
           <div class="ve-track">
             <ul class="ve-set">
-              {bandA.map((p, i) => (
+              {strip.map((p) => (
                 <li class="ve-frame">
                   <figure>
                     <img src={`${img}/${p.f}-h600.webp`} width={p.w} height="600" alt={p.cap} loading="lazy" decoding="async" />
@@ -163,31 +161,7 @@ const jsonLd = {
               ))}
             </ul>
             <ul class="ve-set" aria-hidden="true">
-              {bandA.map((p) => (
-                <li class="ve-frame">
-                  <figure>
-                    <img src={`${img}/${p.f}-h600.webp`} width={p.w} height="600" alt="" loading="lazy" decoding="async" />
-                    <figcaption>{p.cap}</figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div class="ve-band ve-band-b" style="--dur: 110s">
-          <div class="ve-track">
-            <ul class="ve-set">
-              {bandB.map((p) => (
-                <li class="ve-frame">
-                  <figure>
-                    <img src={`${img}/${p.f}-h600.webp`} width={p.w} height="600" alt={p.cap} loading="lazy" decoding="async" />
-                    <figcaption>{p.cap}</figcaption>
-                  </figure>
-                </li>
-              ))}
-            </ul>
-            <ul class="ve-set" aria-hidden="true">
-              {bandB.map((p) => (
+              {strip.map((p) => (
                 <li class="ve-frame">
                   <figure>
                     <img src={`${img}/${p.f}-h600.webp`} width={p.w} height="600" alt="" loading="lazy" decoding="async" />
