@@ -1,0 +1,257 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Network from '../components/Network.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import '../styles/decouvrir.css';
+import '../styles/vie-etudiante.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const pageUrl = new URL(`${base}/vie-etudiante/`, Astro.site).href;
+
+const title = 'Vie étudiante au DCG Nancy : association, sorties, promotion | DCG Nancy';
+const description = 'La vie étudiante du DCG à Nancy : une association dirigée par les étudiants, des sorties, des week-ends et des repas de promotion, et une vraie proximité avec l’équipe enseignante.';
+
+const img = `${base}/images/vie-etudiante`;
+
+/* Légendes fournies par l’éditrice.
+   w = largeur de l’image à la hauteur de 600 px (pour éviter tout décalage de mise en page). */
+const strip = [
+  { f: 'groupe-plein-air', w: 800, cap: 'Accrobranche : photo de groupe de la promotion.' },
+  { f: 'bowling', w: 1333, cap: 'La journée d’intégration au bowling.' },
+  { f: 'terrasse', w: 804, cap: 'La journée d’intégration, en centre-ville.' },
+  { f: 'association-presentation', w: 800, cap: 'Présentation de l’association GEFISUP Nancy.' },
+  { f: 'repas-promotion', w: 800, cap: 'Un repas de promotion avec l’équipe enseignante.' },
+  { f: 'soiree-bar', w: 741, cap: 'Une soirée futsal entre étudiants.' },
+  { f: 'randonnee', w: 450, cap: 'Une randonnée dans les Vosges, pour la cohésion de la promotion.' },
+  { f: 'affiche-weichella', w: 485, cap: '« Weichella », 16-17-18 septembre 2022.' },
+  { f: 'groupe-interieur', w: 1067, cap: 'Photo de groupe lors du week-end d’intégration.' },
+  { f: 'parc-attractions', w: 1022, cap: 'Un week-end détente à Europa-Park, avant les examens.' },
+  { f: 'repas-groupe', w: 800, cap: 'Photo de groupe à la fin d’un repas, avec l’équipe enseignante.' },
+  { f: 'association-estrade', w: 800, cap: 'L’assemblée générale de l’association.' },
+  { f: 'restaurant-bouillon', w: 800, cap: 'Le restaurant de fin d’année, au Bouillon.' },
+];
+
+const assoPoints = [
+  { t: 'Ils lancent les projets', s: 'Les étudiants sont à l’initiative des projets de l’association.' },
+  { t: 'Ils organisent les activités', s: 'Sorties, week-ends, soirées : ce sont eux qui font vivre l’association tout au long de l’année.' },
+  { t: 'Ils soudent la promotion', s: 'L’association contribue fortement à la cohésion de la promotion.' },
+];
+
+const values = [
+  { t: 'La convivialité', s: 'Repas, sorties, week-ends : la promotion se retrouve régulièrement hors des salles de cours.' },
+  { t: 'La solidarité et l’entraide', s: 'Dans une formation exigeante, on avance mieux ensemble : les étudiants s’entraident.' },
+  { t: 'Des liens entre étudiants', s: 'D’une promotion à l’autre, la vie collective crée une vraie dynamique de groupe.' },
+];
+
+const next = [
+  { t: 'Pourquoi nous choisir ?', s: 'Encadrement, méthode, vie de promotion : ce qui fait la différence à Nancy.', href: '/pourquoi-nous-choisir/' },
+  { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
+  { t: 'Admissions', s: 'Parcoursup en première année, dossier en deuxième année.', href: '/admissions/' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'fr-FR',
+      isPartOf: { '@id': `${site}#site` },
+      about: { '@id': `${site}#dcg` },
+      breadcrumb: { '@id': `${pageUrl}#fil` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#fil`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: site },
+        { '@type': 'ListItem', position: 2, name: 'Vie étudiante', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+<Base title={title} description={description} variant="doc">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <Header />
+
+  <main id="contenu" class="dd ve">
+
+    <!-- ───────── Introduction ───────── -->
+    <section class="dd-hero" aria-labelledby="ve-titre">
+      <Network class="network" w={1200} h={600} seed={83} yaw={-0.5} cx={0.76} cy={0.5} veil={false} cols={30} rows={13} f={320} spread={34} />
+      <div class="dd-wrap dd-hero-in">
+        <nav class="dd-crumb" aria-label="Fil d’Ariane">
+          <a href={`${base}/`}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Vie étudiante</span>
+        </nav>
+        <p class="dd-kicker">Vie étudiante</p>
+        <h1 id="ve-titre">Une formation exigeante, <span>une vraie vie de promotion</span></h1>
+        <p class="dd-lead">Au DCG Nancy, on travaille sérieusement, mais on n’avance pas seul. Entre l’association étudiante, les sorties, les week-ends et les repas de promotion, les étudiants forment un groupe soudé, dans une ambiance conviviale et solidaire, et proche de l’équipe enseignante.</p>
+        <nav class="dd-jump" aria-label="Dans cette page">
+          <a href="#association">L’association étudiante</a>
+          <a href="#pellicule">Les moments forts</a>
+          <a href="#promotion">L’esprit de promotion</a>
+          <a href="#enseignants">L’équipe enseignante</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ───────── Association étudiante ───────── -->
+    <section class="dd-light ve-asso" id="association" aria-labelledby="ve-h-asso">
+      <div class="dd-wrap">
+        <div class="ve-asso-in">
+          <div class="ve-asso-txt">
+            <p class="dd-kicker">L’association étudiante</p>
+            <h2 id="ve-h-asso">Une association dirigée par les étudiants</h2>
+            <p class="ve-lede">Au DCG Nancy, l’association étudiante, GEFISUP, est intégralement dirigée par les étudiants eux-mêmes. Ils choisissent les projets, organisent les activités et font vivre l’association tout au long de l’année.</p>
+            <p>C’est une véritable école d’autonomie : on s’investit, on s’organise, on crée une dynamique collective qui profite à toute la promotion.</p>
+            <ul class="ve-points">
+              {assoPoints.map((p) => (
+                <li><h3>{p.t}</h3><p>{p.s}</p></li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="ve-duo">
+            <figure class="ve-ph ve-ph-a">
+              <img src={`${img}/association-presentation-1200.webp`} width="1200" height="900" alt="Étudiants de l’association posant devant un écran où est écrit « Association GEFISUP Nancy »." loading="lazy" decoding="async" />
+              <figcaption>Présentation de l’association GEFISUP Nancy.</figcaption>
+            </figure>
+            <figure class="ve-ph ve-ph-b">
+              <img src={`${img}/association-estrade-1200.webp`} width="1200" height="900" alt="Assemblée générale de l’association : des étudiants réunis sur une estrade, l’une d’elles parlant au micro devant un pupitre." loading="lazy" decoding="async" />
+              <figcaption>L’assemblée générale de l’association.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Pellicule ───────── -->
+    <section class="dd-dark ve-filmsec" id="pellicule" aria-labelledby="ve-h-film">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">La pellicule de la promotion</p>
+            <h2 id="ve-h-film">Les moments forts de la vie de promotion</h2>
+          </div>
+          <div>
+            <p class="dd-sublead">Sorties, week-ends, repas, soirées : un aperçu de ce que vivent concrètement les étudiants.</p>
+            <button type="button" class="ve-pause" id="ve-pause" aria-pressed="false" aria-controls="ve-film">Mettre le défilement en pause</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ve-film" id="ve-film" role="group" aria-label="Pellicule de photographies de la vie étudiante">
+        <div class="ve-band" style="--dur: 125s">
+          <div class="ve-track">
+            <ul class="ve-set">
+              {strip.map((p) => (
+                <li class="ve-frame">
+                  <figure>
+                    <img src={`${img}/${p.f}-h600.webp`} width={p.w} height="600" alt={p.cap} loading="lazy" decoding="async" />
+                    <figcaption>{p.cap}</figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+            <ul class="ve-set" aria-hidden="true">
+              {strip.map((p) => (
+                <li class="ve-frame">
+                  <figure>
+                    <img src={`${img}/${p.f}-h600.webp`} width={p.w} height="600" alt="" loading="lazy" decoding="async" />
+                    <figcaption>{p.cap}</figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Esprit de promotion ───────── -->
+    <section class="dd-light" id="promotion" aria-labelledby="ve-h-promo">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">L’esprit de promotion</p>
+            <h2 id="ve-h-promo">On avance mieux ensemble</h2>
+          </div>
+          <p class="dd-sublead">On peut suivre une formation exigeante tout en évoluant dans un environnement chaleureux et solidaire : c’est l’esprit du DCG Nancy.</p>
+        </div>
+        <ul class="dd-skilllist">
+          {values.map((v) => (
+            <li><h3>{v.t}</h3><p>{v.s}</p></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────── Équipe enseignante ───────── -->
+    <section class="dd-dark ve-teach" id="enseignants" aria-labelledby="ve-h-teach">
+      <div class="dd-wrap ve-teach-in">
+        <figure class="ve-ph ve-ph-t">
+          <img src={`${img}/repas-promotion-1200.webp`} width="1200" height="900" alt="Étudiants et enseignants réunis autour d’une table, dans un restaurant." loading="lazy" decoding="async" />
+          <figcaption>Un repas de promotion avec l’équipe enseignante.</figcaption>
+        </figure>
+        <div class="ve-teach-txt">
+          <p class="dd-kicker">L’équipe enseignante</p>
+          <h2 id="ve-h-teach">Des enseignants proches de leurs étudiants</h2>
+          <p class="ve-lede">Il existe une très bonne entente entre les étudiants et l’équipe pédagogique. L’ambiance est conviviale, les échanges sont faciles et l’accompagnement humain fait partie intégrante de l’expérience DCG.</p>
+          <p>L’exigence de la formation s’accompagne d’une vraie disponibilité : on peut poser ses questions, demander de l’aide et être soutenu tout au long des trois années.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Aller plus loin ───────── -->
+    <section class="dd-dark dd-next" aria-labelledby="ve-h-next">
+      <Network class="network" w={1200} h={420} seed={89} yaw={0.34} cx={0.3} cy={0.5} veil={false} cols={30} rows={12} f={260} spread={32} />
+      <div class="dd-wrap dd-next-in">
+        <div class="dd-nextl">
+          <h2 id="ve-h-next">Envie de rejoindre la prochaine promotion ?</h2>
+          <p>Découvrez les modalités d’admission en première et en deuxième année.</p>
+          <a class="cta dd-cta" href={`${base}/admissions/`}>CANDIDATER</a>
+        </div>
+        <ul class="dd-links">
+          {next.map((l) => (
+            <li>
+              <a href={`${base}${l.href}`}>
+                <span class="dd-lt">{l.t}</span>
+                <span class="dd-ls">{l.s}</span>
+                <svg class="dd-arr" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M0 6h24M19 1l5 5-5 5" /></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var film = document.getElementById('ve-film');
+      var btn = document.getElementById('ve-pause');
+      if (!film || !btn) return;
+      btn.addEventListener('click', function () {
+        var paused = film.classList.toggle('is-paused');
+        btn.setAttribute('aria-pressed', String(paused));
+        if (paused) {
+          btn.textContent = 'Reprendre le défilement';
+        } else {
+          btn.textContent = 'Mettre le défilement en pause';
+        }
+      });
+    })();
+  </script>
+</Base>
