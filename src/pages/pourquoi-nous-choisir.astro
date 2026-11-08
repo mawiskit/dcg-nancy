@@ -1,0 +1,260 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Network from '../components/Network.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import '../styles/pourquoi.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const pageUrl = new URL(`${base}/pourquoi-nous-choisir/`, Astro.site).href;
+
+const title = 'Pourquoi choisir notre DCG à Nancy ? | DCG Nancy';
+const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : classes à taille humaine, prise de parole, travail en groupes, stages, visites et rencontres de professionnels.';
+
+/* ───────── Photographies (public/images/pourquoi/) : deux largeurs par image, recadrées sans déformation ─────────
+   Les légendes (« cap ») sont volontairement descriptives : à remplacer par les légendes d’origine des fichiers. */
+const pic = (name, widths, ratio, alt, cap) => {
+  const dir = `${base}/images/pourquoi/${name}`;
+  const big = Math.max(...widths);
+  return {
+    src: `${dir}-${big}.webp`,
+    srcset: widths.map((w) => `${dir}-${w}.webp ${w}w`).join(', '),
+    w: big,
+    h: Math.round(big / ratio),
+    alt,
+    cap,
+  };
+};
+const P = {
+  petitGroupe: pic('cours-petit-groupe', [700, 1200], 4 / 3, 'Un homme assis sur une table s’adresse à quatre étudiants dans une salle de cours.', 'Un échange en petit groupe'),
+  accomp: pic('cours-accompagnement', [800, 1400], 1599 / 899, 'Une femme debout au milieu de la salle explique un point à des étudiants installés à leurs tables.', 'Un cours en salle'),
+  oral: pic('coaching-oral', [700, 1100], 1206 / 830, 'Une femme s’adresse à un groupe d’étudiants debout, de dos, face aux tableaux d’une salle de classe.', 'Prise de parole devant le groupe'),
+  methodo: pic('methodologie-groupes', [600, 1000], 3 / 4, 'Deux étudiantes présentent une grande feuille couverte de post-its devant leurs camarades.', 'Présentation d’un travail de groupe'),
+  groupe: pic('travail-en-groupe', [600, 900], 908 / 1340, 'Des étudiants réunis autour d’une table pour un travail de groupe, une étudiante debout prend la parole.', 'Travail en groupes'),
+  jeu: pic('jeu-pedagogique', [600, 1000], 3 / 4, 'Une femme souriante devant un grand plateau de jeu dessiné à la main, accroché au tableau de la classe.', 'Un jeu de plateau géant'),
+  conf: pic('conference-professionnelle', [800, 1300], 4 / 3, 'Trois intervenants présentent leur entreprise à des étudiants, devant un écran de projection.', 'Conférence avec des intervenants extérieurs'),
+  visite: pic('visite-entreprise-promotion', [900, 1600], 2048 / 1083, 'Un groupe d’étudiants et d’adultes, en gilets de sécurité et charlottes, pose devant un quai lors d’une visite d’entreprise.', 'Visite d’entreprise'),
+  visite2: pic('visite-entreprise-groupe', [800, 1400], 1500 / 1180, 'Des étudiants et une adulte en gilets orange posent ensemble pendant une visite d’entreprise.', 'Visite d’entreprise'),
+  promo: pic('photo-promotion-20-ans-dcg', [800, 1600], 1600 / 720, 'Photo de groupe d’étudiants du DCG, beaucoup portent un t-shirt « DCG », sur des marches devant un bâtiment du lycée.', 'Photo de promotion, 20 ans du DCG'),
+  lycee: pic('lycee-georges-de-la-tour', [666], 666 / 500, 'Entrée et bâtiments du lycée Georges-de-la-Tour à Nancy, sous un ciel bleu.', 'Le lycée Georges-de-la-Tour, à Nancy'),
+};
+
+/* ───────── Les six thèmes de la mosaïque ───────── */
+const themes = [
+  {
+    id: 'chacun-compte', n: 't1', title: 'Ici, chacun compte', sub: 'Un accompagnement de proximité',
+    text: 'Des promotions à taille humaine, avec des classes d’environ 30 à 35 étudiants. Une équipe enseignante accessible et investie, un accompagnement pédagogique régulier et une attention portée à la progression de chacun.',
+    pos: '38% 50%', sizes: '(min-width: 1000px) 34vw, 96vw', main: P.accomp, extra: [P.petitGroupe],
+  },
+  {
+    id: 'prendre-la-parole', n: 't2', title: 'Oser prendre la parole', sub: 'Prendre confiance et s’affirmer',
+    text: 'Coaching oral, ateliers d’expression orale, gestion du stress, sophrologie, personal branding : des temps pour s’entraîner, gagner en assurance et développer des compétences personnelles et professionnelles.',
+    pos: '52% 50%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.oral, extra: [],
+  },
+  {
+    id: 'apprendre-en-faisant', n: 't3', title: 'Apprendre en faisant', sub: 'Apprendre autrement',
+    text: 'Travail en groupes, méthodologie, jeux pédagogiques, mises en situation : une approche collaborative où l’on apprend aussi en cherchant, en présentant et en jouant ensemble.',
+    pos: '50% 40%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.methodo, extra: [P.groupe, P.jeu],
+  },
+  {
+    id: 'monde-professionnel', n: 't4', title: 'Le monde professionnel en direct', sub: 'Rencontrer les professionnels',
+    text: 'Conférences, interventions de professionnels, rencontres avec les acteurs de la comptabilité et de la finance, échanges autour des métiers et des parcours professionnels.',
+    pos: '45% 50%', sizes: '(min-width: 1000px) 24vw, 50vw', main: P.conf, extra: [],
+  },
+  {
+    id: 'sortir-de-la-classe', n: 't5', title: 'Sortir de la salle de cours', sub: 'Découvrir l’entreprise',
+    text: 'Deux périodes de stage de quatre semaines minimum, en première et en deuxième année, et des visites d’entreprises : découvrir les organisations et relier les enseignements aux réalités professionnelles.',
+    pos: '50% 55%', sizes: '(min-width: 1000px) 46vw, 96vw', main: P.visite, extra: [P.visite2],
+  },
+  {
+    id: 'trois-ans', n: 't6', title: 'Trois ans pour se construire', sub: 'Construire son avenir',
+    text: 'Au fil des trois années du DCG, les étudiants acquièrent des bases solides, gagnent en autonomie et précisent peu à peu leur projet. Une progression qui se construit pas à pas, avec la promotion et l’équipe pédagogique.',
+    pos: '50% 40%', sizes: '(min-width: 1000px) 24vw, 96vw', main: P.promo, extra: [],
+  },
+];
+
+const infos = [
+  { k: 'Adresse', v: '5 rue de la Croix Saint-Claude, 54000 Nancy' },
+  { k: 'Statut', v: 'Établissement public, de la sixième au bac+3' },
+  { k: 'Au quotidien', v: 'Espaces de restauration et de vie scolaire' },
+  { k: 'Autour', v: 'Environnement étudiant et formations variées' },
+];
+
+const next = [
+  { t: 'Témoignages', href: '/temoignages/' },
+  { t: 'Découvrir le DCG', href: '/decouvrir-le-dcg/' },
+  { t: 'Poursuites d’études et carrières', href: '/poursuites-etudes-carrieres/' },
+  { t: 'Vie étudiante', href: '/vie-etudiante/' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'fr-FR',
+      isPartOf: { '@id': `${site}#site` },
+      about: { '@id': `${site}#dcg` },
+      breadcrumb: { '@id': `${pageUrl}#fil` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#fil`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: site },
+        { '@type': 'ListItem', position: 2, name: 'Pourquoi nous choisir ?', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+<Base title={title} description={description} variant="doc">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <Header />
+
+  <main id="contenu" class="pq">
+
+    <!-- ───────── Introduction + mosaïque ───────── -->
+    <section class="pq-gallery" aria-labelledby="pq-titre">
+      <Network class="network" w={1200} h={600} seed={41} yaw={0.4} cx={0.82} cy={0.3} veil={false} cols={30} rows={13} f={320} spread={34} />
+      <div class="pq-wrap">
+        <header class="pq-intro">
+          <h1 id="pq-titre">Pourquoi choisir notre DCG <span>?</span></h1>
+          <p>Un diplôme exigeant, un accompagnement de proximité et une formation ouverte sur le monde professionnel.</p>
+        </header>
+
+        <ul class="pq-mosaic" aria-label="Six raisons de choisir notre DCG">
+          {themes.map((t) => (
+            <li class={`pq-tile pq-${t.n}`}>
+              <button type="button" class="pq-open" data-open={t.id} aria-haspopup="dialog">
+                <img src={t.main.src} srcset={t.main.srcset} sizes={t.sizes} width={t.main.w} height={t.main.h} alt="" loading="lazy" decoding="async" style={`object-position:${t.pos}`} />
+                <span class="pq-label"><span class="pq-t">{t.title}</span><span class="pq-plus" aria-hidden="true"></span></span>
+                <span class="pq-sr">Ouvrir : {t.sub}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+        <p class="pq-hint">Touchez une photo pour en savoir plus.</p>
+      </div>
+    </section>
+
+    <!-- ───────── Fenêtres de détail (une par thème) ───────── -->
+    {themes.map((t, i) => (
+      <dialog class="pq-dlg" id={`dlg-${t.id}`} aria-labelledby={`h-${t.id}`}>
+        <div class="pq-dlg-in">
+          <button type="button" class="pq-x" data-close aria-label="Fermer et revenir à la mosaïque"><span aria-hidden="true"></span></button>
+          <div class="pq-dlg-media">
+            <figure class="pq-dm-main">
+              <img src={t.main.src} srcset={t.main.srcset} sizes="(min-width: 1000px) 560px, 96vw" width={t.main.w} height={t.main.h} alt={t.main.alt} loading="lazy" decoding="async" />
+              <figcaption>{t.main.cap}</figcaption>
+            </figure>
+            <div class="pq-dm-more">
+              {t.extra.map((e) => (
+                <figure>
+                  <img src={e.src} srcset={e.srcset} sizes="(min-width: 1000px) 260px, 46vw" width={e.w} height={e.h} alt={e.alt} loading="lazy" decoding="async" />
+                  <figcaption>{e.cap}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+          <div class="pq-dlg-text">
+            <p class="pq-sub">{t.sub}</p>
+            <h2 id={`h-${t.id}`}>{t.title}</h2>
+            <p>{t.text}</p>
+            <div class="pq-nav">
+              <button type="button" data-go="-1">← Précédent</button>
+              <button type="button" data-go="1">Suivant →</button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    ))}
+
+    <!-- ───────── Le lycée, en bref ───────── -->
+    <section class="pq-school" aria-labelledby="pq-h-lycee">
+      <div class="pq-wrap pq-school-in">
+        <figure>
+          <img src={P.lycee.src} srcset={P.lycee.srcset} sizes="(min-width: 1000px) 30vw, 92vw" width={P.lycee.w} height={P.lycee.h} alt={P.lycee.alt} loading="lazy" decoding="async" />
+          <figcaption>{P.lycee.cap}</figcaption>
+        </figure>
+        <div>
+          <h2 id="pq-h-lycee">Un cadre d’études pour grandir et réussir</h2>
+          <p>Le lycée Georges-de-la-Tour est un établissement public situé à Nancy, qui accueille des élèves et des étudiants dans des parcours de formation variés, de la sixième jusqu’au bac+3. Les étudiants du DCG évoluent dans un environnement scolaire et étudiant diversifié, avec des infrastructures et des services qui facilitent leur quotidien.</p>
+          <dl class="pq-infos">
+            {infos.map((x) => (
+              <div><dt>{x.k}</dt><dd>{x.v}</dd></div>
+            ))}
+          </dl>
+          <p class="pq-site"><a href="https://www.georges-delatour-nancy.fr/" rel="noopener" target="_blank">Site officiel du lycée</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Conclusion ───────── -->
+    <section class="pq-end" aria-labelledby="pq-h-end">
+      <div class="pq-wrap pq-end-in">
+        <h2 id="pq-h-end">Construisons ensemble un avenir qui compte !</h2>
+        <a class="cta pq-cta" href={`${base}/admissions/`}>DÉCOUVRIR LES MODALITÉS D’ADMISSION</a>
+        <nav class="pq-more" aria-label="Pour aller plus loin">
+          {next.map((l) => (
+            <a href={`${base}${l.href}`}>{l.t}</a>
+          ))}
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var dialogs = Array.prototype.slice.call(document.querySelectorAll('.pq-dlg'));
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!dialogs.length || typeof dialogs[0].showModal !== 'function') return;
+      var root = document.documentElement;
+
+      function find(id) { return document.getElementById('dlg-' + id); }
+      function open(d) {
+        if (!d || d.open) return;
+        d.classList.remove('is-closing');
+        d.showModal();
+        d.scrollTop = 0;
+        var box = d.querySelector('.pq-dlg-in'); if (box) box.scrollTop = 0;
+        root.classList.add('pq-lock');
+      }
+      function close(d) {
+        if (!d || !d.open) return;
+        if (reduce) { d.close(); return; }
+        d.classList.add('is-closing');
+        setTimeout(function () { d.classList.remove('is-closing'); d.close(); }, 200);
+      }
+      document.querySelectorAll('[data-open]').forEach(function (b) {
+        b.addEventListener('click', function () { open(find(b.getAttribute('data-open'))); });
+      });
+      dialogs.forEach(function (d, i) {
+        d.addEventListener('click', function (e) { if (e.target === d) close(d); });
+        d.addEventListener('cancel', function (e) { e.preventDefault(); close(d); });
+        d.addEventListener('close', function () { if (!dialogs.some(function (x) { return x.open; })) root.classList.remove('pq-lock'); });
+        d.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', function () { close(d); }); });
+        d.querySelectorAll('[data-go]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var step = parseInt(b.getAttribute('data-go'), 10);
+            var next = dialogs[(i + step + dialogs.length) % dialogs.length];
+            d.close(); open(next);
+          });
+        });
+      });
+      var h = location.hash.replace('#', '');
+      if (h && find(h)) open(find(h));
+    })();
+  </script>
+</Base>

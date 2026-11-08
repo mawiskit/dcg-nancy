@@ -1,0 +1,390 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Network from '../components/Network.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import '../styles/decouvrir.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const pageUrl = new URL(`${base}/decouvrir-le-dcg/`, Astro.site).href;
+
+const title = 'Formation DCG Nancy : programme et matières | DCG Nancy';
+const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : diplôme de comptabilité et de gestion en 3 ans, 13 unités d’enseignement, matières et horaires par année.';
+
+/* ───────── Tableau des enseignements : reproduit à l’identique depuis la plaquette DCG 2026-2027 ─────────
+   Les horaires entre parenthèses correspondent aux cours en classe dédoublée. Aucun total n’est calculé. */
+const years = [
+  {
+    n: 1, label: 'Première année',
+    rows: [
+      { code: 'UE1', name: 'Fondamentaux du droit', h: '4 + (1)' },
+      { code: 'UE5', name: 'Économie contemporaine', h: '4,5 + (1)' },
+      { code: 'UE8', name: 'Systèmes d’information de gestion', h: '5,5 + (1,5)' },
+      { code: 'UE9', name: 'Comptabilité', h: '5 + (1)' },
+      { code: 'UE12', name: 'Anglais des affaires', h: '1 + (0,5)' },
+      { code: 'UE13', name: 'Communication professionnelle', h: '(0,5)' },
+      { code: 'MM', name: 'Modules méthodologiques', h: '(1,5)' },
+    ],
+  },
+  {
+    n: 2, label: 'Deuxième année',
+    rows: [
+      { code: 'UE2', name: 'Droit des sociétés et des groupements d’affaires', h: '4 + (1)' },
+      { code: 'UE4', name: 'Droit fiscal', h: '4 + (1)' },
+      { code: 'UE6', name: 'Finance d’entreprise', h: '4 + (1)' },
+      { code: 'UE10', name: 'Comptabilité approfondie', h: '5 + (1)' },
+      { code: 'UE13', name: 'Communication professionnelle', h: '0,5 + (0,5)' },
+      { code: 'MM', name: 'Modules méthodologiques', h: '(1,5)' },
+    ],
+  },
+  {
+    n: 3, label: 'Troisième année',
+    rows: [
+      { code: 'UE3', name: 'Droit social', h: '4 + (1)' },
+      { code: 'UE7', name: 'Management', h: '5,5 + (1)' },
+      { code: 'UE11', name: 'Contrôle de gestion', h: '5,5 + (1)' },
+      { code: 'UE12', name: 'Anglais des affaires', h: '2,5' },
+      { code: 'UE13', name: 'Communication professionnelle', h: '0,5 + (0,5)' },
+      { code: 'MM', name: 'Modules méthodologiques', h: '(1)' },
+    ],
+  },
+];
+
+/* ───────── Matières regroupées par grand domaine (les quatre axes de la plaquette) ───────── */
+const domains = [
+  {
+    id: 'droit', n: '01', t: 'Droit des affaires',
+    lead: 'Comprendre le cadre juridique dans lequel vit une entreprise.',
+    ues: [
+      { code: 'UE1', when: 'Première année', name: 'Fondamentaux du droit',
+        text: 'Une solide culture juridique de base et des connaissances précises en droit des affaires : sources du droit, action en justice, preuves, personnalité juridique, biens et patrimoine, propriété intellectuelle (brevet, marque), contrats, fonds de commerce et responsabilité.' },
+      { code: 'UE2', when: 'Deuxième année', name: 'Droit des sociétés et des groupements d’affaires',
+        text: 'Les règles de fonctionnement des principales sociétés (SARL, SA, SAS, SNC, sociétés civiles) et les acteurs de l’économie sociale et solidaire (coopératives, associations). S’y ajoutent le droit des entreprises en difficulté (sauvegarde, redressement, liquidation judiciaire) et le droit pénal des affaires (abus de biens sociaux, escroquerie, faux et usage de faux, recel).' },
+      { code: 'UE3', when: 'Troisième année', name: 'Droit social',
+        text: 'Le droit du travail vu de l’entreprise : relations individuelles et collectives de travail, contrat de travail et protection sociale.' },
+      { code: 'UE4', when: 'Deuxième année', name: 'Droit fiscal',
+        text: 'Les grands mécanismes de la fiscalité, celle des entreprises comme celle des particuliers.' },
+    ],
+  },
+  {
+    id: 'gestion', n: '02', t: 'Gestion comptable et financière',
+    lead: 'Enregistrer les opérations, analyser la situation financière, piloter la performance.',
+    ues: [
+      { code: 'UE9', when: 'Première année', name: 'Comptabilité',
+        text: 'Les principes fondamentaux de la comptabilité : enregistrer les opérations d’une entreprise et produire les documents comptables.' },
+      { code: 'UE10', when: 'Deuxième année', name: 'Comptabilité approfondie',
+        text: 'Un approfondissement des règles et des techniques comptables, avec le traitement d’opérations plus complexes.' },
+      { code: 'UE6', when: 'Deuxième année', name: 'Finance d’entreprise',
+        text: 'Les questions financières de l’entreprise : analyse de sa situation financière, décisions de financement et d’investissement.' },
+      { code: 'UE11', when: 'Troisième année', name: 'Contrôle de gestion',
+        text: 'Piloter la performance d’une organisation : coûts, budgets, tableaux de bord et outils d’aide à la décision.' },
+    ],
+  },
+  {
+    id: 'economie', n: '03', t: 'Analyse économique et managériale',
+    lead: 'Comprendre l’environnement économique et le fonctionnement des organisations.',
+    ues: [
+      { code: 'UE5', when: 'Première année', name: 'Économie contemporaine',
+        text: 'Les grands mécanismes économiques, les politiques économiques, les échanges et les transformations de l’économie d’aujourd’hui.' },
+      { code: 'UE7', when: 'Troisième année', name: 'Management',
+        text: 'Stratégie, organisation et fonctionnement des entreprises, prise de décision managériale.' },
+    ],
+  },
+  {
+    id: 'communication', n: '04', t: 'Communication et environnement numérique',
+    lead: 'Maîtriser les outils, la langue et la communication du monde professionnel.',
+    ues: [
+      { code: 'UE8', when: 'Première année', name: 'Systèmes d’information de gestion',
+        text: 'Les systèmes d’information, les processus de gestion et les outils numériques utilisés dans les organisations.' },
+      { code: 'UE12', when: 'Première et troisième années', name: 'Anglais des affaires',
+        text: 'Développer ses compétences linguistiques dans un environnement économique et professionnel international.' },
+      { code: 'UE13', when: 'Chaque année', name: 'Communication professionnelle',
+        text: 'Communication écrite et orale, recherche documentaire et préparation à la communication professionnelle.' },
+    ],
+  },
+];
+
+const overview = domains.map((d) => ({ id: d.id, n: d.n, t: d.t, lead: d.lead, codes: d.ues.map((u) => u.code).join(' · ') }));
+
+const disciplines = ['Comptabilité', 'Gestion', 'Droit', 'Fiscalité', 'Finance', 'Économie', 'Management', 'Communication', 'Outils numériques'];
+
+const modules = [
+  { t: 'La simulation', s: 'Gérer une entreprise en équipes, face à la concurrence : stratégie, publicité, marchés étrangers, première assemblée générale.' },
+  { t: 'La méthode et la motivation', s: 'Outils d’apprentissage partagés, accompagnement individualisé et interventions de professionnels (gestion du stress, développement personnel, personal branding, expression orale).' },
+  { t: 'Les certifications', s: 'Pix pour les compétences numériques, Projet Voltaire pour l’orthographe et la grammaire.' },
+  { t: 'La collaboration', s: 'Des projets réels menés avec l’association des étudiants, et un réseau d’anciens toujours prêts à partager leur expérience.' },
+  { t: 'La création', s: 'Une web radio : ateliers pour créer des podcasts, des interviews et concevoir une émission.' },
+];
+
+const steps = [
+  { n: 1, t: 'Acquérir les fondamentaux', s: 'Découverte des bases du droit, de l’économie, de la comptabilité et des systèmes d’information, avec l’anglais des affaires et la communication professionnelle.', ue: 'UE1 · UE5 · UE8 · UE9' },
+  { n: 2, t: 'Approfondir les connaissances', s: 'Développement des compétences en droit des sociétés, en fiscalité, en finance et en comptabilité approfondie.', ue: 'UE2 · UE4 · UE6 · UE10' },
+  { n: 3, t: 'Développer l’analyse et le pilotage', s: 'Approfondissement du management, du contrôle de gestion, du droit social et des compétences de communication, avec l’anglais des affaires.', ue: 'UE3 · UE7 · UE11 · UE12' },
+];
+
+const skills = [
+  { t: 'Comptabilité', s: 'Enregistrer les opérations d’une entreprise, produire et lire les documents comptables.' },
+  { t: 'Gestion', s: 'Mesurer et piloter la performance : coûts, budgets, tableaux de bord.' },
+  { t: 'Droit', s: 'Repérer le cadre juridique d’une entreprise : contrats, sociétés, droit du travail, fiscalité.' },
+  { t: 'Finance', s: 'Analyser la situation financière d’une entreprise et éclairer ses choix de financement et d’investissement.' },
+  { t: 'Économie', s: 'Comprendre l’environnement économique dans lequel évoluent les entreprises.' },
+  { t: 'Management', s: 'Comprendre l’organisation, la stratégie et la prise de décision dans les entreprises.' },
+];
+
+const next = [
+  { t: 'Pourquoi nous choisir ?', s: 'Encadrement, méthode, vie de promotion : ce qui fait la différence à Nancy.', href: '/pourquoi-nous-choisir/' },
+  { t: 'Poursuites d’études et carrières professionnelles', s: 'DSCG, écoles de commerce, masters, métiers de la comptabilité, de l’audit et de la finance.', href: '/poursuites-etudes-carrieres/' },
+  { t: 'Vie étudiante', s: 'L’association des étudiants, les voyages, les rencontres avec des professionnels.', href: '/vie-etudiante/' },
+  { t: 'Admissions', s: 'Parcoursup en première année, dossier en deuxième année : modalités et candidature.', href: '/admissions/' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'fr-FR',
+      isPartOf: { '@id': `${site}#site` },
+      about: { '@id': `${site}#dcg` },
+      breadcrumb: { '@id': `${pageUrl}#fil` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#fil`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: site },
+        { '@type': 'ListItem', position: 2, name: 'Découvrir le DCG', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+<Base title={title} description={description} variant="doc">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <Header />
+
+  <main id="contenu" class="dd">
+
+    <!-- ───────── En-tête ───────── -->
+    <section class="dd-hero" aria-labelledby="dd-titre">
+      <Network class="network" w={1200} h={600} seed={29} yaw={0.46} cx={0.76} cy={0.42} veil={false} cols={30} rows={13} f={320} spread={34} />
+      <div class="dd-wrap dd-hero-in">
+        <nav class="dd-crumb" aria-label="Fil d’Ariane">
+          <a href={`${base}/`}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Découvrir le DCG</span>
+        </nav>
+        <p class="dd-kicker">Diplôme de comptabilité et de gestion</p>
+        <h1 id="dd-titre">Découvrir le DCG <span>à Nancy</span></h1>
+        <p class="dd-lead">Le DCG est une formation supérieure en trois ans qui confère le grade de licence. Au lycée Georges-de-la-Tour, à Nancy, en Lorraine, il rassemble 13 unités d’enseignement autour de quatre grands domaines : le droit, la gestion comptable et financière, l’analyse économique et managériale, la communication et l’environnement numérique.</p>
+
+        <ul class="dd-facts">
+          <li><b>3 ans</b><span>de formation supérieure</span></li>
+          <li><b>Licence</b><span>grade conféré</span></li>
+          <li><b>13</b><span>unités d’enseignement</span></li>
+          <li><b>4</b><span>grands domaines</span></li>
+        </ul>
+
+        <nav class="dd-jump" aria-label="Dans cette page">
+          <a href="#domaines">Les quatre domaines</a>
+          <a href="#programme">Le programme année par année</a>
+          <a href="#matieres">Les matières</a>
+          <a href="#progression">La progression</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ───────── Une formation pluridisciplinaire ───────── -->
+    <section class="dd-light dd-intro" id="domaines" aria-labelledby="dd-h-multi">
+      <div class="dd-wrap">
+        <div class="dd-split">
+          <h2 id="dd-h-multi">Bien plus que de la comptabilité</h2>
+          <div class="dd-prose">
+            <p>On résume souvent le DCG à l’apprentissage de la comptabilité. Elle y occupe une vraie place, mais la formation est pluridisciplinaire : elle apprend aussi à comprendre le cadre juridique d’une entreprise, sa fiscalité, ses choix de financement, son environnement économique et son management.</p>
+            <p>L’objectif est de comprendre comment fonctionne une organisation dans son ensemble, et pas seulement comment elle tient ses comptes. Pour des études de comptabilité après le bac à Nancy, cette formation en comptabilité et gestion offre un socle large, qui ouvre sur de nombreuses <a href={`${base}/poursuites-etudes-carrieres/`}>poursuites d’études et carrières</a>.</p>
+          </div>
+        </div>
+
+        <ul class="dd-disc" aria-label="Les disciplines étudiées">
+          {disciplines.map((d) => (
+            <li>{d}</li>
+          ))}
+        </ul>
+
+        <h3 class="dd-h3-quiet">Quatre grands domaines, treize unités d’enseignement</h3>
+        <ol class="dd-domains">
+          {overview.map((d) => (
+            <li>
+              <a href={`#domaine-${d.id}`}>
+                <span class="dd-dn">{d.n}</span>
+                <span class="dd-dt"><b>{d.t}</b><em>{d.lead}</em></span>
+                <span class="dd-dc">{d.codes}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────── Le tableau central ───────── -->
+    <section class="dd-dark dd-prog" id="programme" aria-labelledby="dd-h-prog">
+      <div class="dd-wrap">
+        <p class="dd-kicker">Les enseignements sur trois ans</p>
+        <h2 id="dd-h-prog">Le programme du DCG année par année</h2>
+        <p class="dd-sublead">Chaque année, entre 4 et 5 UE sont validées, ce qui permet de valider l’intégralité du diplôme au bout des trois ans. Voici, pour la formation DCG proposée à Nancy, la répartition des enseignements.</p>
+
+        <div class="dd-years">
+          {years.map((y) => (
+            <section class={`dd-year dd-y${y.n}`} aria-labelledby={`dd-an${y.n}`}>
+              <header>
+                <span class="dd-yn" aria-hidden="true">{y.n}</span>
+                <h3 id={`dd-an${y.n}`}>{y.label}</h3>
+              </header>
+              <table>
+                <caption class="dd-sr">Enseignements et horaires de la {y.label.toLowerCase()}</caption>
+                <thead><tr><th scope="col">Unité d’enseignement</th><th scope="col">Horaires</th></tr></thead>
+                <tbody>
+                  {y.rows.map((r) => (
+                    <tr data-ue={r.code}>
+                      <th scope="row"><span class="dd-code">{r.code === 'MM' ? '' : r.code}</span><span class="dd-name">{r.name}</span></th>
+                      <td>{r.h}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          ))}
+        </div>
+
+        <div class="dd-legend">
+          <p><strong>Les volumes horaires entre parenthèses correspondent aux cours en classe dédoublée.</strong></p>
+          <p>L’UE13 et les modules méthodologiques sont présents chaque année, l’UE12 en première et en troisième année. Source : plaquette de présentation du DCG 2026-2027.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Les matières ───────── -->
+    <section class="dd-light dd-subjects" id="matieres" aria-labelledby="dd-h-mat">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <h2 id="dd-h-mat">Les matières du DCG : que va-t-on apprendre ?</h2>
+          <p class="dd-sublead">Les unités d’enseignement sont présentées ici par domaine, avec l’année où elles sont enseignées. Chaque matière du DCG se découvre par des exemples concrets plutôt que par des définitions.</p>
+        </div>
+
+        {domains.map((d) => (
+          <section class="dd-domain" id={`domaine-${d.id}`} aria-labelledby={`dd-d-${d.id}`}>
+            <div class="dd-dhead">
+              <span class="dd-dnum" aria-hidden="true">{d.n}</span>
+              <h3 id={`dd-d-${d.id}`}>{d.t}</h3>
+              <p>{d.lead}</p>
+            </div>
+            <ol class="dd-ues">
+              {d.ues.map((u) => (
+                <li>
+                  <p class="dd-umeta"><span class="dd-ucode">{u.code}</span><span>{u.when}</span></p>
+                  <h4>{u.name}</h4>
+                  <p>{u.text}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+
+        <section class="dd-domain dd-mods" aria-labelledby="dd-d-mm">
+          <div class="dd-dhead">
+            <span class="dd-dnum" aria-hidden="true">+</span>
+            <h3 id="dd-d-mm">Les modules méthodologiques</h3>
+            <p>Présents chaque année, ils développent les compétences professionnelles et l’autonomie.</p>
+          </div>
+          <ul class="dd-modlist">
+            {modules.map((m) => (
+              <li><h4>{m.t}</h4><p>{m.s}</p></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- ───────── La progression ───────── -->
+    <section class="dd-dark dd-steps" id="progression" aria-labelledby="dd-h-steps">
+      <div class="dd-wrap">
+        <p class="dd-kicker">Trois années, un fil conducteur</p>
+        <h2 id="dd-h-steps">Une progression en trois étapes</h2>
+        <ol class="dd-rail">
+          {steps.map((s) => (
+            <li class={`dd-step dd-y${s.n}`}>
+              <span class="dd-node" aria-hidden="true">{s.n}</span>
+              <h3>{s.t}</h3>
+              <p>{s.s}</p>
+              <p class="dd-stepue">{s.ue}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="dd-stages"><strong>Des stages en milieu professionnel.</strong> Deux stages d’une durée minimum de quatre semaines rythment la formation, en première puis en deuxième année.</p>
+      </div>
+    </section>
+
+    <!-- ───────── Les compétences ───────── -->
+    <section class="dd-light dd-skills" aria-labelledby="dd-h-skills">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <h2 id="dd-h-skills">Les compétences développées</h2>
+          <p class="dd-sublead">Au fil des trois ans, la formation DCG donne des repères solides en comptabilité, en gestion, en droit, en finance, en économie et en management, complétés par l’anglais, le numérique et la communication.</p>
+        </div>
+        <ul class="dd-skilllist">
+          {skills.map((k) => (
+            <li><h3>{k.t}</h3><p>{k.s}</p></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────── Aller plus loin ───────── -->
+    <section class="dd-dark dd-next" aria-labelledby="dd-h-next">
+      <Network class="network" w={1200} h={420} seed={53} yaw={0.3} cx={0.3} cy={0.5} veil={false} cols={30} rows={12} f={260} spread={32} />
+      <div class="dd-wrap dd-next-in">
+        <div class="dd-nextl">
+          <h2 id="dd-h-next">Aller plus loin</h2>
+          <p>Les atouts de la formation, les débouchés, le quotidien d’une promotion et les modalités de candidature.</p>
+          <a class="cta dd-cta" href={`${base}/admissions/`}>CANDIDATER</a>
+        </div>
+        <ul class="dd-links">
+          {next.map((l) => (
+            <li>
+              <a href={`${base}${l.href}`}>
+                <span class="dd-lt">{l.t}</span>
+                <span class="dd-ls">{l.s}</span>
+                <svg class="dd-arr" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M0 6h24M19 1l5 5-5 5" /></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+
+  <script is:inline>
+    (function () {
+      var rows = document.querySelectorAll('.dd-years tr[data-ue]');
+      function twins(el, on) {
+        var k = el.getAttribute('data-ue');
+        rows.forEach(function (r) {
+          if (r !== el && r.getAttribute('data-ue') === k) r.classList.toggle('is-twin', on);
+        });
+      }
+      rows.forEach(function (r) {
+        r.addEventListener('mouseenter', function () { twins(r, true); });
+        r.addEventListener('mouseleave', function () { twins(r, false); });
+      });
+    })();
+  </script>
+</Base>

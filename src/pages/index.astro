@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Network from '../components/Network.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import ContactDialog from '../components/ContactDialog.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const rubriques = [
+  { n: '01', t: 'Découvrir le DCG', s: 'La formation DCG en comptabilité et gestion, ses 13 unités d’enseignement.', href: '/decouvrir-le-dcg/' },
+  { n: '02', t: 'Pourquoi nous choisir ?', s: 'Ce qui fait la différence à Nancy.', href: '/pourquoi-nous-choisir/' },
+  { n: '03', t: 'Après le DCG ?', s: 'Après le DCG : DSCG, expertise comptable, métiers, débouchés.', href: '/poursuites-etudes-carrieres/' },
+  { n: '04', t: 'Vie étudiante', s: 'Le quotidien d’une promotion.', href: '/vie-etudiante/' },
+  { n: '05', t: 'Témoignages', s: 'Les promotions en images.', href: '/temoignages/' },
+  { n: '06', t: 'Admissions', s: 'Calendrier, dossier, candidature.', href: '/admissions/' },
+];
+
+const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const logoUrl = new URL(`${base}/images/logo-dcg-nancy-480.png`, Astro.site).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site}#site`,
+      url: site,
+      name: 'DCG Nancy',
+      inLanguage: 'fr-FR',
+    },
+    {
+      '@type': 'EducationalOrganization',
+      '@id': `${site}#organisation`,
+      name: 'DCG Nancy – Lycée Georges-de-la-Tour',
+      alternateName: ['DCG Nancy', 'DCG du lycée Georges-de-la-Tour'],
+      url: site,
+      logo: logoUrl,
+      image: logoUrl,
+      description: 'Formation au DCG (Diplôme de comptabilité et de gestion) au lycée Georges-de-la-Tour, à Nancy.',
+      address: { '@type': 'PostalAddress', addressLocality: 'Nancy', addressRegion: 'Grand Est', addressCountry: 'FR' },
+      areaServed: ['Nancy', 'Meurthe-et-Moselle', 'Grand Est'],
+    },
+    {
+      '@type': 'Course',
+      '@id': `${site}#dcg`,
+      name: 'Diplôme de comptabilité et de gestion (DCG)',
+      description: 'Formation en trois ans, de niveau licence, en comptabilité, gestion, droit et économie, préparée au lycée Georges-de-la-Tour à Nancy. 13 unités d’enseignement et stages en milieu professionnel.',
+      inLanguage: 'fr-FR',
+      educationalLevel: 'Niveau licence (bac+3)',
+      timeRequired: 'P3Y',
+      provider: { '@id': `${site}#organisation` },
+    },
+  ],
+};
+---
+<Base
+  title="Formation DCG comptabilité et gestion à Nancy | DCG Nancy"
+  description="Formation DCG à Nancy, au lycée Georges-de-la-Tour : diplôme de comptabilité et de gestion en 3 ans, niveau licence. Débouchés, poursuites d’études, admissions."
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <Header />
+
+  <main id="contenu" class="home">
+    <div class="band">
+      <h1>À Nancy, rejoignez le DCG : diplôme de comptabilité et de gestion en 3 ans, une formation exigeante et reconnue par l’État.</h1>
+    </div>
+    <section class="left" aria-labelledby="slogan">
+      <img
+        class="logo-big"
+        src={`${base}/images/logo-dcg-nancy-480.png`}
+        width="240" height="240"
+        alt="Logo DCG Nancy – Diplôme de comptabilité et de gestion, lycée Georges de la Tour"
+      />
+      <p id="slogan" class="slogan"><span>Construisons ensemble</span> <span class="gold">un avenir qui compte&#8239;!</span></p>
+      <Network class="network" />
+    </section>
+
+    <div class="right">
+      <figure class="stage">
+        <img
+          src={`${base}/images/promotion-1600.jpg`}
+          srcset={`${base}/images/promotion-800.jpg 800w, ${base}/images/promotion-1600.jpg 1600w`}
+          sizes="(max-width: 900px) 100vw, 60vw"
+          width="1600" height="720"
+          alt="Photographie de groupe d’une promotion de la formation DCG à Nancy : de nombreux étudiants, dont beaucoup portent un tee-shirt blanc « DCG », posent sur des gradins."
+          fetchpriority="high"
+        />
+        <figcaption><span>2025 : le DCG fête ses 20 ans</span></figcaption>
+      </figure>
+
+      <nav aria-label="Rubriques du site">
+        <ol class="rows">
+          {rubriques.map((r, i) => (
+            <li>
+              <a class={`row${i === 0 ? ' on' : ''}`} href={`${base}${r.href}`}>
+                <span class="num">{r.n}</span>
+                <span><span class="ttl">{r.t}</span><span class="sub">{r.s}</span></span>
+                <svg class="arr" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M0 6h24M19 1l5 5-5 5" /></svg>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </main>
+
+  <section class="figures" aria-label="Le DCG en chiffres">
+    <ul>
+      <li class="fig"><b>3 ans</b><span>de formation</span></li>
+      <li class="fig"><b>13</b><span>unités d’enseignement</span></li>
+    </ul>
+    <ul>
+      <li class="fig"><b>Licence</b><span>niveau du diplôme</span></li>
+      <li class="fig"><b>Stages</b><span>en milieu professionnel</span></li>
+      <li class="fig legal"><SiteLinks /></li>
+    </ul>
+  </section>
+
+  <ContactDialog />
+
+  <script is:inline>
+    // La ligne ouverte suit la souris et le clavier ; sans JavaScript, la première reste ouverte.
+    (function () {
+      var rows = [].slice.call(document.querySelectorAll('.row'));
+      function on(i) { rows.forEach(function (r, j) { r.classList.toggle('on', i === j); }); }
+      rows.forEach(function (r, i) {
+        r.addEventListener('mouseenter', function () { on(i); });
+        r.addEventListener('focus', function () { on(i); });
+      });
+    })();
+  </script>
+</Base>
