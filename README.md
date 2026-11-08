@@ -16,13 +16,13 @@ Déposer les fichiers `.woff2` dans `public/fonts/` (noms indiqués dans `public
 
 ## Déploiement sur GitHub Pages avec le nom de domaine
 
-Le site est configuré pour **https://dcg-nancy.fr** (fichier `public/CNAME` et workflow `.github/workflows/deploy.yml`).
+Le site est configuré pour **https://www.dcg-nancy.fr** (domaine canonique ; dcg-nancy.fr et http:// y sont redirigés par GitHub Pages) (fichier `public/CNAME` et workflow `.github/workflows/deploy.yml`).
 
 1. Réserver `dcg-nancy.fr` chez Infomaniak.
 2. Créer le dépôt GitHub (public) et y déposer le contenu de ce dossier (branche `main`).
 3. Settings > Pages > Source : **GitHub Actions**.
 4. Chez Infomaniak, zone DNS du domaine : quatre enregistrements **A** vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, et un **CNAME** `www` vers `VOTRE-COMPTE.github.io`. Ne pas supprimer les enregistrements MX et TXT (messagerie). Vérifier ces adresses dans la documentation GitHub Pages.
-5. Settings > Pages > Custom domain : saisir `dcg-nancy.fr`, enregistrer, puis cocher **Enforce HTTPS** quand c'est possible.
+5. Settings > Pages > Custom domain : saisir `www.dcg-nancy.fr`, enregistrer, puis cocher **Enforce HTTPS** quand c'est possible.
 6. Onglet Actions > Déploiement GitHub Pages > Run workflow.
 
 Variables facultatives (Settings > Secrets and variables > Actions > Variables) : `PUBLIC_GA_ID`, `PUBLIC_FORM_ENDPOINT`, `PUBLIC_GSC_TOKEN`, `CUSTOM_DOMAIN` (autre domaine), `NOINDEX` = `true` (garder le site hors de Google).
