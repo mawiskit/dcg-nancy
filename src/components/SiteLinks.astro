@@ -6,9 +6,14 @@ const ga = import.meta.env.PUBLIC_GA_ID;
   <svg viewBox="0 0 20 14" width="15" height="11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="1" width="18" height="12" rx="1.5" /><path d="M1.5 2l8.5 6.5L18.5 2" /></svg>
   Nous contacter
 </a>
+<span class="social-group">
 <a class="link-social" href="https://www.instagram.com/dcg_gdlt/" target="_blank" rel="noopener" aria-label="Instagram du DCG Nancy (s’ouvre dans un nouvel onglet)" title="Instagram du DCG Nancy">
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none" /></svg>
 </a>
+<a class="link-social" href="https://www.linkedin.com/school/dcg-lyc%C3%A9e-georges-de-la-tour-nancy/" target="_blank" rel="noopener" aria-label="LinkedIn du DCG Nancy (s’ouvre dans un nouvel onglet)" title="LinkedIn du DCG Nancy">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M8 10.5V16M8 7.6v.1M11.8 16v-5.5M11.8 13c0-1.6 1.1-2.6 2.5-2.6s2.2 1 2.2 2.6V16" /></svg>
+</a>
+</span>
 <a href={`${base}/mentions-legales/`}>Mentions légales</a>
 <a href={`${base}/confidentialite/`}>Confidentialité</a>
 {ga && <button type="button" class="linklike" data-cookie-manage>Gérer les cookies</button>}
@@ -23,7 +28,15 @@ const ga = import.meta.env.PUBLIC_GA_ID;
     transition: background .25s, color .25s;
   }
   .link-contact.link-contact:hover, .link-contact.link-contact:focus-visible { background: var(--or); color: var(--violet); }
-  /* Icône Instagram : discrète, mais repérable sur toutes les pages. */
+  .social-group { display: inline-flex; align-items: center; gap: 0; }
+  /* Pied de page de l'accueil (cellule étroite) : icônes et espaces resserrés pour rester sur la ligne du bouton. */
+  :global(.figures .legal) { column-gap: 12px; }
+  :global(.figures .legal) .link-social.link-social { width: 24px; height: 24px; }
+  /* Icônes Instagram et LinkedIn : discrète, mais repérable sur toutes les pages. */
   .link-social.link-social { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; text-decoration: none; color: var(--or); }
   .link-social.link-social:hover, .link-social.link-social:focus-visible { color: #fff; }
+  @media (max-width: 1200px) {
+    :global(.figures .legal) .link-contact.link-contact { padding: 4px 8px 4px 7px; gap: 6px; font-size: .6875rem; letter-spacing: 0; }
+    :global(.figures .legal) .link-social.link-social { width: 22px; height: 22px; }
+  }
 </style>
