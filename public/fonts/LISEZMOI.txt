@@ -1,0 +1,2 @@
+Les polices (Montserrat, Dekko) sont désormais installées automatiquement par le site (paquets @fontsource).
+Il n'y a plus rien à déposer dans ce dossier.
