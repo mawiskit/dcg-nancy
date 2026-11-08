@@ -1,0 +1,270 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Network from '../components/Network.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import '../styles/decouvrir.css';
+import '../styles/poursuites.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const pageUrl = new URL(`${base}/poursuites-etudes-carrieres/`, Astro.site).href;
+
+const title = 'Après le DCG à Nancy : poursuites d’études et métiers | DCG Nancy';
+const description = 'Que faire après un DCG à Nancy ? DSCG, masters CCA, finance et contrôle de gestion, écoles de commerce en admission parallèle, IPAG, MEEF, et métiers de la comptabilité, de l’audit et de la finance.';
+
+/* Sources : plaquette DCG 2026-2027, Padlet du DCG (lycée Georges-de-la-Tour) et, pour les métiers d’entrée, Diplomeo. */
+const routes = [
+  {
+    n: '01', t: 'Le DSCG, vers l’expertise comptable',
+    text: 'Le diplôme supérieur de comptabilité et de gestion se prépare en deux ans après le DCG. De niveau master (120 crédits ECTS), il prolonge la formation et ouvre la voie du diplôme d’expertise comptable (DEC), qui mène aux professions d’expert-comptable et de commissaire aux comptes.',
+    label: 'Où le préparer', links: [{ l: 'Le DSCG au CNAM Grand Est', href: 'https://www.cnam-grandest.fr/formation/DSGC100A' }],
+  },
+  {
+    n: '02', t: 'Les masters universitaires',
+    text: 'Le DCG permet de candidater à de nombreux masters à l’université : contrôle-comptabilité-audit, finance, gestion, droit fiscal, droit des affaires, management.',
+    label: 'Exemples en Lorraine', links: [
+      { l: 'Master Comptabilité-Contrôle-Audit, IAE Nancy', href: 'http://iae-nancy.univ-lorraine.fr/nos-formations/masters/comptabilite-controle-audit' },
+      { l: 'Master Contrôle de gestion et audit organisationnel, IAE Metz', href: 'https://iaemetz.univ-lorraine.fr/nos-formations/catalogue-de-formations/m1-controle-de-gestion-et-audit-organisationnel' },
+      { l: 'Master Finance, IAE Nancy', href: 'http://iae-nancy.univ-lorraine.fr/nos-formations/masters/finance' },
+      { l: 'Master Finance, faculté de droit', href: 'https://fac-droit.univ-lorraine.fr/content/master-mention-finance' },
+    ],
+  },
+  {
+    n: '03', t: 'Les écoles de commerce, en admission parallèle',
+    text: 'Avec un niveau licence, il est possible de candidater en admission parallèle (admission sur titres) à de nombreuses écoles de commerce, souvent directement en première année du cycle master. Parmi elles : SKEMA, NEOMA, ICN Business School à Nancy, ou les écoles qui recrutent via les concours Ecricome Tremplin et Passerelle. Les conditions, les épreuves et les places varient selon les écoles et les années : le dossier et l’entretien comptent.',
+    label: '', links: [],
+  },
+  {
+    n: '04', t: 'Les IPAG',
+    text: 'Les instituts de préparation à l’administration générale (IPAG) préparent aux concours de la fonction publique.',
+    label: '', links: [],
+  },
+  {
+    n: '05', t: 'Le master MEEF',
+    text: 'Pour devenir enseignant en économie-gestion après le DCG ou le DSCG.',
+    label: 'En savoir plus', links: [{ l: 'Master MEEF, université de Lorraine', href: 'https://formations.univ-lorraine.fr/fr/master/2019-master-metiers-de-lenseignement-de-leducation-et-de-la-formation-meef-2nd-degre.html' }],
+  },
+];
+
+const jobsNow = [
+  { t: 'Assistant comptable', s: 'Souvent le premier poste après le DCG.' },
+  { t: 'Comptable général', s: 'Clôtures des comptes, bilans.' },
+  { t: 'Comptable fournisseurs ou clients', s: 'Suivi des factures et des paiements.' },
+  { t: 'Gestionnaire de paie', s: 'Bulletins de paie et cotisations sociales.' },
+  { t: 'Contrôleur de gestion junior', s: 'Tableaux de bord et analyse financière.' },
+  { t: 'Contrôleur ou inspecteur des finances publiques', s: 'Fonction publique (DGFiP), par concours.' },
+];
+
+const jobsLater = [
+  { c: 'Expertise et audit', items: ['Expert-comptable', 'Commissaire aux comptes', 'Auditeur financier'] },
+  { c: 'Comptabilité et gestion', items: ['Directeur comptable', 'Contrôleur de gestion', 'Directeur financier'] },
+  { c: 'Finance', items: ['Analyste financier', 'Finance d’entreprise ou de marché', 'Gestion des risques'] },
+  { c: 'Conseil', items: ['Conseil en stratégie'] },
+];
+
+const opens = [
+  { t: 'Les Vendredis de l’expertise', s: 'Chaque année, les étudiants échangent avec d’anciens diplômés sur les multiples débouchés du DCG.' },
+  { t: 'Des stages', s: 'Deux stages d’au moins quatre semaines, en première puis en deuxième année.' },
+  { t: 'Des rencontres avec des chefs d’entreprise', s: 'Notamment nancéiens, pour échanger sur l’entrepreneuriat et la RSE.' },
+  { t: 'Conférences et ateliers', s: 'Animés par des professionnels tout au long de la formation, avec la participation aux événements de l’Ordre des experts-comptables.' },
+  { t: 'Des voyages', s: 'Visites d’entreprises et d’institutions, comme la Banque centrale européenne et le Parlement européen à Bruxelles.' },
+  { t: 'Un réseau d’anciens', s: 'Des anciens étudiants toujours prêts à partager leur expérience.' },
+];
+
+const resources = [
+  { t: 'Les métiers présentés par l’Ordre des experts-comptables', s: 'Le kit professeur de l’Ordre.', href: 'https://www.experts-comptables.fr/kit-professeur' },
+  { t: 'L’expertise comptable, un secteur attractif', s: 'La filière présentée par l’Ordre des experts-comptables.', href: 'https://vitrine-rec.experts-comptables.org/sites/default/attractivite-2022/' },
+  { t: 'Les métiers de la comptabilité et de la gestion', s: 'Un MOOC gratuit du CNAM pour faire un choix éclairé.', href: 'https://www.fun-mooc.fr/courses/course-v1:CNAM+01056+session02/about' },
+];
+
+const next = [
+  { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
+  { t: 'Vie étudiante', s: 'L’association des étudiants, les voyages, les rencontres avec des professionnels.', href: '/vie-etudiante/' },
+  { t: 'Admissions', s: 'Parcoursup en première année, dossier en deuxième année : modalités et candidature.', href: '/admissions/' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'fr-FR',
+      isPartOf: { '@id': `${site}#site` },
+      about: { '@id': `${site}#dcg` },
+      breadcrumb: { '@id': `${pageUrl}#fil` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#fil`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: site },
+        { '@type': 'ListItem', position: 2, name: 'Après le DCG', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+<Base title={title} description={description} variant="doc">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <Header />
+
+  <main id="contenu" class="dd ap">
+
+    <!-- ───────── En-tête ───────── -->
+    <section class="dd-hero" aria-labelledby="ap-titre">
+      <Network class="network" w={1200} h={600} seed={61} yaw={-0.4} cx={0.74} cy={0.46} veil={false} cols={30} rows={13} f={320} spread={34} />
+      <div class="dd-wrap dd-hero-in">
+        <nav class="dd-crumb" aria-label="Fil d’Ariane">
+          <a href={`${base}/`}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Après le DCG</span>
+        </nav>
+        <p class="dd-kicker">Poursuites d’études et carrières</p>
+        <h1 id="ap-titre">Et après le DCG ? <span>Études et métiers</span></h1>
+        <p class="dd-lead">Le DCG est un diplôme de niveau licence en trois ans. À son issue, deux voies s’ouvrent : entrer directement sur le marché du travail ou poursuivre ses études, en DSCG, en master à l’université, en école de commerce ou en IPAG. Dans les deux cas, il donne un socle large en droit, en comptabilité, en finance, en économie et en management.</p>
+
+        <ul class="dd-facts">
+          <li><b>Licence</b><span>grade conféré par le DCG</span></li>
+          <li><b>Master</b><span>grade conféré par le DSCG</span></li>
+          <li><b>2 stages</b><span>de 4 semaines minimum</span></li>
+          <li><b>2 voies</b><span>études ou vie active</span></li>
+        </ul>
+
+        <nav class="dd-jump" aria-label="Dans cette page">
+          <a href="#etudes">Poursuivre ses études</a>
+          <a href="#metiers">Les métiers possibles</a>
+          <a href="#ouverture">S’ouvrir au monde professionnel</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ───────── Poursuites d’études ───────── -->
+    <section class="dd-light" id="etudes" aria-labelledby="ap-h-etudes">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">Poursuivre ses études</p>
+            <h2 id="ap-h-etudes">Où poursuivre après le DCG ?</h2>
+          </div>
+          <p class="dd-sublead">Le DCG est un tremplin. Voici les voies les plus fréquentes pour viser un niveau master ou préparer un concours.</p>
+        </div>
+
+        <ol class="ap-routes">
+          {routes.map((r) => (
+            <li>
+              <span class="dd-dn" aria-hidden="true">{r.n}</span>
+              <div class="ap-rt">
+                <h3>{r.t}</h3>
+                <p>{r.text}</p>
+              </div>
+              <div class="ap-ex">
+                <p class="ap-exl">{r.label}</p>
+                <ul>
+                  {r.links.map((e) => (
+                    <li><a href={e.href} target="_blank" rel="noopener">{e.l}</a></li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ───────── Métiers ───────── -->
+    <section class="dd-dark" id="metiers" aria-labelledby="ap-h-metiers">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">Les métiers possibles</p>
+            <h2 id="ap-h-metiers">Quels métiers après un DCG ?</h2>
+          </div>
+          <p class="dd-sublead">Le DCG ouvre les portes de carrières variées et stimulantes. Certains métiers sont accessibles dès le niveau licence, d’autres après une poursuite d’études adaptée.</p>
+        </div>
+
+        <div class="ap-jobs">
+          <section class="ap-col ap-now" aria-labelledby="ap-h-now">
+            <h3 id="ap-h-now">Dès le DCG</h3>
+            <ul>
+              {jobsNow.map((j) => (
+                <li><b>{j.t}</b><span>{j.s}</span></li>
+              ))}
+            </ul>
+          </section>
+          <section class="ap-col ap-later" aria-labelledby="ap-h-later">
+            <h3 id="ap-h-later">Après une poursuite d’études adaptée</h3>
+            {jobsLater.map((g) => (
+              <div class="ap-grp">
+                <p class="ap-grpl">{g.c}</p>
+                <ul>
+                  {g.items.map((i) => (
+                    <li>{i}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </section>
+        </div>
+
+        <p class="dd-legend ap-where">Après une poursuite d’études adaptée, les diplômés peuvent rejoindre des cabinets d’expertise comptable ou d’audit, mais aussi des banques, des grands groupes internationaux ou des sociétés de conseil, et évoluer vers des fonctions à fortes responsabilités.</p>
+      </div>
+    </section>
+
+    <!-- ───────── Ouverture ───────── -->
+    <section class="dd-light dd-skills" id="ouverture" aria-labelledby="ap-h-ouv">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">Pendant la formation</p>
+            <h2 id="ap-h-ouv">S’ouvrir au monde professionnel</h2>
+          </div>
+          <p class="dd-sublead">Dès la première année, le DCG à Nancy met les étudiants au contact des entreprises et des professionnels pour préparer leur projet.</p>
+        </div>
+        <ul class="dd-skilllist">
+          {opens.map((k) => (
+            <li><h3>{k.t}</h3><p>{k.s}</p></li>
+          ))}
+        </ul>
+
+        <h3 class="dd-h3-quiet ap-res-t">Pour en savoir plus sur les métiers</h3>
+        <ul class="ap-res">
+          {resources.map((r) => (
+            <li><a href={r.href} target="_blank" rel="noopener"><b>{r.t}</b><span>{r.s}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────── Aller plus loin ───────── -->
+    <section class="dd-dark dd-next" aria-labelledby="ap-h-next">
+      <Network class="network" w={1200} h={420} seed={67} yaw={0.36} cx={0.3} cy={0.5} veil={false} cols={30} rows={12} f={260} spread={32} />
+      <div class="dd-wrap dd-next-in">
+        <div class="dd-nextl">
+          <h2 id="ap-h-next">Le DCG ne ferme aucune porte : il en ouvre plusieurs.</h2>
+          <p>Découvrez le programme, la vie d’une promotion et les modalités de candidature.</p>
+          <a class="cta dd-cta" href={`${base}/admissions/`}>CANDIDATER</a>
+        </div>
+        <ul class="dd-links">
+          {next.map((l) => (
+            <li>
+              <a href={`${base}${l.href}`}>
+                <span class="dd-lt">{l.t}</span>
+                <span class="dd-ls">{l.s}</span>
+                <svg class="dd-arr" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M0 6h24M19 1l5 5-5 5" /></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+</Base>
