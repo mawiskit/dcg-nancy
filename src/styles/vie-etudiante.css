@@ -1,7 +1,7 @@
 /* Page « Vie étudiante » : composants propres à cette page.
    Le reste (hero, bandes, têtes de section, listes, bloc final) vient de decouvrir.css. */
 
-.ve .ve-lede { font-size: 1.1875rem; line-height: 1.65; }
+.ve .ve-lede { font-size: 1.0625rem; line-height: 1.65; }
 .ve p { max-width: 62ch; }
 .ve-ph { margin: 0; }
 .ve-ph img { display: block; width: 100%; height: auto; }
@@ -10,8 +10,8 @@
 /* ───────── Association ───────── */
 .ve-asso-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 .ve-asso-txt h2 { margin: 0 0 clamp(16px, 2.6vh, 24px); max-width: 16ch; font-size: clamp(1.9rem, 3.4vw, 2.9rem); line-height: 1.08; }
-.ve-asso-txt > p:not(.dd-kicker):not(.ve-lede) { margin-top: 14px; font-size: 1.0625rem; }
-.ve-asso-txt .ve-lede { color: var(--nuit); }
+.ve-asso-txt > p:not(.dd-kicker) { margin-top: 14px; font-size: 1.0625rem; line-height: 1.65; }
+.ve-asso-txt > p:not(.dd-kicker) { color: var(--nuit); }
 .ve-points { list-style: none; margin-top: clamp(24px, 4vh, 36px); border-top: 2px solid var(--nuit); }
 .ve-points li { display: grid; gap: 4px; padding: 16px 0 18px; border-bottom: 1px solid var(--line-l); }
 .ve-points h3 { font: 600 1.1875rem / 1.25 var(--display); color: var(--nuit); }
@@ -64,8 +64,7 @@
 .ve-teach .ve-ph figcaption { color: rgba(236, 236, 236, .8); }
 .ve-teach .ve-ph img { border: 6px solid var(--ecru); }
 .ve-teach-txt h2 { margin: 0 0 clamp(16px, 2.6vh, 24px); font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.1; max-width: 18ch; }
-.ve-teach-txt > p:not(.dd-kicker):not(.ve-lede) { margin-top: 14px; font-size: 1.0625rem; color: rgba(236, 236, 236, .9); }
-.ve-teach .ve-lede { color: #fff; }
+.ve-teach-txt > p:not(.dd-kicker) { margin-top: 14px; font-size: 1.0625rem; line-height: 1.65; color: rgba(236, 236, 236, .92); }
 
 @media (max-width: 1000px) {
   .ve-asso-in, .ve-teach-in { grid-template-columns: 1fr; gap: 32px; }
