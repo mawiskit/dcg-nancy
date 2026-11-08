@@ -38,7 +38,6 @@
 }
 .ve-band { overflow: hidden; }
 .ve-track { display: flex; width: max-content; animation: ve-run var(--dur, 120s) linear infinite; will-change: transform; }
-.ve-band-b .ve-track { animation-direction: reverse; }
 .ve-film.is-paused .ve-track, .ve-band:hover .ve-track, .ve-band:focus-within .ve-track { animation-play-state: paused; }
 @keyframes ve-run { to { transform: translateX(-50%); } }
 
