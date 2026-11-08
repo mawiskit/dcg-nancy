@@ -1,0 +1,23 @@
+---
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import Network from '../components/Network.astro';
+const { title, description, noindex = false, seed = 3 } = Astro.props;
+// Chaque page a son propre dessin du réseau (graine, angle et point de fuite différents).
+const yaw = [0.5, 0.3, 0.42, 0.22][seed % 4];
+const cx = [0.5, 0.62, 0.42, 0.7][seed % 4];
+---
+<Base title={title} description={description} noindex={noindex} variant="doc">
+  <Header />
+  <div class="doc-banner" aria-hidden="true"><Network class="network" w={1200} h={200} seed={seed * 7 + 5} yaw={yaw} cx={cx} cy={0.5} veil={false} cols={33} rows={11} f={185} spread={70} /></div>
+  <main id="contenu" class="doc-main">
+    <article class="doc-body">
+      <slot />
+    </article>
+  </main>
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+</Base>
