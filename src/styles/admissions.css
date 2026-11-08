@@ -39,3 +39,13 @@
 @media (max-width: 760px) {
   .ad-steps > li { grid-template-columns: 48px minmax(0, 1fr); }
 }
+
+@media (min-width: 1001px) {
+  .ad-steps > li { padding: clamp(12px, 2vh, 18px) 0; }
+  .ad-steps h3 { font-size: var(--d-h3); }
+  .ad-steps p { font-size: var(--d-small); line-height: 1.55; margin-top: 4px; }
+  .ad-aside h3 { font-size: clamp(1.125rem, 1.6vw, 1.35rem); }
+  .ad-aside > p:not(.ad-asl):not(.ad-note) { font-size: var(--d-small); line-height: 1.55; margin-top: 8px; }
+  .ad-cta { margin-top: 14px; }
+  .ad-note { margin-top: 12px; font-size: .8438rem; }
+}

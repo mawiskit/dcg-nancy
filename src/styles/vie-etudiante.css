@@ -87,3 +87,14 @@
   .ve-pause { display: none; }
   .ve-film { -webkit-mask-image: none; mask-image: none; }
 }
+
+@media (min-width: 1001px) {
+  .ve .ve-lede { font-size: var(--d-body); line-height: 1.6; }
+  .ve-asso-txt h2, .ve-teach-txt h2 { font-size: var(--d-h2); line-height: 1.14; max-width: 20ch; margin-bottom: 14px; }
+  .ve-asso-txt > p:not(.dd-kicker), .ve-teach-txt > p:not(.dd-kicker) { font-size: var(--d-body); line-height: 1.6; margin-top: 10px; }
+  .ve-points { margin-top: var(--d-gap); }
+  .ve-points li { padding: 11px 0 13px; }
+  .ve-points h3 { font-size: 1.0625rem; }
+  .ve-points p { font-size: var(--d-small); line-height: 1.52; }
+  .ve-filmsec { padding-bottom: var(--d-sec); }
+}

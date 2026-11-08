@@ -82,3 +82,22 @@
   .tm-qa li { grid-template-columns: 34px minmax(0, 1fr); gap: 0 8px; }
   .tm-num { font-size: 1.25rem; }
 }
+
+@media (min-width: 1001px) {
+  .tm-over { padding-block: clamp(28px, 4.4vh, 48px); }
+  .tm-over-h { font-size: 1.125rem; margin-bottom: 16px; }
+  .tm-cards a { padding: 14px 18px 12px; }
+  .tm-cn { font-size: 1.3rem; }
+  .tm-cl { font-size: var(--d-small); }
+  .tm-sec { padding-block: clamp(32px, 5vh, 56px); }
+  .tm-in { gap: clamp(24px, 4vw, 64px); }
+  .tm-id h2 { font-size: var(--d-h2); }
+  .tm-statut { font-size: var(--d-small); }
+  .tm-niveau { margin-bottom: 10px; }
+  .tm-qa li { padding: 13px 0 15px; }
+  .tm-num { font-size: 1.3rem; }
+  .tm-qr { gap: 5px; }
+  .tm-qr h3 { font-size: 1rem; }
+  .tm-qr p { font-size: var(--d-body); line-height: 1.58; }
+  .tm-sign { padding-top: 14px; }
+}

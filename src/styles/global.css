@@ -12,6 +12,29 @@
   --fh: clamp(54px, 10.5vh, 100px);
   --px: clamp(24px, 3.4vw, 56px);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Échelle éditoriale (sections sous les premiers écrans) — valeurs mobiles inchangées */
+  --d-h2: clamp(1.75rem, 3.1vw, 2.6rem);
+  --d-h3: 1.25rem;
+  --d-lede: 1.125rem;
+  --d-body: 1.0625rem;
+  --d-small: .9688rem;
+  --d-sec: clamp(56px, 9vh, 112px);
+  --d-gap: clamp(30px, 5vh, 56px);
+  --d-item: 22px;
+}
+/* Densité ordinateur : une seule échelle, utilisée par toutes les pages de contenu */
+@media (min-width: 1001px) {
+  :root {
+    --d-h2: clamp(1.5rem, 2.1vw, 2rem);
+    --d-h3: clamp(1.0625rem, 1.35vw, 1.25rem);
+    --d-lede: 1rem;
+    --d-body: .9688rem;
+    --d-small: .9063rem;
+    --d-sec: clamp(34px, 5.2vh, 64px);
+    --d-gap: clamp(20px, 3.2vh, 34px);
+    --d-item: 14px;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

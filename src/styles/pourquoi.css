@@ -176,3 +176,17 @@ html.pq-lock { overflow: hidden; }
   .pq *, .pq *::before, .pq *::after { transition: none !important; }
   .pq-dlg, .pq-dlg[open], .pq-dlg.is-closing, .pq-dlg::backdrop { animation: none !important; }
 }
+
+@media (min-width: 1001px) {
+  .pq-school, .pq-press { padding: var(--d-sec) 0; }
+  .pq-end { padding: clamp(32px, 5.5vh, 60px) 0; }
+  .pq-school h2, .pq-press h2 { font-size: var(--d-h2); }
+  .pq-press .pq-chapo { font-size: var(--d-body); }
+  .pq-press-list li { padding: 9px 0 9px 22px; font-size: var(--d-small); line-height: 1.55; }
+  .pq-press-list { margin-top: 12px; }
+  .pq-press-ph { margin-top: 16px; }
+  .pq-infos { margin-top: 16px; }
+  .pq-infos div { padding: 8px 0; }
+  .pq-dlg h2 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); }
+  .pq-dlg-text > p:not(.pq-sub) { font-size: var(--d-body); }
+}
