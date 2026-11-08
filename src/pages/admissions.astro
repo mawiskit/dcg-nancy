@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Network from '../components/Network.astro';
+import SiteLinks from '../components/SiteLinks.astro';
+import '../styles/decouvrir.css';
+import '../styles/admissions.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const pageUrl = new URL(`${base}/admissions/`, Astro.site).href;
+
+const title = 'Admissions DCG Nancy : Parcoursup et entrée en 2e année | DCG Nancy';
+const description = 'Candidater au DCG à Nancy, lycée Georges-de-la-Tour : procédure Parcoursup en première année, entrée directe en deuxième année après un BTS CG ou un BUT GEA, et dossier de candidature.';
+
+/* Fiche officielle de la formation sur Parcoursup : elle précise les attendus et les critères d’examen des vœux. */
+const parcoursupFiche = 'https://dossier.parcoursup.fr/Candidats/public/fiches/afficherFicheFormation?g_ta_cod=6261&typeBac=0&originePc=0';
+/* Dossier de candidature en deuxième année : à remplacer chaque année en déposant le nouveau PDF sous le même nom. */
+const dossierPdf = `${base}/documents/dossier-candidature-dcg2.pdf`;
+
+const steps1 = [
+  { n: '01', t: 'Consulter la fiche de la formation', s: 'Sur Parcoursup, la fiche du DCG du lycée Georges-de-la-Tour présente les attendus de la formation et les critères d’examen des vœux.' },
+  { n: '02', t: 'Formuler son vœu', s: 'Le vœu « DCG – lycée Georges-de-la-Tour, Nancy » s’ajoute à la liste des vœux sur la plateforme, dans les délais fixés au niveau national.' },
+  { n: '03', t: 'Compléter son dossier et confirmer', s: 'Résultats scolaires, appréciations et projet de formation motivé : le dossier est complété sur Parcoursup, puis chaque vœu est confirmé.' },
+  { n: '04', t: 'Examen par l’équipe pédagogique', s: 'Les dossiers sont étudiés par l’équipe enseignante du DCG. Parcoursup n’examine pas les candidatures : la plateforme applique le classement établi par la formation.' },
+  { n: '05', t: 'Réponse et inscription', s: 'Les réponses sont consultées sur Parcoursup. Il faut y répondre dans les délais, puis finaliser l’inscription auprès du lycée.' },
+];
+
+const steps2 = [
+  { n: '01', t: 'Vérifier son diplôme', s: 'L’entrée directe en deuxième année est ouverte après un BTS Comptabilité et gestion (CG) ou après deux ans en BUT GEA (ex-IUT GEA).' },
+  { n: '02', t: 'Télécharger et compléter le dossier', s: 'Le dossier de candidature en deuxième année se télécharge sur cette page. Il est accompagné des copies des bulletins des deux années de BTS ou de BUT, et se dépose au secrétariat du lycée.' },
+  { n: '03', t: 'Examen sur dossier', s: 'Une commission d’admission composée d’enseignants du DCG étudie les dossiers. Pour connaître les unités d’enseignement validées au titre des acquis selon votre diplôme (BTS ou BUT), contactez-nous.' },
+];
+
+const next = [
+  { t: 'Pourquoi nous choisir ?', s: 'Encadrement, méthode, vie de promotion : ce qui fait la différence à Nancy.', href: '/pourquoi-nous-choisir/' },
+  { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
+  { t: 'Après le DCG ?', s: 'DSCG, masters, écoles de commerce et métiers possibles.', href: '/poursuites-etudes-carrieres/' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': `${pageUrl}#page`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: 'fr-FR',
+      isPartOf: { '@id': `${site}#site` },
+      about: { '@id': `${site}#dcg` },
+      breadcrumb: { '@id': `${pageUrl}#fil` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#fil`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: site },
+        { '@type': 'ListItem', position: 2, name: 'Admissions', item: pageUrl },
+      ],
+    },
+  ],
+};
+---
+<Base title={title} description={description} variant="doc">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <Header />
+
+  <main id="contenu" class="dd ad">
+
+    <!-- ───────── En-tête ───────── -->
+    <section class="dd-hero" aria-labelledby="ad-titre">
+      <Network class="network" w={1200} h={600} seed={73} yaw={0.52} cx={0.78} cy={0.4} veil={false} cols={30} rows={13} f={320} spread={34} />
+      <div class="dd-wrap dd-hero-in">
+        <nav class="dd-crumb" aria-label="Fil d’Ariane">
+          <a href={`${base}/`}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Admissions</span>
+        </nav>
+        <p class="dd-kicker">Candidater au DCG</p>
+        <h1 id="ad-titre">Admissions <span>au DCG à Nancy</span></h1>
+        <p class="dd-lead">On entre au DCG du lycée Georges-de-la-Tour par deux voies : en première année, via Parcoursup, directement après un baccalauréat général ou technologique ; en deuxième année, sur dossier, après un BTS Comptabilité et gestion ou un BUT GEA.</p>
+
+        <nav class="dd-jump" aria-label="Dans cette page">
+          <a href="#premiere-annee">Entrer en première année</a>
+          <a href="#deuxieme-annee">Entrer en deuxième année</a>
+          <a href="#contact">Une question ?</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ───────── Première année : Parcoursup ───────── -->
+    <section class="dd-light" id="premiere-annee" aria-labelledby="ad-h-1">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">Première année</p>
+            <h2 id="ad-h-1">Candidater via Parcoursup</h2>
+          </div>
+          <p class="dd-sublead">Le lycée recrute à partir d’un baccalauréat général ou technologique (STMG CG de préférence). Un bon niveau scolaire est requis : le travail personnel en DCG est plus conséquent qu’au lycée.</p>
+        </div>
+
+        <div class="ad-grid">
+          <ol class="ad-steps">
+            {steps1.map((s) => (
+              <li>
+                <span class="dd-dn" aria-hidden="true">{s.n}</span>
+                <div>
+                  <h3>{s.t}</h3>
+                  <p>{s.s}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <aside class="ad-aside" aria-labelledby="ad-h-fiche">
+            <p class="ad-asl">La fiche officielle</p>
+            <h3 id="ad-h-fiche">Les critères d’admission, sur Parcoursup</h3>
+            <p>La fiche de notre formation précise les attendus nationaux, les critères d’examen des vœux et les informations utiles à votre candidature.</p>
+            <a class="cta ad-cta" href={parcoursupFiche} target="_blank" rel="noopener">VOIR LA FICHE SUR PARCOURSUP</a>
+            <p class="ad-note">Les dates de la campagne sont publiées sur <a href="https://www.parcoursup.fr/" target="_blank" rel="noopener">parcoursup.fr</a>.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Deuxième année : sur dossier ───────── -->
+    <section class="dd-dark" id="deuxieme-annee" aria-labelledby="ad-h-2">
+      <div class="dd-wrap">
+        <div class="dd-split dd-split-head">
+          <div class="dd-hl">
+            <p class="dd-kicker">Deuxième année</p>
+            <h2 id="ad-h-2">Intégrer directement la deuxième année</h2>
+          </div>
+          <p class="dd-sublead">Après un BTS Comptabilité et gestion ou deux ans en BUT GEA, il est possible de candidater sur dossier en deuxième année. Pour connaître les unités d’enseignement validées au titre des acquis, contactez-nous.</p>
+        </div>
+
+        <div class="ad-grid ad-grid-dark">
+          <ol class="ad-steps">
+            {steps2.map((s) => (
+              <li>
+                <span class="dd-dn" aria-hidden="true">{s.n}</span>
+                <div>
+                  <h3>{s.t}</h3>
+                  <p>{s.s}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <aside class="ad-aside" aria-labelledby="ad-h-dossier">
+            <p class="ad-asl">À télécharger</p>
+            <h3 id="ad-h-dossier">Dossier de candidature en deuxième année</h3>
+            <p>Le dossier à compléter pour candidater directement en deuxième année du DCG.</p>
+            <a class="cta ad-cta" href={dossierPdf} download>TÉLÉCHARGER LE DOSSIER (PDF)</a>
+            <p class="ad-note">Ce dossier est mis à jour chaque année : en cas de doute sur les pièces ou les dates, <a href={`${base}/contact/`}>contactez-nous</a> avant l’envoi.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Contact ───────── -->
+    <section class="dd-dark dd-next" id="contact" aria-labelledby="ad-h-next">
+      <Network class="network" w={1200} h={420} seed={79} yaw={0.3} cx={0.3} cy={0.5} veil={false} cols={30} rows={12} f={260} spread={32} />
+      <div class="dd-wrap dd-next-in">
+        <div class="dd-nextl">
+          <h2 id="ad-h-next">Une question sur votre candidature ?</h2>
+          <p>Écrivez-nous : nous vous répondons rapidement. Lycée Georges-de-la-Tour, 5 rue de la Croix Saint-Claude, 54052 Nancy Cedex. Téléphone : 03 83 96 48 98.</p>
+          <a class="cta dd-cta" href={`${base}/contact/`}>NOUS ÉCRIRE</a>
+        </div>
+        <ul class="dd-links">
+          {next.map((l) => (
+            <li>
+              <a href={`${base}${l.href}`}>
+                <span class="dd-lt">{l.t}</span>
+                <span class="dd-ls">{l.s}</span>
+                <svg class="dd-arr" viewBox="0 0 26 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M0 6h24M19 1l5 5-5 5" /></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="doc-footer">
+    <p>DCG Nancy · Lycée Georges-de-la-Tour, Nancy</p>
+    <p class="doc-links"><SiteLinks /></p>
+  </footer>
+</Base>
