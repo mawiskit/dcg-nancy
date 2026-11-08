@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+      PREVIEW: ${{ vars.PREVIEW }}
       NOINDEX: ${{ vars.NOINDEX }}
       PUBLIC_GA_ID: ${{ vars.PUBLIC_GA_ID }}
       PUBLIC_GSC_TOKEN: ${{ vars.PUBLIC_GSC_TOKEN }}
@@ -26,14 +27,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Le site est servi sur son nom de domaine (dcg-nancy.fr par défaut, modifiable avec la variable CUSTOM_DOMAIN).
+      # Le site est servi sur https://www.dcg-nancy.fr (domaine canonique, modifiable avec la variable CUSTOM_DOMAIN).
+      # GitHub Pages redirige tout seul (301) dcg-nancy.fr et http:// vers cette adresse : aucune redirection à écrire dans le projet.
       # Pour le garder hors de Google, créer la variable NOINDEX = true.
       - name: Configurer l'adresse du site
         run: |
-          DOMAIN="${CUSTOM_DOMAIN:-dcg-nancy.fr}"
-          echo "SITE_URL=https://$DOMAIN" >> "$GITHUB_ENV"
-          echo "BASE_PATH=/" >> "$GITHUB_ENV"
-          echo "$DOMAIN" > public/CNAME
+          DOMAIN="${CUSTOM_DOMAIN:-www.dcg-nancy.fr}"
+          # Garde-fou : la variante sans www n'est jamais l'adresse canonique.
+          if [ "$DOMAIN" = "dcg-nancy.fr" ]; then DOMAIN="www.dcg-nancy.fr"; fi
+          if [ "$PREVIEW" = "true" ]; then
+            # Mode aperçu : adresse provisoire https://<compte>.github.io/<depot>/
+            OWNER="${GITHUB_REPOSITORY_OWNER}"
+            REPO="${GITHUB_REPOSITORY#*/}"
+            echo "SITE_URL=https://$OWNER.github.io" >> "$GITHUB_ENV"
+            echo "BASE_PATH=/$REPO" >> "$GITHUB_ENV"
+            rm -f public/CNAME
+          else
+            echo "SITE_URL=https://$DOMAIN" >> "$GITHUB_ENV"
+            echo "BASE_PATH=/" >> "$GITHUB_ENV"
+            echo "$DOMAIN" > public/CNAME
+          fi
           if [ "$NOINDEX" = "true" ]; then
             echo "PUBLIC_INDEXABLE=false" >> "$GITHUB_ENV"
           else
