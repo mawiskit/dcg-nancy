@@ -28,18 +28,18 @@ const pic = (name, widths, ratio, alt, cap, pos = '50% 50%') => {
   };
 };
 const P = {
-  petitGroupe: pic('cours-petit-groupe', [700, 1200], 4 / 3, 'Un homme assis sur une table s’adresse à quatre étudiants dans une salle de cours.', 'Un échange en petit groupe'),
-  accomp: pic('cours-accompagnement', [800, 1400], 1599 / 899, 'Une femme debout au milieu de la salle explique un point à des étudiants installés à leurs tables.', 'Un cours en salle'),
-  oral: pic('coaching-oral', [700, 1100], 1206 / 830, 'Une femme s’adresse à un groupe d’étudiants debout, de dos, face aux tableaux d’une salle de classe.', 'Prise de parole devant le groupe'),
-  methodo: pic('methodologie-groupes', [600, 1000], 3 / 4, 'Deux étudiantes présentent une grande feuille couverte de post-its devant leurs camarades.', 'Présentation d’un travail de groupe'),
+  petitGroupe: pic('cours-petit-groupe', [700, 1200], 4 / 3, 'Un homme assis sur une table s’adresse à quatre étudiants dans une salle de cours.', 'Séance de méthodologie, pour optimiser ses résultats'),
+  accomp: pic('cours-accompagnement', [800, 1400], 1599 / 899, 'Une femme debout au milieu de la salle explique un point à des étudiants installés à leurs tables.', 'Séance de méthodologie, pour optimiser ses résultats'),
+  oral: pic('coaching-oral', [700, 1100], 1206 / 830, 'Une femme s’adresse à un groupe d’étudiants debout, de dos, face aux tableaux d’une salle de classe.', 'Coaching en personal branding'),
+  methodo: pic('methodologie-groupes', [600, 1000], 3 / 4, 'Deux étudiantes présentent une grande feuille couverte de post-its devant leurs camarades.', 'Jeu d’entreprise'),
   groupe: pic('travail-en-groupe', [600, 900], 908 / 1340, 'Des étudiants réunis autour d’une table pour un travail de groupe, une étudiante debout prend la parole.', 'Travail en groupes'),
-  jeu: pic('jeu-pedagogique', [600, 1000], 3 / 4, 'Une femme souriante devant un grand plateau de jeu dessiné à la main, accroché au tableau de la classe.', 'Un jeu de plateau géant'),
+  jeu: pic('jeu-pedagogique', [600, 1000], 3 / 4, 'Une femme souriante devant un grand plateau de jeu dessiné à la main, accroché au tableau de la classe.', 'Trivial Pursuit spécial DCG'),
   conf: pic('conference-professionnelle', [800, 1300], 4 / 3, 'Trois intervenants présentent leur entreprise à des étudiants, devant un écran de projection.', 'Conférence avec des intervenants extérieurs'),
   visite: pic('visite-entreprise-promotion', [900, 1600], 2048 / 1083, 'Un groupe d’étudiants et d’adultes, en gilets de sécurité et charlottes, pose devant un quai lors d’une visite d’entreprise.', 'Visite d’entreprise'),
   visite2: pic('visite-entreprise-groupe', [800, 1400], 1500 / 1180, 'Des étudiants et une adulte en gilets orange posent ensemble pendant une visite d’entreprise.', 'Visite d’entreprise'),
   promo: pic('photo-promotion-20-ans-dcg', [800, 1600], 1600 / 720, 'Photo de groupe d’étudiants du DCG, beaucoup portent un t-shirt « DCG », sur des marches devant un bâtiment du lycée.', 'Photo de promotion, 20 ans du DCG'),
   jeuBrain: pic('jeu-entreprise-brainstorming', [800, 1400], 2016 / 908, 'Un intervenant debout devant un écran affichant « Les règles du brainstorming », à côté d’une bannière « Entreprendre pour Apprendre ».', 'Le jeu d’entreprise, avec Entreprendre pour Apprendre'),
-  jeuGroupe: pic('jeu-entreprise-groupe', [800, 1400], 2016 / 908, 'Un groupe d’étudiants posant debout dans une salle de cours aux murs jaunes, l’une d’elles tenant un micro.', 'Un groupe d’étudiants réunis dans la salle', '50% 45%'),
+  jeuGroupe: pic('jeu-entreprise-groupe', [800, 1400], 2016 / 908, 'Un groupe d’étudiants posant debout dans une salle de cours aux murs jaunes, l’une d’elles tenant un micro.', 'Restitution du jeu d’entreprise', '50% 45%'),
   tournoi: pic('tournoi-equipe', [800, 1300], 1599 / 899, 'Quatre étudiantes assises devant leurs ordinateurs lors du Tournoi européen de gestion, deux d’entre elles faisant un signe de la main.', 'Une équipe en plein tournoi', '40% 50%'),
   tournoiPromo: pic('tournoi-promotion-2024', [700, 1200], 1599 / 1200, 'Photo de groupe des participants au Tournoi européen de gestion, en t-shirts blancs, certains tenant des ballons dorés.', 'Les participants du tournoi'),
   tournoiFinance: pic('tournoi-remise-finance', [700, 1200], 2000 / 1500, 'Remise des prix du Challenge Finance : l’équipe 7 du lycée Georges de la Tour, troisième prix, pose avec les organisatrices.', 'Challenge Finance : 3e prix', '50% 62%'),
@@ -75,7 +75,7 @@ const themes = [
   {
     id: 'tournoi-de-gestion', n: 't5', title: 'Le Tournoi européen de gestion', sub: 'Se mesurer à d’autres équipes',
     text: 'Les étudiants participent au Tournoi européen de gestion de l’Ordre des experts-comptables (Région Grand Est). Par équipes, ils s’y mesurent à d’autres établissements, et des équipes du lycée sont déjà montées sur le podium, avec des troisièmes prix en Challenge Finance et en Ressources humaines.',
-    pos: '40% 50%', sizes: '(min-width: 1000px) 42vw, 96vw', main: P.tournoi, extra: [P.tournoiPromo, P.tournoiFinance, P.tournoiRH],
+    pos: '50% 62%', sizes: '(min-width: 1000px) 42vw, 96vw', main: P.tournoiFinance, extra: [P.tournoiPromo, P.tournoi, P.tournoiRH],
   },
   {
     id: 'monde-professionnel', n: 't6', title: 'Le monde professionnel en direct', sub: 'Rencontrer les professionnels',
@@ -107,8 +107,8 @@ const presse = {
 const infos = [
   { k: 'Adresse', v: '5 rue de la Croix Saint-Claude, 54000 Nancy' },
   { k: 'Statut', v: 'Établissement public, de la sixième au bac+3' },
-  { k: 'Au quotidien', v: 'Espaces de restauration et de vie scolaire' },
-  { k: 'Autour', v: 'Environnement étudiant et formations variées' },
+  { k: 'Au quotidien', v: 'Restauration scolaire, cafétéria et salle de pause réservée aux étudiants' },
+  { k: 'Autour', v: 'À 15 minutes du centre-ville en transport en commun, proche des résidences étudiantes' },
 ];
 
 const next = [
@@ -215,7 +215,7 @@ const jsonLd = {
         </figure>
         <div>
           <h2 id="pq-h-lycee">Un cadre d’études pour grandir et réussir</h2>
-          <p>Le lycée Georges-de-la-Tour est un établissement public situé à Nancy, qui accueille des élèves et des étudiants dans des parcours de formation variés, de la sixième jusqu’au bac+3. Les étudiants du DCG évoluent dans un environnement scolaire et étudiant diversifié, avec des infrastructures et des services qui facilitent leur quotidien.</p>
+          <p>Le lycée Georges-de-la-Tour est un établissement public situé à Nancy, à 15 minutes en transport en commun du centre-ville et à proximité des résidences étudiantes. Il accueille des élèves et des étudiants dans des parcours de formation variés, de la sixième jusqu’au bac+3. Les étudiants du DCG évoluent dans un environnement scolaire et étudiant diversifié, avec des infrastructures et des services qui facilitent leur quotidien : un service de restauration scolaire, une cafétéria et une salle de pause qui leur est réservée, au sein de la cité scolaire.</p>
           <dl class="pq-infos">
             {infos.map((x) => (
               <div><dt>{x.k}</dt><dd>{x.v}</dd></div>
