@@ -1,0 +1,91 @@
+/* Page « Vie étudiante » : composants propres à cette page.
+   Le reste (hero, bandes, têtes de section, listes, bloc final) vient de decouvrir.css. */
+
+.ve .ve-lede { font-size: 1.1875rem; line-height: 1.65; }
+.ve p { max-width: 62ch; }
+.ve-ph { margin: 0; }
+.ve-ph img { display: block; width: 100%; height: auto; }
+.ve-ph figcaption { margin-top: 10px; font: 500 .8125rem / 1.45 var(--text); color: rgba(24, 21, 56, .8); max-width: 48ch; }
+
+/* ───────── Association ───────── */
+.ve-asso-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+.ve-asso-txt h2 { margin: 0 0 clamp(16px, 2.6vh, 24px); max-width: 16ch; font-size: clamp(1.9rem, 3.4vw, 2.9rem); line-height: 1.08; }
+.ve-asso-txt > p:not(.dd-kicker):not(.ve-lede) { margin-top: 14px; font-size: 1.0625rem; }
+.ve-asso-txt .ve-lede { color: var(--nuit); }
+.ve-points { list-style: none; margin-top: clamp(24px, 4vh, 36px); border-top: 2px solid var(--nuit); }
+.ve-points li { display: grid; gap: 4px; padding: 16px 0 18px; border-bottom: 1px solid var(--line-l); }
+.ve-points h3 { font: 600 1.1875rem / 1.25 var(--display); color: var(--nuit); }
+.ve-points p { font-size: .9688rem; line-height: 1.6; color: rgba(24, 21, 56, .88); }
+
+.ve-duo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px) 0; max-width: 520px; margin-left: auto; }
+.ve-ph-a { grid-column: 1 / 10; }
+.ve-ph-b { grid-column: 4 / 13; }
+.ve-duo .ve-ph img { border: 6px solid var(--ecru); outline: 1px solid rgba(24, 21, 56, .14); outline-offset: -7px; }
+
+/* ───────── Pellicule ───────── */
+.ve-filmsec { padding-bottom: clamp(48px, 8vh, 96px); overflow: hidden; }
+.ve-pause {
+  margin-top: 18px; font: 600 .75rem / 1 var(--text); letter-spacing: .12em; text-transform: uppercase; color: var(--ecru);
+  background: none; border: 1px solid rgba(236, 236, 236, .45); padding: 11px 16px; cursor: pointer; transition: background .25s, border-color .25s;
+}
+.ve-pause:hover, .ve-pause:focus-visible { background: rgba(255, 255, 255, .08); border-color: var(--or); }
+
+.ve-film {
+  --fh: clamp(105px, 12vw, 175px);
+  margin-top: clamp(8px, 2vh, 20px); display: grid; gap: clamp(16px, 2.4vw, 28px);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.ve-band { overflow: hidden; }
+.ve-track { display: flex; width: max-content; animation: ve-run var(--dur, 120s) linear infinite; will-change: transform; }
+.ve-band-b .ve-track { animation-direction: reverse; }
+.ve-film.is-paused .ve-track, .ve-band:hover .ve-track, .ve-band:focus-within .ve-track { animation-play-state: paused; }
+@keyframes ve-run { to { transform: translateX(-50%); } }
+
+.ve-set { list-style: none; display: flex; flex: none; }
+.ve-frame {
+  flex: none; position: relative; background: #0b0a1d; padding: 28px 6px 28px;
+}
+/* perforations : une rangée en haut, une en bas, qui se prolongent d'une vue à l'autre */
+.ve-frame::before, .ve-frame::after {
+  content: ""; position: absolute; left: 0; right: 0; height: 10px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='10'%3E%3Crect x='5' y='0' width='12' height='10' rx='2.5' fill='%23181538'/%3E%3C/svg%3E") repeat-x 0 0;
+}
+.ve-frame::before { top: 10px; }
+.ve-frame::after { bottom: 10px; }
+.ve-frame figure { margin: 0; display: grid; }
+.ve-frame img { display: block; height: var(--fh); width: auto; max-width: none; }
+.ve-frame figcaption {
+  width: 0; min-width: 100%; margin-top: 8px; padding: 0 2px; min-height: 2.9em;
+  font: 500 clamp(.6875rem, .9vw, .8125rem) / 1.4 var(--text); letter-spacing: .02em; color: rgba(236, 236, 236, .88);
+}
+
+/* ───────── Équipe enseignante ───────── */
+.ve-teach-in { display: grid; grid-template-columns: minmax(0, 4.6fr) minmax(0, 6.4fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+.ve-teach .ve-ph figcaption { color: rgba(236, 236, 236, .8); }
+.ve-teach .ve-ph img { border: 6px solid var(--ecru); }
+.ve-teach-txt h2 { margin: 0 0 clamp(16px, 2.6vh, 24px); font-size: clamp(1.9rem, 3.2vw, 2.7rem); line-height: 1.1; max-width: 18ch; }
+.ve-teach-txt > p:not(.dd-kicker):not(.ve-lede) { margin-top: 14px; font-size: 1.0625rem; color: rgba(236, 236, 236, .9); }
+.ve-teach .ve-lede { color: #fff; }
+
+@media (max-width: 1000px) {
+  .ve-asso-in, .ve-teach-in { grid-template-columns: 1fr; gap: 32px; }
+  .ve-duo { max-width: 460px; margin-left: 0; }
+  .ve-teach .ve-ph { max-width: 460px; }
+}
+@media (max-width: 560px) {
+  .ve-frame { padding: 26px 5px 26px; }
+  .ve-frame::before { top: 8px; }
+  .ve-frame::after { bottom: 8px; }
+  .ve-ph-a { grid-column: 1 / 11; }
+  .ve-ph-b { grid-column: 3 / 13; }
+}
+
+/* mouvement réduit : pas de défilement automatique, les bandes se parcourent au doigt ou à la souris */
+@media (prefers-reduced-motion: reduce) {
+  .ve-track { animation: none; }
+  .ve-band { overflow-x: auto; }
+  .ve-set[aria-hidden="true"] { display: none; }
+  .ve-pause { display: none; }
+  .ve-film { -webkit-mask-image: none; mask-image: none; }
+}
