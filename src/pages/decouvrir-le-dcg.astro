@@ -6,6 +6,8 @@ import SiteLinks from '../components/SiteLinks.astro';
 import '../styles/decouvrir.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+/* Plaquette de présentation : à remplacer chaque année en déposant le nouveau PDF sous le même nom. */
+const plaquettePdf = `${base}/documents/plaquette-dcg-2026-2027.pdf`;
 const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/decouvrir-le-dcg/`, Astro.site).href;
 
@@ -34,6 +36,7 @@ const years = [
       { code: 'UE4', name: 'Droit fiscal', h: '4 + (1)' },
       { code: 'UE6', name: 'Finance d’entreprise', h: '4 + (1)' },
       { code: 'UE10', name: 'Comptabilité approfondie', h: '5 + (1)' },
+      { code: 'UE12', name: 'Anglais des affaires', h: '1,5 + (1,5)' },
       { code: 'UE13', name: 'Communication professionnelle', h: '0,5 + (0,5)' },
       { code: 'MM', name: 'Modules méthodologiques', h: '(1,5)' },
     ],
@@ -97,7 +100,7 @@ const domains = [
     ues: [
       { code: 'UE8', when: 'Première année', name: 'Systèmes d’information de gestion',
         text: 'Les systèmes d’information, les processus de gestion et les outils numériques utilisés dans les organisations.' },
-      { code: 'UE12', when: 'Première et troisième années', name: 'Anglais des affaires',
+      { code: 'UE12', when: 'Chaque année', name: 'Anglais des affaires',
         text: 'Développer ses compétences linguistiques dans un environnement économique et professionnel international.' },
       { code: 'UE13', when: 'Chaque année', name: 'Communication professionnelle',
         text: 'Communication écrite et orale, recherche documentaire et préparation à la communication professionnelle.' },
@@ -207,7 +210,7 @@ const jsonLd = {
             <h2 id="dd-h-multi">Bien plus que de la comptabilité</h2>
           </div>
           <div class="dd-prose">
-            <p>On résume souvent le DCG à l’apprentissage de la comptabilité. Elle y occupe une vraie place, mais la formation est pluridisciplinaire : elle apprend aussi à comprendre le cadre juridique d’une entreprise, sa fiscalité, ses choix de financement, son environnement économique et son management.</p>
+            <p>On résume souvent le DCG à l’apprentissage de la comptabilité. Elle y occupe une vraie place, mais la formation est pluridisciplinaire : elle apprend aussi à comprendre le cadre juridique d’une entreprise, sa fiscalité, ses choix de financement, son environnement économique, numérique ainsi que son management.</p>
             <p>L’objectif est de comprendre comment fonctionne une organisation dans son ensemble, et pas seulement comment elle tient ses comptes. Pour des études de comptabilité après le bac à Nancy, cette formation en comptabilité et gestion offre un socle large, qui ouvre sur de nombreuses <a href={`${base}/poursuites-etudes-carrieres/`}>poursuites d’études et carrières</a>.</p>
           </div>
         </div>
@@ -269,7 +272,8 @@ const jsonLd = {
 
         <div class="dd-legend">
           <p><strong>Les volumes horaires entre parenthèses correspondent aux cours en classe dédoublée.</strong></p>
-          <p>L’UE13 et les modules méthodologiques sont présents chaque année, l’UE12 en première et en troisième année. Source : plaquette de présentation du DCG 2026-2027.</p>
+          <p>L’UE12, l’UE13 et les modules méthodologiques sont présents chaque année ; l’UE12 et l’UE13 sont présentées par les candidats en troisième année. Source : plaquette de présentation du DCG 2026-2027.</p>
+          <p><a class="dd-dl" href={plaquettePdf} download>Télécharger la plaquette du DCG 2026-2027 (PDF)</a></p>
         </div>
       </div>
     </section>
