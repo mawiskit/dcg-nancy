@@ -191,9 +191,11 @@
 
 /* ───────── Compétences ───────── */
 .dd-skills .dd-split-head { margin-bottom: clamp(26px, 4vh, 44px); }
-.dd-skilllist { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); }
+.dd-skilllist { list-style: none; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0 clamp(24px, 3vw, 48px); }
+.dd-skilllist li { grid-column: span 2; }
+.dd-skilllist li:nth-child(5) { grid-column: 2 / span 2; }
 .dd-skilllist li { padding: 22px 0 28px; border-top: 1px solid var(--line-l); }
-.dd-skilllist li:nth-child(-n+3) { border-top: 2px solid var(--nuit); }
+.dd-skilllist li:nth-child(-n+4) { border-top: 2px solid var(--nuit); }
 .dd-skilllist h3 { font: 600 1.1875rem / 1.2 var(--display); color: var(--nuit); position: relative; display: inline-block; padding-bottom: 8px; margin-bottom: 8px; }
 .dd-skilllist h3::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: var(--or); }
 .dd-skilllist p { font-size: .9688rem; line-height: 1.62; color: rgba(24, 21, 56, .9); max-width: 38ch; }
@@ -232,8 +234,9 @@
   .dd-dhead { position: static; }
   .dd-dhead p { max-width: 60ch; }
   .dd-modlist { grid-template-columns: 1fr; }
-  .dd-skilllist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .dd-skilllist li:nth-child(3) { border-top: 1px solid var(--line-l); }
+  .dd-skilllist { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); }
+  .dd-skilllist li, .dd-skilllist li:nth-child(5) { grid-column: auto; }
+  .dd-skilllist li:nth-child(n+3) { border-top: 1px solid var(--line-l); }
   .dd-hero::after { background: linear-gradient(90deg, rgba(14, 24, 62, .94), rgba(18, 38, 88, .7)); }
   .dd-next-in { grid-template-columns: 1fr; gap: 28px; }
 }
@@ -256,7 +259,7 @@
   .dd-node { position: absolute; left: 0; top: 0; }
   .dd-step h3 { margin-top: 0; padding-top: 14px; }
   .dd-skilllist { grid-template-columns: 1fr; }
-  .dd-skilllist li:nth-child(-n+3) { border-top: 1px solid var(--line-l); }
+  .dd-skilllist li:nth-child(-n+4) { border-top: 1px solid var(--line-l); }
   .dd-skilllist li:first-child { border-top: 2px solid var(--nuit); }
   .dd-links a { grid-template-columns: minmax(0, 1fr) 30px; }
 }
