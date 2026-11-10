@@ -4,7 +4,7 @@
 // Ne pas la modifier pour une simple correction de typographie ou de mise en page : Google se fie à cette date.
 // Une page absente de cette liste apparaît dans le sitemap sans date (rien n'est inventé).
 export const lastmodParPage = {
-  '/': '2026-11-08',
+  '/': '2026-11-10',
   '/decouvrir-le-dcg/': '2026-11-09',
   '/pourquoi-nous-choisir/': '2026-11-10',
   '/poursuites-etudes-carrieres/': '2026-11-08',
