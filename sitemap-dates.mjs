@@ -7,7 +7,7 @@ export const lastmodParPage = {
   '/': '2026-11-10',
   '/decouvrir-le-dcg/': '2026-11-10',
   '/pourquoi-nous-choisir/': '2026-11-10',
-  '/poursuites-etudes-carrieres/': '2026-11-08',
+  '/poursuites-etudes-carrieres/': '2026-11-10',
   '/vie-etudiante/': '2026-11-10',
   '/temoignages/': '2026-11-08',
   '/admissions/': '2026-11-08',
