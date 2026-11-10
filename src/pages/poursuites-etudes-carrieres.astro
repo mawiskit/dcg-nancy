@@ -7,22 +7,22 @@ import '../styles/decouvrir.css';
 import '../styles/poursuites.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/poursuites-etudes-carrieres/`, Astro.site).href;
 
-const title = 'Après le DCG à Nancy : poursuites d’études et métiers | DCG Nancy';
-const description = 'Que faire après un DCG à Nancy ? DSCG, masters CCA, finance et contrôle de gestion, écoles de commerce en admission parallèle, IPAG, MEEF, et métiers de la comptabilité, de l’audit et de la finance.';
+const title = 'Après le DCG : poursuites d’études et métiers | DCG Nancy';
+const description = 'Que faire après un DCG ? Poursuites d’études, métiers accessibles et perspectives dans la comptabilité, l’audit et la finance, depuis le DCG de Nancy.';
 
 /* Sources : plaquette DCG 2026-2027, Padlet du DCG (lycée Georges-de-la-Tour) et, pour les métiers d’entrée, Diplomeo. */
 const routes = [
   {
     n: '01', t: 'Le DSCG, vers l’expertise comptable',
-    text: 'Le diplôme supérieur de comptabilité et de gestion se prépare en deux ans après le DCG. De niveau master (120 crédits ECTS), il prolonge la formation et ouvre la voie du diplôme d’expertise comptable (DEC), qui mène aux professions d’expert-comptable et de commissaire aux comptes.',
+    text: 'Le diplôme supérieur de comptabilité et de gestion se prépare en deux ans après le DCG. De niveau master (120 crédits ECTS), il prolonge la formation. Il est aussi l’étape qui permet de s’engager vers le diplôme d’expertise comptable (DEC), lequel suppose ensuite trois ans de stage en cabinet, des épreuves et un mémoire. Les professions d’expert-comptable et de commissaire aux comptes sont réglementées et ont chacune leurs conditions d’accès : le DSCG seul ne suffit pas pour les exercer.',
     label: 'Où le préparer', links: [{ l: 'Le DSCG au CNAM Grand Est', href: 'https://www.cnam-grandest.fr/formation/DSGC100A' }],
   },
   {
     n: '02', t: 'Les masters universitaires',
-    text: 'Le DCG permet de candidater à de nombreux masters à l’université : contrôle-comptabilité-audit, finance, gestion, droit fiscal, droit des affaires, management.',
+    text: 'Le DCG permet de candidater à de nombreux masters à l’université : contrôle-comptabilité-audit, finance, gestion, droit fiscal, droit des affaires, management. L’admission se fait sur dossier, selon les capacités d’accueil et les critères de chaque formation : elle n’est pas automatique.',
     label: 'Exemples en Lorraine', links: [
       { l: 'Master Comptabilité-Contrôle-Audit, IAE Nancy', href: 'http://iae-nancy.univ-lorraine.fr/nos-formations/masters/comptabilite-controle-audit' },
       { l: 'Master Contrôle de gestion et audit organisationnel, IAE Metz', href: 'https://iaemetz.univ-lorraine.fr/nos-formations/catalogue-de-formations/m1-controle-de-gestion-et-audit-organisationnel' },
@@ -32,17 +32,17 @@ const routes = [
   },
   {
     n: '03', t: 'Les écoles de commerce, en admission parallèle',
-    text: 'Avec un niveau licence, il est possible de candidater en admission parallèle (admission sur titres) à de nombreuses écoles de commerce, souvent directement en première année du cycle master. Parmi elles : SKEMA, NEOMA, ICN Business School à Nancy, ou les écoles qui recrutent via les concours Ecricome Tremplin et Passerelle. Les conditions, les épreuves et les places varient selon les écoles et les années : le dossier et l’entretien comptent.',
+    text: 'Avec un niveau licence, il est possible de candidater en admission parallèle (admission sur titres) à de nombreuses écoles de commerce, parfois directement en première année du cycle master. Parmi elles : SKEMA, NEOMA, ICN Business School à Nancy, ou les écoles qui recrutent via les concours Ecricome Tremplin et Passerelle. Les possibilités d’admission dépendent de chaque établissement, de ses conditions d’accès, de ses concours et de l’examen du dossier : elles ne sont pas systématiques.',
     label: '', links: [],
   },
   {
     n: '04', t: 'Les IPAG',
-    text: 'Les instituts de préparation à l’administration générale (IPAG) préparent aux concours de la fonction publique.',
+    text: 'Les instituts de préparation à l’administration générale (IPAG) préparent aux concours administratifs de la fonction publique, par une licence ou un master d’administration publique ou par une préparation dédiée. Le DCG ne donne pas automatiquement accès à tous les concours : chacun fixe ses propres conditions de diplôme.',
     label: 'En savoir plus', links: [{ l: 'IPAG, université de Lorraine', href: 'https://www.ipag.univ-lorraine.fr/' }],
   },
   {
-    n: '05', t: 'Le master MEEF',
-    text: 'Pour devenir enseignant en économie-gestion après le DCG ou le DSCG.',
+    n: '05', t: 'Le master MEEF, pour enseigner',
+    text: 'Pour enseigner l’économie-gestion, le DCG ou le DSCG peuvent constituer une base, mais ils ne suffisent pas : il faut réussir un concours de l’enseignement (CAPET, par exemple) et suivre un master des métiers de l’enseignement, de l’éducation et de la formation. L’organisation de ce parcours a évolué récemment : les conditions d’accès applicables sont à vérifier auprès de l’Inspé de l’université de Lorraine.',
     label: 'En savoir plus', links: [{ l: 'Master MEEF, université de Lorraine', href: 'https://formations.univ-lorraine.fr/fr/master/2019-master-metiers-de-lenseignement-de-leducation-et-de-la-formation-meef-2nd-degre.html' }],
   },
 ];
@@ -52,8 +52,8 @@ const jobsNow = [
   { t: 'Comptable général', s: 'Clôtures des comptes, bilans.' },
   { t: 'Comptable fournisseurs ou clients', s: 'Suivi des factures et des paiements.' },
   { t: 'Gestionnaire de paie', s: 'Bulletins de paie et cotisations sociales.' },
-  { t: 'Contrôleur de gestion junior', s: 'Tableaux de bord et analyse financière.' },
-  { t: 'Contrôleur ou inspecteur des finances publiques', s: 'Fonction publique (DGFiP), par concours.' },
+  { t: 'Contrôleur de gestion junior', s: 'Tableaux de bord et analyse financière, souvent après une première expérience ou une spécialisation.' },
+  { t: 'Contrôleur ou inspecteur des finances publiques', s: 'Fonction publique (DGFiP) : on y accède par concours.' },
 ];
 
 const jobsLater = [
@@ -64,7 +64,7 @@ const jobsLater = [
 ];
 
 const opens = [
-  { t: 'Les Vendredis de l’expertise', s: 'Chaque année, les étudiants échangent avec d’anciens diplômés sur les multiples débouchés du DCG.' },
+  { t: 'Les Vendredis de l’expertise', s: 'Chaque année, les étudiants échangent avec d’anciens diplômés sur les multiples débouchés du DCG, pour découvrir les métiers et nourrir leur projet.' },
   { t: 'Des stages', s: 'Deux stages d’au moins quatre semaines, en première puis en deuxième année.' },
   { t: 'Des rencontres avec des chefs d’entreprise', s: 'Notamment nancéiens, pour échanger sur l’entrepreneuriat et la RSE.' },
   { t: 'Conférences et ateliers', s: 'Animés par des professionnels tout au long de la formation, avec la participation aux événements de l’Ordre des experts-comptables.' },
@@ -74,6 +74,7 @@ const opens = [
 
 const next = [
   { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
+  { t: 'Pourquoi nous choisir ?', s: 'Accompagnement, projets et ouverture professionnelle.', href: '/pourquoi-nous-choisir/' },
   { t: 'Vie étudiante', s: 'L’association des étudiants, les voyages, les rencontres avec des professionnels.', href: '/vie-etudiante/' },
   { t: 'Admissions', s: 'Parcoursup en première année, dossier en deuxième année : modalités et candidature.', href: '/admissions/' },
 ];
@@ -119,7 +120,7 @@ const jsonLd = {
         </nav>
         <p class="dd-kicker">Poursuites d’études et carrières</p>
         <h1 id="ap-titre">Et après le DCG ? <span>Études et métiers</span></h1>
-        <p class="dd-lead">Le DCG est un diplôme de niveau licence en trois ans. À son issue, deux voies s’ouvrent : entrer directement sur le marché du travail ou poursuivre ses études, en DSCG, en master à l’université, en école de commerce ou en IPAG. Dans les deux cas, il donne un socle large en droit, en comptabilité, en finance, en économie et en management.</p>
+        <p class="dd-lead">Proposé au lycée Georges-de-la-Tour à Nancy, le DCG est un diplôme de niveau licence en trois ans. À son issue, deux voies s’ouvrent : entrer directement sur le marché du travail ou poursuivre ses études, en DSCG, en master à l’université, en école de commerce ou en IPAG. Dans les deux cas, il donne un socle large en droit, en comptabilité, en finance, en économie et en management.</p>
 
         <ul class="dd-facts">
           <li><b>Licence</b><span>grade conféré par le DCG</span></li>
@@ -177,7 +178,7 @@ const jsonLd = {
             <p class="dd-kicker">Les métiers possibles</p>
             <h2 id="ap-h-metiers">Quels métiers après un DCG ?</h2>
           </div>
-          <p class="dd-sublead">Le DCG ouvre les portes de carrières variées et stimulantes. Certains métiers sont accessibles dès le niveau licence, d’autres après une poursuite d’études adaptée.</p>
+          <p class="dd-sublead">Le DCG ouvre des perspectives professionnelles variées. Certains métiers sont accessibles dès le niveau licence, d’autres après une poursuite d’études adaptée, de l’expérience ou la réussite d’un concours : aucun n’est garanti par le seul diplôme.</p>
         </div>
 
         <div class="ap-jobs">
@@ -204,7 +205,7 @@ const jsonLd = {
           </section>
         </div>
 
-        <p class="dd-legend ap-where">Après une poursuite d’études adaptée, les diplômés peuvent rejoindre des cabinets d’expertise comptable ou d’audit, mais aussi des banques, des grands groupes internationaux ou des sociétés de conseil, et évoluer vers des fonctions à fortes responsabilités.</p>
+        <p class="dd-legend ap-where">Après une poursuite d’études adaptée, les diplômés peuvent rejoindre des cabinets d’expertise comptable ou d’audit, mais aussi des banques, des grands groupes internationaux ou des sociétés de conseil. Les fonctions de direction supposent généralement de l’expérience, et certaines professions, comme celle d’expert-comptable, sont réglementées : ce sont des perspectives, pas des débouchés automatiques.</p>
       </div>
     </section>
 
