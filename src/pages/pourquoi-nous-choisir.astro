@@ -127,7 +127,8 @@ const synth = [
   { k: 'Un jeu d’entreprise chaque année', v: 'En partenariat avec une organisation professionnelle (Entreprendre pour Apprendre, l’Ordre des experts-comptables…), les étudiants découvrent chaque année l’entrepreneuriat à travers un jeu collectif qui mobilise créativité, réflexion et esprit d’équipe.' },
   { k: 'Le Tournoi européen de gestion', v: 'Organisé par l’Ordre des experts-comptables du Grand Est, ce tournoi confronte les étudiants à des situations de gestion concrètes. Plusieurs équipes du lycée ont déjà été primées.' },
   { k: 'Des rencontres avec les professionnels', v: 'Conférences, interventions et Vendredis de l’expertise permettent de découvrir les métiers de la comptabilité et de la gestion, d’échanger avec des professionnels et de rencontrer d’anciens diplômés.' },
-  { k: 'Des stages et des visites d’entreprises', v: 'Deux périodes de stage d’au moins quatre semaines, en première et en deuxième année, complétées par des visites d’entreprises pour découvrir le monde professionnel et donner du sens aux enseignements. Ceux-ci peuvent même se dérouler à l’étranger grâce à notre partenariat Erasmus+.' },
+  { k: 'Des stages et des visites d’entreprises', v: 'Deux périodes de stage d’au moins quatre semaines, en première et en deuxième année, complétées par des visites d’entreprises pour découvrir le monde professionnel et donner du sens aux enseignements.' },
+  { k: 'La possibilité de partir étudier à l’étranger', v: 'Avec notre partenariat Erasmus+, nos étudiants ont la possibilité de faire financer leur stage à l’étranger. Des ateliers sont même organisés en langue étrangère afin de leur permettre de présenter une LV2 optionnelle à l’examen.' },
   { k: 'Trois ans pour construire son avenir', v: 'Au fil de la formation, les étudiants consolident leurs connaissances en comptabilité et en gestion, développent leur autonomie et précisent progressivement leur projet professionnel.' },
 ];
 
@@ -239,11 +240,11 @@ const jsonLd = {
     <!-- ───────── Les neuf raisons, en bref (texte accessible sans clic) ───────── -->
     <section class="pq-school pq-synth" aria-labelledby="pq-h-synth">
       <div class="pq-wrap">
-        <h2 id="pq-h-synth">Neuf raisons de choisir notre formation DCG à Nancy</h2>
+        <h2 id="pq-h-synth">Dix raisons de choisir notre formation DCG à Nancy</h2>
         <p>Le diplôme de comptabilité et de gestion (DCG), de grade licence, se prépare en trois ans au lycée Georges-de-la-Tour. Au-delà des enseignements, notre formation s’appuie sur des expériences et des projets qui rythment la vie des étudiants. Voici ce qui enrichira votre formation :</p>
         <dl class="pq-infos">
-          {synth.map((x) => (
-            <div><dt>{x.k}</dt><dd>{x.v}</dd></div>
+          {synth.map((x, i) => (
+            <div><dt><span class="pq-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>{x.k}</dt><dd>{x.v}</dd></div>
           ))}
         </dl>
       </div>
