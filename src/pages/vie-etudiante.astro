@@ -7,11 +7,11 @@ import '../styles/decouvrir.css';
 import '../styles/vie-etudiante.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/vie-etudiante/`, Astro.site).href;
 
-const title = 'Vie étudiante au DCG Nancy : association, sorties, promotion | DCG Nancy';
-const description = 'La vie étudiante du DCG à Nancy : une association dirigée par les étudiants, des sorties, des week-ends et des repas de promotion, et une vraie proximité avec l’équipe enseignante.';
+const title = 'Vie étudiante en DCG à Nancy : association et vie de promotion';
+const description = 'Découvrez la vie étudiante du DCG au lycée Georges-de-la-Tour à Nancy : association GEFISUP, sorties, week-ends, projets collectifs et ambiance de promotion.';
 
 const img = `${base}/images/vie-etudiante`;
 
@@ -40,14 +40,15 @@ const assoPoints = [
 ];
 
 const values = [
-  { t: 'La convivialité', s: 'Repas, sorties, week-ends : la promotion se retrouve régulièrement hors des salles de cours.' },
-  { t: 'La solidarité et l’entraide', s: 'Dans une formation exigeante, on avance mieux ensemble : les étudiants s’entraident.' },
-  { t: 'Des liens entre étudiants', s: 'D’une promotion à l’autre, la vie collective crée une vraie dynamique de groupe.' },
+  { t: 'Se retrouver hors des cours', s: 'Repas, sorties, week-ends : la promotion se retrouve en dehors des salles de cours.' },
+  { t: 'S’entraider', s: 'Dans une formation exigeante, les étudiants s’entraident.' },
+  { t: 'Des liens entre étudiants', s: 'La vie collective de la promotion permet aux étudiants de se connaître et de s’appuyer les uns sur les autres.' },
 ];
 
 const next = [
   { t: 'Pourquoi nous choisir ?', s: 'Encadrement, méthode, vie de promotion : ce qui fait la différence à Nancy.', href: '/pourquoi-nous-choisir/' },
   { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
+  { t: 'Poursuites d’études et carrières', s: 'DSCG, écoles de commerce, masters : que faire après le DCG ?', href: '/poursuites-etudes-carrieres/' },
   { t: 'Admissions', s: 'Parcoursup en première année, dossier en deuxième année.', href: '/admissions/' },
 ];
 
@@ -90,9 +91,9 @@ const jsonLd = {
         <nav class="dd-crumb" aria-label="Fil d’Ariane">
           <a href={`${base}/`}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Vie étudiante</span>
         </nav>
-        <p class="dd-kicker">Vie étudiante</p>
-        <h1 id="ve-titre">Une formation exigeante, <span>une vraie vie de promotion</span></h1>
-        <p class="dd-lead">Au DCG Nancy, on travaille sérieusement, mais on n’avance pas seul. Entre l’association étudiante, les sorties, les week-ends et les repas de promotion, les étudiants forment un groupe soudé, dans une ambiance conviviale et solidaire, et proche de l’équipe enseignante.</p>
+        <p class="dd-kicker">Une formation exigeante, une vraie vie de promotion</p>
+        <h1 id="ve-titre">La vie étudiante <span>au DCG de Nancy</span></h1>
+        <p class="dd-lead">Au DCG du lycée Georges-de-la-Tour, on travaille sérieusement, mais on n’avance pas seul. L’association étudiante GEFISUP, les sorties, les week-ends et les repas de promotion font de chaque promotion un groupe uni, proche de l’équipe enseignante.</p>
         <nav class="dd-jump" aria-label="Dans cette page">
           <a href="#association">L’association étudiante</a>
           <a href="#pellicule">Les moments forts</a>
@@ -109,8 +110,8 @@ const jsonLd = {
           <div class="ve-asso-txt">
             <p class="dd-kicker">L’association étudiante</p>
             <h2 id="ve-h-asso">Une association dirigée par les étudiants</h2>
-            <p class="ve-lede">Au DCG Nancy, l’association étudiante, GEFISUP, est intégralement dirigée par les étudiants eux-mêmes. Ils choisissent les projets, organisent les activités et font vivre l’association tout au long de l’année.</p>
-            <p>C’est une véritable école d’autonomie : on s’investit, on s’organise, on crée une dynamique collective qui profite à toute la promotion.</p>
+            <p class="ve-lede">À Nancy, l’association étudiante du DCG, GEFISUP, est intégralement dirigée par les étudiants eux-mêmes. Ils choisissent les projets, organisent les activités et la font vivre tout au long de l’année.</p>
+            <p>C’est une véritable école d’autonomie : on s’investit et on s’organise à plusieurs, au bénéfice de toute la promotion.</p>
             <ul class="ve-points">
               {assoPoints.map((p) => (
                 <li><h3>{p.t}</h3><p>{p.s}</p></li>
@@ -141,7 +142,7 @@ const jsonLd = {
             <h2 id="ve-h-film">Les moments forts de la vie de promotion</h2>
           </div>
           <div>
-            <p class="dd-sublead">Sorties, week-ends, repas, soirées : un aperçu de ce que vivent concrètement les étudiants.</p>
+            <p class="dd-sublead">Sorties, week-ends, repas, soirées : un aperçu en photos de ce que vivent les étudiants. Certaines images, comme « Weichella » en septembre 2022, sont des souvenirs d’événements passés.</p>
             <div class="ve-actions">
               <button type="button" class="ve-pause" id="ve-pause" aria-pressed="false" aria-controls="ve-film">Mettre le défilement en pause</button>
               <a class="ve-social" href="https://www.instagram.com/dcg_gdlt/" target="_blank" rel="noopener">
@@ -189,7 +190,7 @@ const jsonLd = {
             <p class="dd-kicker">L’esprit de promotion</p>
             <h2 id="ve-h-promo">On avance mieux ensemble</h2>
           </div>
-          <p class="dd-sublead">On peut suivre une formation exigeante tout en évoluant dans un environnement chaleureux et solidaire : c’est l’esprit du DCG Nancy.</p>
+          <p class="dd-sublead">Étudier en DCG à Nancy, c’est suivre une formation exigeante au sein d’un groupe où l’on se soutient.</p>
         </div>
         <ul class="dd-skilllist">
           {values.map((v) => (
@@ -209,8 +210,8 @@ const jsonLd = {
         <div class="ve-teach-txt">
           <p class="dd-kicker">L’équipe enseignante</p>
           <h2 id="ve-h-teach">Des enseignants proches de leurs étudiants</h2>
-          <p class="ve-lede">Il existe une très bonne entente entre les étudiants et l’équipe pédagogique. L’ambiance est conviviale, les échanges sont faciles et l’accompagnement humain fait partie intégrante de l’expérience DCG.</p>
-          <p>L’exigence de la formation s’accompagne d’une vraie disponibilité : on peut poser ses questions, demander de l’aide et être soutenu tout au long des trois années.</p>
+          <p class="ve-lede">Il existe une très bonne entente entre les étudiants et l’équipe pédagogique : les échanges sont faciles et l’accompagnement humain fait partie de l’expérience du DCG.</p>
+          <p>L’exigence de la formation s’accompagne d’une vraie disponibilité : on peut poser ses questions, demander de l’aide et être soutenu tout au long des trois années de formation.</p>
         </div>
       </div>
     </section>
