@@ -49,3 +49,9 @@
   .ad-cta { margin-top: 14px; }
   .ad-note { margin-top: 12px; font-size: .8438rem; }
 }
+
+/* ───────── Bandeaux titre + introduction : même grille dans les deux sections ───────── */
+@media (min-width: 1001px) {
+  .ad .dd-split-head { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(24px, 3vw, 48px); align-items: start; }
+  .ad .dd-split-head .dd-sublead { padding-top: 0; max-width: none; }
+}
