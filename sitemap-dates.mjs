@@ -5,7 +5,7 @@
 // Une page absente de cette liste apparaît dans le sitemap sans date (rien n'est inventé).
 export const lastmodParPage = {
   '/': '2026-11-10',
-  '/decouvrir-le-dcg/': '2026-11-09',
+  '/decouvrir-le-dcg/': '2026-11-10',
   '/pourquoi-nous-choisir/': '2026-11-10',
   '/poursuites-etudes-carrieres/': '2026-11-08',
   '/vie-etudiante/': '2026-11-08',
