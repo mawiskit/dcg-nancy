@@ -8,11 +8,11 @@ import '../styles/decouvrir.css';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 /* Plaquette de présentation : à remplacer chaque année en déposant le nouveau PDF sous le même nom. */
 const plaquettePdf = `${base}/documents/plaquette-dcg-2026-2027.pdf`;
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/decouvrir-le-dcg/`, Astro.site).href;
 
-const title = 'Formation DCG Nancy : programme et matières | DCG Nancy';
-const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : diplôme de comptabilité et de gestion en 3 ans, 13 unités d’enseignement, matières et horaires par année.';
+const title = 'DCG à Nancy : programme, matières et diplôme | Lycée Georges-de-la-Tour';
+const description = 'Découvrez le DCG à Nancy au lycée Georges-de-la-Tour : programme des 13 unités d’enseignement, matières étudiées, horaires et organisation des trois années.';
 
 /* ───────── Tableau des enseignements : reproduit à l’identique depuis la plaquette DCG 2026-2027 ─────────
    Les horaires entre parenthèses correspondent aux cours en classe dédoublée. Aucun total n’est calculé. */
@@ -123,7 +123,7 @@ const modules = [
 const steps = [
   { n: 1, t: 'Acquérir les fondamentaux', s: 'Découverte des bases du droit, de l’économie, de la comptabilité et des systèmes d’information, avec l’anglais des affaires et la communication professionnelle.', ue: 'UE1 · UE5 · UE8 · UE9' },
   { n: 2, t: 'Approfondir les connaissances', s: 'Développement des compétences en droit des sociétés, en fiscalité, en finance et en comptabilité approfondie.', ue: 'UE2 · UE4 · UE6 · UE10' },
-  { n: 3, t: 'Développer l’analyse et le pilotage', s: 'Approfondissement du management, du contrôle de gestion, du droit social et des compétences de communication, avec l’anglais des affaires.', ue: 'UE3 · UE7 · UE11 · UE12' },
+  { n: 3, t: 'Développer l’analyse et le pilotage', s: 'Approfondissement du management, du contrôle de gestion, du droit social et des compétences de communication, avec l’anglais des affaires.', ue: 'UE3 · UE7 · UE11 · UE12 · UE13' },
 ];
 
 const skills = [
@@ -212,7 +212,7 @@ const jsonLd = {
           </div>
           <div class="dd-prose">
             <p>On résume souvent le DCG à l’apprentissage de la comptabilité. Elle y occupe une vraie place, mais la formation est pluridisciplinaire : elle apprend aussi à comprendre le cadre juridique d’une entreprise, sa fiscalité, ses choix de financement, son environnement économique, numérique ainsi que son management.</p>
-            <p>L’objectif est de comprendre comment fonctionne une organisation dans son ensemble, et pas seulement comment elle tient ses comptes. Pour des études de comptabilité après le bac à Nancy, cette formation en comptabilité et gestion offre un socle large, qui ouvre sur de nombreuses <a href={`${base}/poursuites-etudes-carrieres/`}>poursuites d’études et carrières</a>.</p>
+            <p>L’objectif est de comprendre comment fonctionne une organisation dans son ensemble, et pas seulement comment elle tient ses comptes. Pour des études de comptabilité après le bac à Nancy, cette formation en comptabilité et gestion offre un socle large, qui ouvre sur de nombreuses <a href={`${base}/poursuites-etudes-carrieres/`}>poursuites d’études et carrières</a>. Pour savoir comment intégrer le DCG, consultez les <a href={`${base}/admissions/`}>modalités d’admission</a>, et découvrez <a href={`${base}/pourquoi-nous-choisir/`}>ce qui distingue notre formation</a> au lycée.</p>
           </div>
         </div>
 
@@ -245,7 +245,7 @@ const jsonLd = {
             <p class="dd-kicker">Les enseignements sur trois ans</p>
             <h2 id="dd-h-prog">Le programme du DCG année par année</h2>
           </div>
-          <p class="dd-sublead">Chaque année, entre 4 et 5 UE sont validées, ce qui permet de valider l’intégralité du diplôme au bout des trois ans. Voici, pour la formation DCG proposée à Nancy, la répartition des enseignements.</p>
+          <p class="dd-sublead">Chaque année, les étudiants suivent les enseignements du programme et présentent les épreuves de 4 à 5 UE (4 en première et en deuxième année, 5 en troisième année) : le diplôme se compose ainsi de 13 UE, obtenues en fonction des résultats aux épreuves. Voici la répartition des enseignements au lycée Georges-de-la-Tour, d’après la plaquette du DCG 2026-2027.</p>
         </div>
 
         <div class="dd-years">
@@ -274,7 +274,7 @@ const jsonLd = {
         <div class="dd-legend">
           <p><strong>Les volumes horaires entre parenthèses correspondent aux cours en classe dédoublée.</strong></p>
           <p>L’UE12, l’UE13 et les modules méthodologiques sont présents chaque année ; l’UE12 et l’UE13 sont présentées par les candidats en troisième année. Source : plaquette de présentation du DCG 2026-2027.</p>
-          <p><a class="dd-dl" href={plaquettePdf} download>Télécharger la plaquette du DCG 2026-2027 (PDF)</a></p>
+          <p><a class="dd-dl" href={plaquettePdf} type="application/pdf" download>Télécharger la plaquette du DCG 2026-2027 (PDF)</a></p>
         </div>
       </div>
     </section>
