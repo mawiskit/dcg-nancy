@@ -16,7 +16,7 @@ const rubriques = [
   { n: '06', t: 'Admissions', s: 'Calendrier, dossier, candidature.', href: '/admissions/' },
 ];
 
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const logoUrl = new URL(`${base}/images/logo-dcg-nancy-480.png`, Astro.site).href;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -27,6 +27,7 @@ const jsonLd = {
       url: site,
       name: 'DCG Nancy',
       inLanguage: 'fr-FR',
+      publisher: { '@id': `${site}#organisation` },
     },
     {
       '@type': 'EducationalOrganization',
@@ -39,23 +40,27 @@ const jsonLd = {
       description: 'Formation au DCG (Diplôme de comptabilité et de gestion) au lycée Georges-de-la-Tour, à Nancy.',
       address: { '@type': 'PostalAddress', addressLocality: 'Nancy', addressRegion: 'Grand Est', addressCountry: 'FR' },
       areaServed: ['Nancy', 'Meurthe-et-Moselle', 'Grand Est'],
+      sameAs: ['https://www.instagram.com/dcg_gdlt/', 'https://www.linkedin.com/school/dcg-lyc%C3%A9e-georges-de-la-tour-nancy/'],
     },
     {
       '@type': 'Course',
       '@id': `${site}#dcg`,
-      name: 'Diplôme de comptabilité et de gestion (DCG)',
+      name: 'Diplôme de comptabilité et de gestion (DCG) à Nancy',
+      alternateName: 'DCG Nancy',
+      url: site,
       description: 'Formation en trois ans, de niveau licence, en comptabilité, gestion, droit et économie, préparée au lycée Georges-de-la-Tour à Nancy. 13 unités d’enseignement et stages en milieu professionnel.',
       inLanguage: 'fr-FR',
       educationalLevel: 'Niveau licence (bac+3)',
       timeRequired: 'P3Y',
+      educationalCredentialAwarded: 'Diplôme de comptabilité et de gestion (DCG), conférant le grade de licence',
       provider: { '@id': `${site}#organisation` },
     },
   ],
 };
 ---
 <Base
-  title="Formation DCG comptabilité et gestion à Nancy | DCG Nancy"
-  description="Formation DCG à Nancy, au lycée Georges-de-la-Tour : diplôme de comptabilité et de gestion en 3 ans, niveau licence. Débouchés, poursuites d’études, admissions."
+  title="DCG Nancy, diplôme de comptabilité et gestion | Lycée Georges-de-la-Tour"
+  description="DCG Nancy : préparez le diplôme de comptabilité et de gestion (niveau licence) en 3 ans au lycée Georges-de-la-Tour. Programme, poursuites d’études, admissions."
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
 
@@ -63,7 +68,7 @@ const jsonLd = {
 
   <main id="contenu" class="home">
     <div class="band">
-      <h1>À Nancy, rejoignez le DCG : diplôme de comptabilité et de gestion en 3 ans, une formation exigeante et reconnue par l’État.</h1>
+      <h1>DCG Nancy : préparez le diplôme de comptabilité et de gestion au lycée Georges-de-la-Tour</h1>
     </div>
     <section class="left" aria-labelledby="slogan">
       <img
