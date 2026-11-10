@@ -7,11 +7,11 @@ import '../styles/decouvrir.css';
 import '../styles/admissions.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/admissions/`, Astro.site).href;
 
-const title = 'Admissions DCG Nancy : Parcoursup et entrée en 2e année | DCG Nancy';
-const description = 'Candidater au DCG à Nancy, lycée Georges-de-la-Tour : procédure Parcoursup en première année, entrée directe en deuxième année après un BTS CG ou un BUT GEA, et dossier de candidature.';
+const title = 'Admission en DCG à Nancy : Parcoursup et entrée en 2e année';
+const description = 'Vous souhaitez intégrer le DCG à Nancy ? Découvrez les conditions d’admission en première année via Parcoursup et en deuxième année après un BTS CG ou un BUT GEA.';
 
 /* Fiche officielle de la formation sur Parcoursup : elle précise les attendus et les critères d’examen des vœux. */
 const parcoursupFiche = 'https://dossier.parcoursup.fr/Candidats/public/fiches/afficherFicheFormation?g_ta_cod=6261&typeBac=0&originePc=0';
@@ -22,14 +22,14 @@ const steps1 = [
   { n: '01', t: 'Consulter la fiche de la formation', s: 'Sur Parcoursup, la fiche du DCG du lycée Georges-de-la-Tour présente les attendus de la formation et les critères d’examen des vœux.' },
   { n: '02', t: 'Formuler son vœu', s: 'Le vœu « DCG – lycée Georges-de-la-Tour, Nancy » s’ajoute à la liste des vœux sur la plateforme, dans les délais fixés au niveau national.' },
   { n: '03', t: 'Compléter son dossier et confirmer', s: 'Résultats scolaires, appréciations et projet de formation motivé : le dossier est complété sur Parcoursup, puis chaque vœu est confirmé.' },
-  { n: '04', t: 'Examen par l’équipe pédagogique', s: 'Les dossiers sont étudiés par l’équipe enseignante du DCG. Parcoursup n’examine pas les candidatures : la plateforme applique le classement établi par la formation.' },
+  { n: '04', t: 'Examen par l’équipe pédagogique', s: 'Les candidatures sont examinées et classées par la commission d’examen des vœux de la formation, qui s’appuie sur l’équipe enseignante du DCG. Les propositions d’admission sont ensuite communiquées aux candidats sur Parcoursup.' },
   { n: '05', t: 'Réponse et inscription', s: 'Les réponses sont consultées sur Parcoursup. Il faut y répondre dans les délais, puis finaliser l’inscription auprès du lycée.' },
 ];
 
 const steps2 = [
   { n: '01', t: 'Vérifier son diplôme', s: 'L’entrée directe en deuxième année est ouverte après un BTS Comptabilité et gestion (CG) ou après deux ans en BUT GEA (ex-IUT GEA).' },
   { n: '02', t: 'Télécharger et compléter le dossier', s: 'Le dossier de candidature en deuxième année se télécharge sur cette page. Il est accompagné des copies des bulletins des deux années de BTS ou de BUT, et se dépose au secrétariat du lycée.' },
-  { n: '03', t: 'Examen sur dossier', s: 'Une commission d’admission composée d’enseignants du DCG étudie les dossiers. Pour connaître les unités d’enseignement dont vous serez dispensé selon votre diplôme (BTS ou BUT), contactez-nous.' },
+  { n: '03', t: 'Examen sur dossier', s: 'Une commission d’admission composée d’enseignants du DCG étudie les dossiers : l’admission n’est pas automatique. Les dispenses d’unités d’enseignement dépendent du diplôme obtenu (BTS ou BUT) et de la réglementation : pour les connaître, contactez-nous.' },
 ];
 
 const next = [
@@ -97,7 +97,7 @@ const jsonLd = {
             <p class="dd-kicker">Première année</p>
             <h2 id="ad-h-1">Candidater via Parcoursup</h2>
           </div>
-          <p class="dd-sublead">Le lycée recrute à partir d’un baccalauréat général ou technologique (STMG CG de préférence). Un bon niveau scolaire est requis : le travail personnel en DCG est plus conséquent qu’au lycée.</p>
+          <p class="dd-sublead">Le lycée recrute à partir d’un baccalauréat général ou technologique, avec une préférence pour le baccalauréat STMG (spécialité gestion et finance, anciennement CG). Un bon niveau scolaire est requis : le travail personnel en DCG est plus conséquent qu’au lycée.</p>
         </div>
 
         <div class="ad-grid">
@@ -132,7 +132,7 @@ const jsonLd = {
             <p class="dd-kicker">Deuxième année</p>
             <h2 id="ad-h-2">Intégrer directement la deuxième année</h2>
           </div>
-          <p class="dd-sublead">Après un BTS Comptabilité et gestion ou deux ans en BUT GEA, il est possible de candidater sur dossier en deuxième année. Pour connaître les unités d’enseignement dont vous serez dispensé selon votre diplôme, contactez-nous.</p>
+          <p class="dd-sublead">Après un BTS Comptabilité et gestion ou deux ans en BUT GEA, il est possible de candidater sur dossier en deuxième année du DCG. L’admission n’est pas automatique et les dispenses d’unités d’enseignement varient selon le diplôme : pour les connaître, contactez-nous.</p>
         </div>
 
         <div class="ad-grid ad-grid-dark">
@@ -152,8 +152,8 @@ const jsonLd = {
             <p class="ad-asl">À télécharger</p>
             <h3 id="ad-h-dossier">Dossier de candidature en deuxième année</h3>
             <p>Le dossier à compléter pour candidater directement en deuxième année du DCG.</p>
-            <a class="cta ad-cta" href={dossierPdf} download>TÉLÉCHARGER LE DOSSIER (PDF)</a>
-            <p class="ad-note">Ce dossier est mis à jour chaque année : en cas de doute sur les pièces ou les dates, <a href={`${base}/contact/`}>contactez-nous</a> avant l’envoi.</p>
+            <a class="cta ad-cta" href={dossierPdf} type="application/pdf" download>TÉLÉCHARGER LE DOSSIER (PDF)</a>
+            <p class="ad-note">Ce dossier est actualisé chaque année : vérifiez la date limite de dépôt et les pièces demandées, ou <a href={`${base}/contact/`}>contactez-nous</a> avant l’envoi.</p>
           </aside>
         </div>
       </div>
