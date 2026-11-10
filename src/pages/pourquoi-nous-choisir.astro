@@ -44,6 +44,8 @@ const P = {
   tournoiPromo: pic('tournoi-promotion-2024', [700, 1200], 1599 / 1200, 'Photo de groupe des participants au Tournoi européen de gestion, en t-shirts blancs, certains tenant des ballons dorés.', 'Les participants du tournoi'),
   tournoiFinance: pic('tournoi-remise-finance', [700, 1200], 2000 / 1500, 'Remise des prix du Challenge Finance : l’équipe 7 du lycée Georges de la Tour, troisième prix, pose avec les organisatrices.', 'Challenge Finance : 3e prix', '50% 62%'),
   tournoiRH: pic('tournoi-remise-rh', [400, 720], 720 / 1600, 'Remise du troisième prix Ressources humaines à l’équipe 6 du lycée Georges de la Tour.', 'Ressources humaines : 3e prix', '50% 22%'),
+  radioStudio: pic('web-radio-studio', [700, 1200], 1206 / 708, 'Des étudiants et leur encadrant autour de la table d’enregistrement de la web radio, micros et casques devant eux.', 'Enregistrement de la web radio'),
+  radioFajet: pic('web-radio-fajet', [600, 1100], 1170 / 848, 'Des étudiants du DCG dans les locaux de Radio Fajet, devant le logo de la radio.', 'Dans les locaux de Radio Fajet'),
   presse: pic('presse-vingt-ans-dcg', [689], 689 / 666, 'Article de presse intitulé « Georges-de-la-Tour fête les vingt ans de son diplôme compta et gestion », avec la photo de groupe des étudiants actuels.', 'Article de presse sur les vingt ans du DCG'),
   anniv: pic('anniversaire-20-ans-salle', [800, 1400], 4 / 3, 'Une grande salle de sport aménagée en salle de réception : des étudiants assis face à une scène où plusieurs personnes prennent la parole.', 'Un moment de l’anniversaire, dans la salle du lycée'),
   vendredi: pic('vendredis-expertise', [800, 1400], 1600 / 720, 'Des étudiants assis dans une salle aux grands rideaux bleus, certains souriant à l’objectif, pendant une rencontre.', 'Un Vendredi de l’expertise', '30% 50%'),
@@ -91,6 +93,12 @@ const themes = [
     id: 'trois-ans', n: 't8', title: 'Trois ans pour se construire', sub: 'Construire son avenir',
     text: 'Au fil des trois années du DCG, les étudiants acquièrent des bases solides, gagnent en autonomie et précisent peu à peu leur projet. Une progression qui se construit pas à pas, avec la promotion et l’équipe pédagogique.',
     pos: '50% 40%', sizes: '(min-width: 1000px) 50vw, 96vw', main: P.promo, extra: [],
+  },
+  {
+    id: 'web-radio', n: 't9', title: 'Une web radio réalisée par les étudiants', sub: 'S’exprimer à l’antenne',
+    text: 'Les étudiants conçoivent et enregistrent une web radio consacrée à l’économie, encadrée par Jérôme Georgel et diffusée sur Radio Fajet : un exercice concret pour s’informer, structurer un propos et s’exprimer à l’antenne.',
+    link: { href: 'https://radiofajet.net/2026/05/11/linstant-eco-2/', label: 'Écouter L’Instant Éco sur Radio Fajet' },
+    pos: '50% 40%', sizes: '(min-width: 1000px) 33vw, 96vw', main: P.radioStudio, extra: [P.radioFajet],
   },
 ];
 
@@ -159,7 +167,7 @@ const jsonLd = {
           <p>Suivre cette formation en comptabilité au sein de notre établissement, c’est s’assurer d’une formation reconnue par l’État, au sein d’un lycée public donc gratuite. Vous serez encadrés par une équipe d’enseignants titulaires de l’agrégation, proposant une pédagogie innovante, diversifiée et ouverte sur le monde.</p>
         </header>
 
-        <ul class="pq-mosaic" aria-label="Huit raisons de choisir notre DCG">
+        <ul class="pq-mosaic" aria-label="Neuf raisons de choisir notre DCG">
           {themes.map((t) => (
             <li class={`pq-tile pq-${t.n}`}>
               <button type="button" class="pq-open" data-open={t.id} aria-haspopup="dialog">
@@ -205,6 +213,7 @@ const jsonLd = {
             <p class="pq-sub">{t.sub}</p>
             <h2 id={`h-${t.id}`}>{t.title}</h2>
             <p>{t.text}</p>
+            {t.link && <p class="pq-link"><a href={t.link.href} target="_blank" rel="noopener">{t.link.label}</a></p>}
             <div class="pq-nav">
               <button type="button" data-go="-1">← Précédent</button>
               <button type="button" data-go="1">Suivant →</button>
