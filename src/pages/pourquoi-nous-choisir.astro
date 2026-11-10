@@ -6,11 +6,11 @@ import SiteLinks from '../components/SiteLinks.astro';
 import '../styles/pourquoi.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/pourquoi-nous-choisir/`, Astro.site).href;
 
-const title = 'Pourquoi choisir notre DCG à Nancy ? | DCG Nancy';
-const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : classes à taille humaine, prise de parole, jeu d’entreprise, Tournoi européen de gestion, stages, visites et rencontres de professionnels.';
+const title = 'Formation DCG à Nancy : pourquoi choisir le lycée Georges-de-la-Tour ?';
+const description = 'Formation DCG à Nancy, lycée Georges-de-la-Tour : classes de 30 à 35 étudiants, coaching oral, jeu d’entreprise, Tournoi européen de gestion, stages en entreprise.';
 
 /* ───────── Photographies (public/images/pourquoi/) : deux largeurs par image, recadrées sans déformation ─────────
    Les légendes (« cap ») sont volontairement descriptives : à remplacer par les légendes d’origine des fichiers. */
@@ -119,7 +119,20 @@ const infos = [
   { k: 'Autour', v: 'À 15 minutes du centre-ville en transport en commun, proche des résidences étudiantes' },
 ];
 
+const synth = [
+  { k: 'Un accompagnement de proximité', v: 'Des promotions de 30 à 35 étudiants, une équipe enseignante qualifiée, accessible, qui propose un suivi régulier : chacun bénéficie d’un cadre propice à sa progression.' },
+  { k: 'Prendre la parole et prendre confiance en soi', v: 'Coaching oral, ateliers d’expression, sophrologie et personal branding : nous organisons autant d’ateliers permettant de s’exprimer, de gagner en assurance et de mieux se connaître.' },
+  { k: 'Apprendre par la mise en pratique', v: 'Travaux de groupe, jeux pédagogiques, mises en situation et exercices de méthodologie : les étudiants apprennent aussi en expérimentant, en échangeant et en construisant ensemble chaque semaine en méthodologie.' },
+  { k: 'Une web radio étudiante', v: 'Encadrés par Jérôme Georgel, les étudiants contribuent à l’émission L’Instant Éco, une émission consacrée à l’économie et diffusée sur Radio Fajet. Une expérience concrète pour s’informer, préparer ses interventions et prendre la parole au micro.' },
+  { k: 'Un jeu d’entreprise chaque année', v: 'En partenariat avec une organisation professionnelle (Entreprendre pour Apprendre, l’Ordre des experts-comptables…), les étudiants découvrent chaque année l’entrepreneuriat à travers un jeu collectif qui mobilise créativité, réflexion et esprit d’équipe.' },
+  { k: 'Le Tournoi européen de gestion', v: 'Organisé par l’Ordre des experts-comptables du Grand Est, ce tournoi confronte les étudiants à des situations de gestion concrètes. Plusieurs équipes du lycée ont déjà été primées.' },
+  { k: 'Des rencontres avec les professionnels', v: 'Conférences, interventions et Vendredis de l’expertise permettent de découvrir les métiers de la comptabilité et de la gestion, d’échanger avec des professionnels et de rencontrer d’anciens diplômés.' },
+  { k: 'Des stages et des visites d’entreprises', v: 'Deux périodes de stage d’au moins quatre semaines, en première et en deuxième année, complétées par des visites d’entreprises pour découvrir le monde professionnel et donner du sens aux enseignements. Ceux-ci peuvent même se dérouler à l’étranger grâce à notre partenariat Erasmus+.' },
+  { k: 'Trois ans pour construire son avenir', v: 'Au fil de la formation, les étudiants consolident leurs connaissances en comptabilité et en gestion, développent leur autonomie et précisent progressivement leur projet professionnel.' },
+];
+
 const next = [
+  { t: 'Accueil DCG Nancy', href: '/' },
   { t: 'Témoignages', href: '/temoignages/' },
   { t: 'Découvrir le DCG', href: '/decouvrir-le-dcg/' },
   { t: 'Poursuites d’études et carrières', href: '/poursuites-etudes-carrieres/' },
@@ -163,11 +176,11 @@ const jsonLd = {
       <Network class="network" w={1200} h={600} seed={41} yaw={0.4} cx={0.82} cy={0.3} veil={false} cols={30} rows={13} f={320} spread={34} />
       <div class="pq-wrap">
         <header class="pq-intro">
-          <h1 id="pq-titre">Pourquoi choisir notre DCG <span>?</span></h1>
+          <h1 id="pq-titre">Pourquoi choisir le DCG au lycée Georges-de-la-Tour à Nancy <span>?</span></h1>
           <p>Suivre cette formation en comptabilité au sein de notre établissement, c’est s’assurer d’une formation reconnue par l’État, au sein d’un lycée public donc gratuite. Vous serez encadrés par une équipe d’enseignants titulaires de l’agrégation, proposant une pédagogie innovante, diversifiée et ouverte sur le monde.</p>
         </header>
 
-        <ul class="pq-mosaic" aria-label="Neuf raisons de choisir notre DCG">
+        <ul class="pq-mosaic" aria-label="Neuf raisons de choisir notre formation DCG à Nancy">
           {themes.map((t) => (
             <li class={`pq-tile pq-${t.n}`}>
               <button type="button" class="pq-open" data-open={t.id} aria-haspopup="dialog">
@@ -223,6 +236,19 @@ const jsonLd = {
       </dialog>
     ))}
 
+    <!-- ───────── Les neuf raisons, en bref (texte accessible sans clic) ───────── -->
+    <section class="pq-school pq-synth" aria-labelledby="pq-h-synth">
+      <div class="pq-wrap">
+        <h2 id="pq-h-synth">Neuf raisons de choisir notre formation DCG à Nancy</h2>
+        <p>Le diplôme de comptabilité et de gestion (DCG), de grade licence, se prépare en trois ans au lycée Georges-de-la-Tour. Au-delà des enseignements, notre formation s’appuie sur des expériences et des projets qui rythment la vie des étudiants. Voici ce qui enrichira votre formation :</p>
+        <dl class="pq-infos">
+          {synth.map((x) => (
+            <div><dt>{x.k}</dt><dd>{x.v}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
     <!-- ───────── Le lycée, en bref ───────── -->
     <section class="pq-school" aria-labelledby="pq-h-lycee">
       <div class="pq-wrap pq-school-in">
@@ -231,7 +257,7 @@ const jsonLd = {
           <figcaption>{P.lycee.cap}</figcaption>
         </figure>
         <div>
-          <h2 id="pq-h-lycee">Un cadre d’études pour grandir et réussir</h2>
+          <h2 id="pq-h-lycee">Le lycée Georges-de-la-Tour à Nancy : un cadre d’études pour grandir et réussir</h2>
           <p>Le lycée Georges-de-la-Tour est un établissement public situé à Nancy, à 15 minutes en transport en commun du centre-ville et à proximité des résidences étudiantes. Il accueille des élèves et des étudiants dans des parcours de formation variés, de la sixième jusqu’au bac+3. Les étudiants du DCG évoluent dans un environnement scolaire et étudiant diversifié, avec des infrastructures et des services qui facilitent leur quotidien : un service de restauration scolaire, une cafétéria et une salle de pause qui leur est réservée, au sein de la cité scolaire.</p>
           <dl class="pq-infos">
             {infos.map((x) => (
