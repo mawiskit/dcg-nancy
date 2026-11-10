@@ -13,7 +13,7 @@
 /* ───────── Introduction + mosaïque ───────── */
 .pq-gallery { position: relative; overflow: hidden; isolation: isolate; background: var(--violet); color: var(--ecru); border-bottom: 3px solid var(--or); padding: clamp(18px, 3.4vh, 44px) 0 clamp(24px, 4.5vh, 56px); }
 .pq-gallery .network { z-index: 0 !important; opacity: .55; }
-.pq-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 58ch); gap: 8px clamp(24px, 4vw, 64px); align-items: end; margin-bottom: clamp(14px, 2.6vh, 30px); }
+.pq-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 58ch); gap: 8px clamp(24px, 4vw, 64px); align-items: center; margin-bottom: clamp(20px, 3.4vh, 36px); }
 .pq-intro h1 { font-size: clamp(1.9rem, min(4.6vw, 7vh), 3.6rem); line-height: 1.05; }
 .pq-intro h1 span { color: var(--or); }
 .pq .pq-intro p { font-size: clamp(.9375rem, 1.25vw, 1.0625rem); line-height: 1.5; color: rgba(236, 236, 236, .9); text-align: justify; text-justify: inter-word; hyphens: auto; }
@@ -44,8 +44,8 @@
 .pq-plus::after { transform: rotate(90deg); }
 .pq-open:hover .pq-plus::after, .pq-open:focus-visible .pq-plus::after { transform: rotate(0); }
 .pq-open:hover .pq-label { background: var(--violet); }
-.pq-erasmus { display: flex; align-items: center; gap: clamp(16px, 2.6vw, 32px); margin-top: clamp(16px, 2.6vh, 28px); padding-top: clamp(14px, 2.2vh, 22px); border-top: 1px solid rgba(236, 236, 236, .16); }
-.pq .pq-erasmus-logo { flex: 0 0 auto; width: clamp(130px, 14vw, 180px); height: auto; background: #fff; padding: 8px 12px; border-radius: 3px; }
+.pq-erasmus { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); margin-top: clamp(16px, 2.6vh, 28px); padding-top: clamp(14px, 2.2vh, 22px); border-top: 1px solid rgba(236, 236, 236, .16); }
+.pq .pq-erasmus .pq-erasmus-logo { flex: 0 0 auto; box-sizing: border-box; width: 108px; max-width: 108px; height: auto; background: #fff; padding: 6px 8px; border-radius: 3px; }
 .pq-erasmus-txt p { font-size: .9375rem; line-height: 1.5; color: rgba(236, 236, 236, .86); max-width: 68ch; }
 .pq .pq-erasmus-txt .pq-erasmus-k { font: 600 .6875rem / 1.2 var(--text); letter-spacing: .18em; text-transform: uppercase; color: var(--or); margin-bottom: 4px; }
 .pq-hint { display: none; margin-top: 12px; font: 400 1.1rem / 1.3 var(--hand); color: var(--or); }
@@ -197,5 +197,5 @@ html.pq-lock { overflow: hidden; }
 
 @media (max-width: 640px) {
   .pq-erasmus { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .pq .pq-erasmus-logo { width: 150px; }
+  .pq .pq-erasmus .pq-erasmus-logo { width: 100px; max-width: 100px; }
 }
