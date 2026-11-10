@@ -8,13 +8,13 @@ import '../styles/decouvrir.css';
 import '../styles/temoignages.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const site = Astro.site?.href ?? 'https://dcg-nancy.fr/';
+const site = Astro.site?.href ?? 'https://www.dcg-nancy.fr/';
 const pageUrl = new URL(`${base}/temoignages/`, Astro.site).href;
 
-const title = 'Témoignages d’étudiants du DCG à Nancy : rythme, matières, ambiance | DCG Nancy';
-const description = 'Étudier en DCG à Nancy, vu par ceux qui le vivent : trois étudiants racontent leur arrivée, le rythme, les matières, l’entraide et la vie de promotion.';
+const title = 'Étudier en DCG à Nancy : témoignages d’étudiants';
+const description = 'Étudier en DCG à Nancy : trois étudiants du lycée Georges-de-la-Tour racontent leur parcours, le rythme de travail, les matières et la vie de promotion.';
 
-/* Données préparées pour l’affichage (la saisie des témoignages se fait dans src/data/temoignages.js). */
+/* Données préparées pour l’affichage (la saisie des témoignages se fait dans src/components/temoignages-data.js). */
 const liste = temoignages.map((t, i) => {
   const suffixe = t.annee === 1 ? 're' : 'e';
   const niveau = t.annee ? `DCG ${t.annee}${suffixe} année` : 'Ancien étudiant';
@@ -32,6 +32,7 @@ const liste = temoignages.map((t, i) => {
 const next = [
   { t: 'Vie étudiante', s: 'L’association, les sorties et l’esprit de promotion en images.', href: '/vie-etudiante/' },
   { t: 'Découvrir le DCG', s: 'Le programme année par année, les matières et la progression.', href: '/decouvrir-le-dcg/' },
+  { t: 'Pourquoi nous choisir ?', s: 'Accompagnement, projets et ouverture professionnelle.', href: '/pourquoi-nous-choisir/' },
   { t: 'Admissions', s: 'Parcoursup en première année, dossier en deuxième année.', href: '/admissions/' },
 ];
 
@@ -74,9 +75,9 @@ const jsonLd = {
         <nav class="dd-crumb" aria-label="Fil d’Ariane">
           <a href={`${base}/`}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Témoignages</span>
         </nav>
-        <p class="dd-kicker">Parole aux étudiants</p>
-        <h1 id="tm-titre">Ils vivent le DCG. <span>Ils en parlent.</span></h1>
-        <p class="dd-lead">Qui mieux que nos étudiants pour vous faire découvrir le DCG ? À travers leurs témoignages, découvrez leur parcours, leur quotidien, les exigences de la formation, leurs matières préférées et l’ambiance qui anime les trois promotions. Des expériences personnelles, des conseils et un regard concret sur ces trois années d’études.</p>
+        <p class="dd-kicker">Ils vivent le DCG. Ils en parlent.</p>
+        <h1 id="tm-titre">Étudier en DCG à Nancy : <span>ils racontent leur expérience</span></h1>
+        <p class="dd-lead">Qui mieux que nos étudiants pour vous faire découvrir le DCG du lycée Georges-de-la-Tour ? À travers trois témoignages, découvrez comment ils y sont arrivés, le rythme de travail et la charge de travail à la maison, les matières qu’ils ont trouvées les plus faciles ou les plus difficiles, et l’ambiance entre les trois promotions de DCG. Chaque témoignage reflète la situation de l’étudiant au moment où il a été recueilli.</p>
         <nav class="dd-jump" aria-label="Les témoignages">
           {liste.map((t) => (
             <a href={`#${t.id}`}>{t.prenom}</a>
