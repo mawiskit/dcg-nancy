@@ -210,7 +210,7 @@ const jsonLd = {
     </section>
 
     <!-- ───────── Ouverture ───────── -->
-    <section class="dd-light dd-skills" id="ouverture" aria-labelledby="ap-h-ouv">
+    <section class="dd-light ap-ouv" id="ouverture" aria-labelledby="ap-h-ouv">
       <div class="dd-wrap">
         <div class="dd-split dd-split-head">
           <div class="dd-hl">
@@ -219,9 +219,13 @@ const jsonLd = {
           </div>
           <p class="dd-sublead">Dès la première année, le DCG à Nancy met les étudiants au contact des entreprises et des professionnels pour préparer leur projet.</p>
         </div>
-        <ul class="dd-skilllist">
-          {opens.map((k) => (
-            <li><h3>{k.t}</h3><p>{k.s}</p></li>
+        <ul class="ap-opens">
+          {opens.map((k, i) => (
+            <li>
+              <span class="ap-on" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{k.t}</h3>
+              <p>{k.s}</p>
+            </li>
           ))}
         </ul>
       </div>
