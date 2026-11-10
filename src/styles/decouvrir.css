@@ -18,7 +18,7 @@
 }
 .dd-kicker::before { content: ""; width: 34px; height: 2px; background: var(--or); flex: none; }
 
-.dd-sublead { font-size: 1.0625rem; max-width: 64ch; }
+.dd-sublead { font-size: 1.0625rem; }
 
 /* Bandes claires / sombres */
 .dd-light { background: var(--ecru); color: var(--violet); padding: clamp(56px, 9vh, 112px) 0; }
@@ -80,7 +80,7 @@
 .dd-split { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(24px, 5vw, 80px); align-items: start; }
 .dd-split h2 { max-width: 19ch; font-size: clamp(1.9rem, 3.4vw, 2.9rem); line-height: 1.08; }
 .dd-split-head { margin-bottom: clamp(30px, 5vh, 56px); }
-.dd-split-head .dd-sublead { max-width: 60ch; font-size: 1.125rem; padding-top: clamp(0px, 3.2vw, 36px); }
+.dd-split-head .dd-sublead { font-size: 1.125rem; padding-top: clamp(0px, 3.2vw, 36px); }
 .dd-prose { padding-top: clamp(0px, 3.2vw, 36px); max-width: 66ch; }
 .dd-prose p { font-size: 1.0625rem; }
 .dd-prose p:first-child { font-size: 1.1875rem; line-height: 1.65; color: var(--nuit); }
@@ -142,7 +142,7 @@
 .dd-code:empty { display: none; }
 .dd-name { display: block; font: 500 .9375rem / 1.38 var(--text); color: var(--ecru); }
 
-.dd-legend { margin-top: clamp(24px, 4vh, 40px); padding: 4px 0 4px 20px; border-left: 3px solid var(--or); max-width: 78ch; }
+.dd-legend { margin-top: clamp(24px, 4vh, 40px); padding: 4px 0 4px 20px; border-left: 3px solid var(--or); }
 .dd-legend p { font-size: .9375rem; color: rgba(236, 236, 236, .88); }
 .dd-legend p + p { margin-top: 6px; font-size: .8125rem; color: rgba(236, 236, 236, .7); }
 .dd-legend strong { color: #fff; font-weight: 600; }
@@ -186,7 +186,7 @@
 .dd-step h3 { margin-top: 20px; font: 600 clamp(1.125rem, 1.6vw, 1.4rem) / 1.2 var(--display); color: #fff; }
 .dd-step p { margin-top: 10px; font-size: .9688rem; line-height: 1.62; color: rgba(236, 236, 236, .88); max-width: 42ch; }
 .dd-step .dd-stepue { margin-top: 14px; font: 600 .75rem / 1.4 var(--text); letter-spacing: .12em; color: var(--ac); }
-.dd-stages { margin-top: clamp(32px, 5vh, 52px); padding: 4px 0 4px 20px; border-left: 3px solid var(--or); max-width: 74ch; color: rgba(236, 236, 236, .9); }
+.dd-stages { margin-top: clamp(32px, 5vh, 52px); padding: 4px 0 4px 20px; border-left: 3px solid var(--or); color: rgba(236, 236, 236, .9); }
 .dd-stages strong { color: #fff; }
 
 /* ───────── Compétences ───────── */
