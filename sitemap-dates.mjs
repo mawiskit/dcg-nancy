@@ -9,7 +9,7 @@ export const lastmodParPage = {
   '/pourquoi-nous-choisir/': '2026-11-10',
   '/poursuites-etudes-carrieres/': '2026-11-10',
   '/vie-etudiante/': '2026-11-10',
-  '/temoignages/': '2026-11-08',
+  '/temoignages/': '2026-11-10',
   '/admissions/': '2026-11-10',
   '/contact/': '2026-11-07',
   '/mentions-legales/': '2026-11-07',
