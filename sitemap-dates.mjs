@@ -10,7 +10,7 @@ export const lastmodParPage = {
   '/poursuites-etudes-carrieres/': '2026-11-10',
   '/vie-etudiante/': '2026-11-10',
   '/temoignages/': '2026-11-08',
-  '/admissions/': '2026-11-08',
+  '/admissions/': '2026-11-10',
   '/contact/': '2026-11-07',
   '/mentions-legales/': '2026-11-07',
   '/confidentialite/': '2026-11-07',
